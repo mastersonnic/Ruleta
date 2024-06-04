@@ -1,6 +1,6 @@
 #ruleta-container {
     text-align: center;
-    margin-top: 50px;
+    margin-top: 25px;
     width: 25px; /* Ancho fijo de 50px */
     height: 25px; /* Alto fijo de 50px */
 }
