@@ -1,12 +1,1 @@
-#ruleta-container {
-    text-align: center;
-    margin-top: 50px;
-    width: 50px; /* Ancho fijo de 25px */
-    height: 50px; /* Alto fijo de 25px */
-    overflow: hidden; /* Ocultar el desbordamiento */
-}
-
-canvas {
-    width: 50px; /* Ancho fijo de 25px */
-    height: 50px; /* Alto fijo de 25px */
-}
+<iframe src="https://mastersonnic.github.io/Ruleta/" style="width: 100%; height: 100vh; max-width: 100%; border: none; overflow: hidden;" scrolling="no"></iframe>
