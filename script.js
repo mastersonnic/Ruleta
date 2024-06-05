@@ -3,11 +3,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const ctx = canvas.getContext('2d');
     const btnGirar = document.getElementById('girar');
     const radio = canvas.width / 2;
-    let anguloActual = 0;
-    let velocidad = Math.PI * 2 / 150; // Velocidad constante para completar un giro en 2 segundos
-    const desaceleracion = 0.99; // Factor de desaceleración
-    const duracionTotalGiro = 5000; // Duración total del giro en milisegundos
-    const duracionDesaceleracion = 3000; // Duración de la desaceleración en milisegundos
+    let anguloActual = Math.random() * Math.PI * 2; // Posición inicial aleatoria
+    let velocidad = Math.PI * 2 / 75; // Velocidad para completar un giro en 5 segundos
+    const desaceleracionInicial = 0.95; // Desaceleración más obvia
+    let desaceleracion = desaceleracionInicial;
+    const duracionGiroMin = 5000; // Duración mínima del giro en milisegundos
+    const duracionGiroMax = 10000; // Duración máxima del giro en milisegundos
+    let duracionGiro = Math.random() * (duracionGiroMax - duracionGiroMin) + duracionGiroMin; // Duración aleatoria del giro
     const tiempoInicioGiro = Date.now();
     const segmentos = [
         { color: '#FF0000', label: '1x' },
@@ -27,20 +29,31 @@ document.addEventListener('DOMContentLoaded', (event) => {
         ctx.stroke();
         ctx.fill();
 
-        // Dibujar el texto
+        // Dibujar el texto más grande
         ctx.save();
         ctx.translate(radio, radio);
         ctx.rotate((inicioAngulo + finAngulo) / 2);
         ctx.textAlign = 'right';
         ctx.fillStyle = '#FFFFFF';
-        ctx.font = 'bold 20px Arial';
+        ctx.font = 'bold 30px Arial'; // Tamaño de fuente aumentado
         ctx.fillText(segmento.label, radio - 10, 10);
         ctx.restore();
     }
 
+    function dibujarCentroCentelleante() {
+        ctx.beginPath();
+        ctx.arc(radio, radio, 20, 0, Math.PI * 2);
+        ctx.fillStyle = 'gold';
+        ctx.fill();
+        ctx.font = 'bold 25px Arial';
+        ctx.fillStyle = 'black';
+        ctx.textAlign = 'center';
+        ctx.fillText('$', radio, radio + 10);
+    }
+
     function dibujarRuleta() {
         const anguloPorSegmento = Math.PI * 2 / segmentos.length;
-        let inicioAngulo = 0;
+        let inicioAngulo = anguloActual;
 
         segmentos.forEach(segmento => {
             const finAngulo = inicioAngulo + anguloPorSegmento;
@@ -48,18 +61,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
             inicioAngulo = finAngulo;
         });
 
-        // Dibujar el círculo del centro
-        ctx.beginPath();
-        ctx.arc(radio, radio, 20, 0, Math.PI * 2);
-        ctx.fillStyle = 'black';
-        ctx.fill();
+        dibujarCentroCentelleante();
     }
 
     function girarRuleta() {
         const tiempoTranscurrido = Date.now() - tiempoInicioGiro;
-        if (tiempoTranscurrido < duracionTotalGiro) {
-            if (tiempoTranscurrido > duracionTotalGiro - duracionDesaceleracion) {
-                velocidad *= desaceleracion; // Comenzar a desacelerar
+        if (tiempoTranscurrido < duracionGiro) {
+            if (tiempoTranscurrido > duracionGiro - 3000) { // Comenzar a desacelerar en los últimos 3 segundos
+                desaceleracion = desaceleracionInicial - ((tiempoTranscurrido - (duracionGiro - 3000)) / 3000) * (desaceleracionInicial - 0.5);
+                velocidad *= desaceleracion;
             }
             anguloActual += velocidad;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
