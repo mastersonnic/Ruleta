@@ -48,32 +48,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
         ctx.fill();
     }
 
-    // Nueva función girarRuleta con regulador de velocidad y desaceleración
     function girarRuleta() {
-        let velocidad = 0.2; // Velocidad inicial de giro
-        const desaceleracion = 0.99; // Factor de desaceleración (debe ser menor que 1)
+        anguloActual += Math.random() * 0.1 + 0.05; // Velocidad de giro
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.translate(radio, radio);
+        ctx.rotate(anguloActual);
+        ctx.translate(-radio, -radio);
+        dibujarRuleta();
 
-        function animarGiro() {
-            anguloActual += velocidad;
-            velocidad *= desaceleracion; // Reducir la velocidad gradualmente
-
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.translate(radio, radio);
-            ctx.rotate(anguloActual);
-            ctx.translate(-radio, -radio);
-            dibujarRuleta();
-
-            // Continuar girando si la velocidad es suficiente
-            if (velocidad > 0.001) {
-                requestAnimationFrame(animarGiro);
-            } else {
-                // La ruleta se ha detenido, determinar el segmento ganador
-                const segmentoGanador = segmentos[Math.floor(anguloActual / (Math.PI * 2) * segmentos.length) % segmentos.length];
-                console.log('El segmento ganador es:', segmentoGanador.label);
-            }
+        // Continuar girando
+        if (Math.random() > 0.05) {  // Probabilidad de detenerse
+            requestAnimationFrame(girarRuleta);
+        } else {
+            const segmentoGanador = segmentos[Math.floor(Math.random() * segmentos.length)];
+            console.log('El segmento ganador es:', segmentoGanador.label);
         }
-
-        animarGiro();
     }
 
     btnGirar.addEventListener('click', girarRuleta);
