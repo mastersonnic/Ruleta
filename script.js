@@ -3,12 +3,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const ctx = canvas.getContext('2d');
     const btnGirar = document.getElementById('girar');
     const radio = canvas.width / 2;
-    let anguloActual = Math.random() * Math.PI * 2; // Posición inicial aleatoria
-    let velocidad = Math.PI * 2 / 150; // Velocidad inicial
-    const desaceleracion = 0.95; // Desaceleración más suave
-    let tiempoInicioGiro;
-    const duracionGiro = 5000 + Math.random() * 5000; // Duración del giro entre 5 y 10 segundos
-    let centelleo = true; // Estado inicial del centelleo para el signo de dinero
+    let anguloActual = 0;
+    let velocidad = 0;
+    let frameId;
     const segmentos = [
         { inicioColor: '#FF0000', finColor: '#FF4500', label: '1x' },
         { inicioColor: '#00FF00', finColor: '#32CD32', label: '0.5x' },
@@ -19,7 +16,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
     ];
 
     function dibujarSegmento(segmento, inicioAngulo, finAngulo) {
-        const gradiente = ctx.createLinearGradient(radio, radio, radio * Math.cos(inicioAngulo), radio * Math.sin(inicioAngulo));
+        const gradiente = ctx.createLinearGradient(
+            radio + radio * Math.cos(inicioAngulo), 
+            radio + radio * Math.sin(inicioAngulo),
+            radio + radio * Math.cos(finAngulo), 
+            radio + radio * Math.sin(finAngulo)
+        );
         gradiente.addColorStop(0, segmento.inicioColor);
         gradiente.addColorStop(1, segmento.finColor);
 
@@ -27,35 +29,63 @@ document.addEventListener('DOMContentLoaded', (event) => {
         ctx.fillStyle = gradiente;
         ctx.moveTo(radio, radio);
         ctx.arc(radio, radio, radio, inicioAngulo, finAngulo);
-        ctx.lineTo(radio, radio);
-        ctx.lineWidth = 5; // Bordes más gruesos
-        ctx.shadowBlur = 10; // Sombra
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // Color de la sombra
-        ctx.stroke();
+        ctx.closePath();
         ctx.fill();
 
-        // Dibujar el texto más grande y grueso
+        // Texto más grande y grueso
         ctx.save();
         ctx.translate(radio, radio);
         ctx.rotate((inicioAngulo + finAngulo) / 2);
         ctx.textAlign = 'right';
         ctx.fillStyle = 'black'; // Letras negras
-        ctx.font = 'bold 40px Arial'; // Tamaño y grosor de fuente aumentados
+        ctx.font = 'bold 40px Arial';
         ctx.fillText(segmento.label, radio - 10, 10);
         ctx.restore();
     }
 
-    function dibujarCentroCentelleante() {
-        ctx.font = 'bold 75px Arial'; // Tamaño de fuente aumentado
-        ctx.textAlign = 'center';
-        ctx.fillStyle = centelleo ? 'gold' : 'transparent'; // Parpadeo
-        ctx.fillText('$', radio, radio + 25);
-        centelleo = !centelleo; // Cambiar el estado del centelleo
+    function dibujarFlecha() {
+        ctx.save();
+        ctx.beginPath();
+        ctx.fillStyle = 'black';
+        ctx.moveTo(radio - 4, 0);
+        ctx.lineTo(radio + 4, 0);
+        ctx.lineTo(radio + 4, -10);
+        ctx.lineTo(radio + 10, -10);
+        ctx.lineTo(radio, -30);
+        ctx.lineTo(radio - 10, -10);
+        ctx.lineTo(radio - 4, -10);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+    }
+
+    function girarRuleta() {
+        if (!velocidad) {
+            velocidad = Math.PI * 2 / (100 + Math.random() * 100);
+            anguloActual = Math.random() * Math.PI * 2;
+        }
+        if (velocidad > 0.002) {
+            velocidad *= 0.99; // Desaceleración
+            anguloActual += velocidad;
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            dibujarRuleta();
+            ctx.translate(radio, radio);
+            ctx.rotate(anguloActual);
+            ctx.translate(-radio, -radio);
+            frameId = requestAnimationFrame(girarRuleta);
+        } else {
+            cancelAnimationFrame(frameId);
+            velocidad = 0;
+            // Determinar el segmento ganador
+            const segmentoGanador = segmentos[Math.floor((anguloActual / (Math.PI * 2)) * segmentos.length) % segmentos.length];
+            console.log('El segmento ganador es:', segmentoGanador.label);
+        }
     }
 
     function dibujarRuleta() {
         const anguloPorSegmento = Math.PI * 2 / segmentos.length;
-        let inicioAngulo = anguloActual;
+        let inicioAngulo = 0;
 
         segmentos.forEach(segmento => {
             const finAngulo = inicioAngulo + anguloPorSegmento;
@@ -63,30 +93,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
             inicioAngulo = finAngulo;
         });
 
-        dibujarCentroCentelleante();
+        // Dibujar la flecha
+        dibujarFlecha();
     }
 
-    function girarRuleta() {
-        if (!tiempoInicioGiro) {
-            tiempoInicioGiro = Date.now();
+    btnGirar.addEventListener('click', () => {
+        if (frameId) {
+            cancelAnimationFrame(frameId);
+            velocidad = 0;
         }
-        const tiempoTranscurrido = Date.now() - tiempoInicioGiro;
-        if (tiempoTranscurrido < duracionGiro) {
-            velocidad *= desaceleracion; // Desaceleración gradual
-            anguloActual += velocidad;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.translate(radio, radio);
-            ctx.rotate(anguloActual);
-            ctx.translate(-radio, -radio);
-            dibujarRuleta();
-            requestAnimationFrame(girarRuleta);
-        } else {
-            // Determinar el segmento ganador
-            const segmentoGanador = segmentos[Math.floor((anguloActual / (Math.PI * 2)) * segmentos.length) % segmentos.length];
-            console.log('El segmento ganador es:', segmentoGanador.label);
-        }
-    }
+        girarRuleta();
+    });
 
-    btnGirar.addEventListener('click', girarRuleta);
     dibujarRuleta();
 });
