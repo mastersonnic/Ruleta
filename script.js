@@ -4,51 +4,52 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const btnGirar = document.getElementById('girar');
     const radio = canvas.width / 2;
     let anguloActual = Math.random() * Math.PI * 2; // Posición inicial aleatoria
-    let velocidad = Math.PI * 2 / 75; // Velocidad para completar un giro en 5 segundos
-    const desaceleracionInicial = 0.95; // Desaceleración más obvia
-    let desaceleracion = desaceleracionInicial;
-    const duracionGiroMin = 5000; // Duración mínima del giro en milisegundos
-    const duracionGiroMax = 10000; // Duración máxima del giro en milisegundos
-    let duracionGiro = Math.random() * (duracionGiroMax - duracionGiroMin) + duracionGiroMin; // Duración aleatoria del giro
-    const tiempoInicioGiro = Date.now();
+    let velocidad = Math.PI * 2 / 150; // Velocidad inicial
+    const desaceleracion = 0.95; // Desaceleración más suave
+    let tiempoInicioGiro;
+    const duracionGiro = 5000 + Math.random() * 5000; // Duración del giro entre 5 y 10 segundos
     const segmentos = [
-        { color: '#FF0000', label: '1x' },
-        { color: '#00FF00', label: '0.5x' },
-        { color: '#0000FF', label: '0X' },
-        { color: '#FFFF00', label: '3x' },
-        { color: '#FF00FF', label: '2x' },
-        { color: '#00FFFF', label: '5x' }
+        { inicioColor: '#FF0000', finColor: '#FF4500', label: '1x' },
+        { inicioColor: '#00FF00', finColor: '#32CD32', label: '0.5x' },
+        { inicioColor: '#0000FF', finColor: '#1E90FF', label: '0X' },
+        { inicioColor: '#FFFF00', finColor: '#FFD700', label: '3x' },
+        { inicioColor: '#FF00FF', finColor: '#BA55D3', label: '2x' },
+        { inicioColor: '#00FFFF', finColor: '#E0FFFF', label: '5x' }
     ];
 
     function dibujarSegmento(segmento, inicioAngulo, finAngulo) {
+        const gradiente = ctx.createLinearGradient(radio, radio, radio * Math.cos(inicioAngulo), radio * Math.sin(inicioAngulo));
+        gradiente.addColorStop(0, segmento.inicioColor);
+        gradiente.addColorStop(1, segmento.finColor);
+
         ctx.beginPath();
-        ctx.fillStyle = segmento.color;
+        ctx.fillStyle = gradiente;
         ctx.moveTo(radio, radio);
         ctx.arc(radio, radio, radio, inicioAngulo, finAngulo);
         ctx.lineTo(radio, radio);
         ctx.stroke();
         ctx.fill();
 
-        // Dibujar el texto más grande
+        // Dibujar el texto más grande y grueso
         ctx.save();
         ctx.translate(radio, radio);
         ctx.rotate((inicioAngulo + finAngulo) / 2);
         ctx.textAlign = 'right';
         ctx.fillStyle = '#FFFFFF';
-        ctx.font = 'bold 30px Arial'; // Tamaño de fuente aumentado
+        ctx.font = 'bold 40px Arial'; // Tamaño y grosor de fuente aumentados
         ctx.fillText(segmento.label, radio - 10, 10);
         ctx.restore();
     }
 
     function dibujarCentroCentelleante() {
         ctx.beginPath();
-        ctx.arc(radio, radio, 20, 0, Math.PI * 2);
+        ctx.arc(radio, radio, 60, 0, Math.PI * 2); // Tamaño aumentado
         ctx.fillStyle = 'gold';
         ctx.fill();
-        ctx.font = 'bold 25px Arial';
+        ctx.font = 'bold 75px Arial'; // Tamaño de fuente aumentado
         ctx.fillStyle = 'black';
         ctx.textAlign = 'center';
-        ctx.fillText('$', radio, radio + 10);
+        ctx.fillText('$', radio, radio + 25);
     }
 
     function dibujarRuleta() {
@@ -65,12 +66,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
     function girarRuleta() {
+        if (!tiempoInicioGiro) {
+            tiempoInicioGiro = Date.now();
+        }
         const tiempoTranscurrido = Date.now() - tiempoInicioGiro;
         if (tiempoTranscurrido < duracionGiro) {
-            if (tiempoTranscurrido > duracionGiro - 3000) { // Comenzar a desacelerar en los últimos 3 segundos
-                desaceleracion = desaceleracionInicial - ((tiempoTranscurrido - (duracionGiro - 3000)) / 3000) * (desaceleracionInicial - 0.5);
-                velocidad *= desaceleracion;
-            }
+            velocidad *= desaceleracion; // Desaceleración gradual
             anguloActual += velocidad;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.translate(radio, radio);
