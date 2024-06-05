@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const desaceleracion = 0.95; // Desaceleración más suave
     let tiempoInicioGiro;
     const duracionGiro = 5000 + Math.random() * 5000; // Duración del giro entre 5 y 10 segundos
+    let centelleo = true; // Estado inicial del centelleo para el signo de dinero
     const segmentos = [
         { inicioColor: '#FF0000', finColor: '#FF4500', label: '1x' },
         { inicioColor: '#00FF00', finColor: '#32CD32', label: '0.5x' },
@@ -27,6 +28,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         ctx.moveTo(radio, radio);
         ctx.arc(radio, radio, radio, inicioAngulo, finAngulo);
         ctx.lineTo(radio, radio);
+        ctx.lineWidth = 5; // Bordes más gruesos
+        ctx.shadowBlur = 10; // Sombra
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // Color de la sombra
         ctx.stroke();
         ctx.fill();
 
@@ -35,21 +39,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
         ctx.translate(radio, radio);
         ctx.rotate((inicioAngulo + finAngulo) / 2);
         ctx.textAlign = 'right';
-        ctx.fillStyle = '#FFFFFF';
+        ctx.fillStyle = 'black'; // Letras negras
         ctx.font = 'bold 40px Arial'; // Tamaño y grosor de fuente aumentados
         ctx.fillText(segmento.label, radio - 10, 10);
         ctx.restore();
     }
 
     function dibujarCentroCentelleante() {
-        ctx.beginPath();
-        ctx.arc(radio, radio, 60, 0, Math.PI * 2); // Tamaño aumentado
-        ctx.fillStyle = 'gold';
-        ctx.fill();
         ctx.font = 'bold 75px Arial'; // Tamaño de fuente aumentado
-        ctx.fillStyle = 'black';
         ctx.textAlign = 'center';
+        ctx.fillStyle = centelleo ? 'gold' : 'transparent'; // Parpadeo
         ctx.fillText('$', radio, radio + 25);
+        centelleo = !centelleo; // Cambiar el estado del centelleo
     }
 
     function dibujarRuleta() {
