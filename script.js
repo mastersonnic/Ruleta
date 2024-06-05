@@ -7,13 +7,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let velocidad = 0;
     let frameId;
     let centelleo = true;
+    let ultimoTiempoCentelleo = Date.now();
     const segmentos = [
-        { inicioColor: '#FF0000', finColor: '#FF4500', label: '1x' },
-        { inicioColor: '#00FF00', finColor: '#32CD32', label: '0.5x' },
-        { inicioColor: '#0000FF', finColor: '#1E90FF', label: '0X' },
-        { inicioColor: '#FFFF00', finColor: '#FFD700', label: '3x' },
-        { inicioColor: '#FF00FF', finColor: '#BA55D3', label: '2x' },
-        { inicioColor: '#00FFFF', finColor: '#E0FFFF', label: '5x' }
+        { inicioColor: '#FF4500', finColor: '#FF0000', label: '1x' },
+        { inicioColor: '#32CD32', finColor: '#00FF00', label: '0.5x' },
+        { inicioColor: '#1E90FF', finColor: '#0000FF', label: '0X' },
+        { inicioColor: '#FFD700', finColor: '#FFFF00', label: '3x' },
+        { inicioColor: '#BA55D3', finColor: '#FF00FF', label: '2x' },
+        { inicioColor: '#E0FFFF', finColor: '#00FFFF', label: '5x' }
     ];
 
     function dibujarSegmento(segmento, inicioAngulo, finAngulo) {
@@ -77,11 +78,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
     function dibujarCentroCentelleante() {
+        const tiempoActual = Date.now();
+        if (tiempoActual - ultimoTiempoCentelleo >= 1000) {
+            centelleo = !centelleo;
+            ultimoTiempoCentelleo = tiempoActual;
+        }
         ctx.font = 'bold 75px Arial';
         ctx.textAlign = 'center';
-        ctx.fillStyle = centelleo ? 'gold' : 'transparent';
-        ctx.fillText('$', radio, radio + 25);
-        centelleo = !centelleo;
+        ctx.fillStyle = centelleo ? 'gold' : '#ffd700'; // No completamente transparente
+        ctx.fillText('$', radio, radio + 28);
     }
 
     function dibujarRuleta() {
@@ -109,9 +114,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     function actualizar() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         dibujarRuleta();
-        if (centelleo) {
-            dibujarCentroCentelleante();
-        }
         frameId = requestAnimationFrame(actualizar);
     }
 
