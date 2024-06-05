@@ -1,58 +1,81 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const canvas = document.getElementById('ruleta');
-  const ctx = canvas.getContext('2d');
-  let anguloActual = 0;
-  const segmentos = [
-    { color: '#FF5959', label: 'Premio 1', porcentaje: 0.1 },
-    { color: '#FFAC59', label: 'Premio 2', porcentaje: 0.2 },
-    { color: '#66CC99', label: 'Premio 3', porcentaje: 0.15 },
-    { color: '#FFCC66', label: 'Premio 4', porcentaje: 0.12 },
-    { color: '#9966CC', label: 'Premio 5', porcentaje: 0.18 },
-    { color: '#FF99CC', label: 'Premio 6', porcentaje: 0.25 }
-  ];
+document.addEventListener('DOMContentLoaded', (event) => {
+    const canvas = document.getElementById('ruleta');
+    const ctx = canvas.getContext('2d');
+    const btnGirar = document.getElementById('girar');
+    const radio = canvas.width / 2;
+    let anguloActual = 0;
+    const segmentos = [
+        { color: '#FF0000', label: 'Premio 1' },
+        { color: '#00FF00', label: 'Premio 2' },
+        { color: '#0000FF', label: 'Premio 3' },
+        { color: '#FFFF00', label: 'Premio 4' }
+    ];
 
-  function dibujarSegmento(segmento, inicioAngulo, finAngulo) {
-    ctx.beginPath();
-    ctx.arc(250, 250, 200, inicioAngulo, finAngulo);
-    ctx.lineTo(250, 250);
-    ctx.fillStyle = segmento.color;
-    ctx.fill();
-    ctx.stroke();
-  }
+    function dibujarSegmento(segmento, inicioAngulo, finAngulo) {
+        ctx.beginPath();
+        ctx.fillStyle = segmento.color;
+        ctx.moveTo(radio, radio);
+        ctx.arc(radio, radio, radio, inicioAngulo, finAngulo);
+        ctx.lineTo(radio, radio);
+        ctx.stroke();
+        ctx.fill();
 
-  function dibujarRuleta() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpia el canvas antes de redibujar
-    let inicioAngulo = 0;
-    segmentos.forEach(segmento => {
-      const finAngulo = inicioAngulo + (2 * Math.PI * segmento.porcentaje);
-      dibujarSegmento(segmento, inicioAngulo, finAngulo);
-      inicioAngulo = finAngulo;
-    });
-  }
-
-  function girarRuleta() {
-    const velocidadInicial = Math.random() * 10 + 10; // Velocidad inicial aleatoria entre 10 y 20
-    let velocidad = velocidadInicial;
-    const desaceleracion = 0.98; // Factor de desaceleración
-
-    function rotar() {
-      anguloActual += velocidad;
-      velocidad *= desaceleracion;
-      if (velocidad < 0.5) {
-        // Detener la animación cuando la velocidad sea baja
-        console.log('La ruleta se ha detenido.');
-        return;
-      }
-      dibujarRuleta();
-      requestAnimationFrame(rotar);
+        // Dibujar el texto
+        ctx.save();
+        ctx.translate(radio, radio);
+        ctx.rotate((inicioAngulo + finAngulo) / 2);
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = 'bold 20px Arial';
+        ctx.fillText(segmento.label, radio - 10, 10);
+        ctx.restore();
     }
 
-    rotar();
-  }
+    function dibujarRuleta() {
+        const anguloPorSegmento = Math.PI * 2 / segmentos.length;
+        let inicioAngulo = 0;
 
-  // Evento para el botón de girar
-  document.getElementById('girar').addEventListener('click', girarRuleta);
+        segmentos.forEach(segmento => {
+            const finAngulo = inicioAngulo + anguloPorSegmento;
+            dibujarSegmento(segmento, inicioAngulo, finAngulo);
+            inicioAngulo = finAngulo;
+        });
 
-  // Inicializar la ruleta
-  dibujarRuleta();
+        // Dibujar el círculo del centro
+        ctx.beginPath();
+        ctx.arc(radio, radio, 20, 0, Math.PI * 2);
+        ctx.fillStyle = 'black';
+        ctx.fill();
+    }
+
+    // Nueva función girarRuleta con regulador de velocidad y desaceleración
+    function girarRuleta() {
+        let velocidad = 0.2; // Velocidad inicial de giro
+        const desaceleracion = 0.99; // Factor de desaceleración (debe ser menor que 1)
+
+        function animarGiro() {
+            anguloActual += velocidad;
+            velocidad *= desaceleracion; // Reducir la velocidad gradualmente
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.translate(radio, radio);
+            ctx.rotate(anguloActual);
+            ctx.translate(-radio, -radio);
+            dibujarRuleta();
+
+            // Continuar girando si la velocidad es suficiente
+            if (velocidad > 0.001) {
+                requestAnimationFrame(animarGiro);
+            } else {
+                // La ruleta se ha detenido, determinar el segmento ganador
+                const segmentoGanador = segmentos[Math.floor(anguloActual / (Math.PI * 2) * segmentos.length) % segmentos.length];
+                console.log('El segmento ganador es:', segmentoGanador.label);
+            }
+        }
+
+        animarGiro();
+    }
+
+    btnGirar.addEventListener('click', girarRuleta);
+    dibujarRuleta();
 });
