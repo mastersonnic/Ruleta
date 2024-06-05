@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function dibujarRuleta() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpia el canvas antes de redibujar
     let inicioAngulo = 0;
     segmentos.forEach(segmento => {
       const finAngulo = inicioAngulo + (2 * Math.PI * segmento.porcentaje);
