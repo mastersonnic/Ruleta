@@ -5,7 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const segmentos = [
     { color: '#FF5959', label: 'Premio 1', porcentaje: 0.1 },
     { color: '#FFAC59', label: 'Premio 2', porcentaje: 0.2 },
-    // Añade más segmentos según sea necesario
+    { color: '#66CC99', label: 'Premio 3', porcentaje: 0.15 },
+    { color: '#FFCC66', label: 'Premio 4', porcentaje: 0.12 },
+    { color: '#9966CC', label: 'Premio 5', porcentaje: 0.18 },
+    { color: '#FF99CC', label: 'Premio 6', porcentaje: 0.25 }
   ];
 
   function dibujarSegmento(segmento, inicioAngulo, finAngulo) {
