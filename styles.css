@@ -1,56 +1,59 @@
-body {
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f7f7f7;
+#roulette-container {
+    position: relative;
+    width: 878px;
+    height: 886px;
+    margin: auto;
 }
 
-.ruleta-container {
-  position: relative;
+#base, #roulette, #arrow, #money {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.ruleta {
-  width: 300px; /* Ajusta esto al tamaño de tu imagen */
-  transition: transform 7s ease-out;
+#base {
+    width: 590px;
+    height: 373px;
+    z-index: 1;
 }
 
-.flecha {
-  position: absolute;
-  top: 10%; /* Ajusta esto según el diseño de tu ruleta */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50px; /* Ajusta esto al tamaño de tu imagen */
+#roulette {
+    width: 878px;
+    height: 886px;
+    z-index: 2;
 }
 
-.base {
-  position: absolute;
-  top: 100%; /* Ajusta esto según el diseño de tu ruleta */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px; /* Ajusta esto al tamaño de tu imagen */
+#arrow {
+    width: 56px;
+    height: 79px;
+    z-index: 3;
 }
 
-.base-img {
-  width: 100%;
-  height: auto;
+#money {
+    width: 200px;
+    height: 200px;
+    z-index: 4;
 }
 
-/* Estilos para el botón de girar la ruleta */
-.boton-girar {
-  padding: 10px 20px;
-  font-size: 16px;
-  color: white;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  outline: none;
-  margin-top: 20px; /* Ajusta la posición vertical del botón */
-  transition: background-color 0.3s;
+#spinButton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.boton-girar:hover {
-  background-color: #0056b3;
+#confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 5;
 }
