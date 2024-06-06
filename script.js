@@ -6,29 +6,81 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let anguloActual = 0;
     let velocidad = 0;
     let frameId;
-    let centelleo = true; // Estado inicial del centelleo para el signo de dinero
     const segmentos = [
-        // ... definición de los segmentos con colores en gradiente
+        { inicioColor: '#FF0000', finColor: '#FF4500', label: '1x' },
+        { inicioColor: '#00FF00', finColor: '#32CD32', label: '0.5x' },
+        { inicioColor: '#0000FF', finColor: '#1E90FF', label: '0X' },
+        { inicioColor: '#FFFF00', finColor: '#FFD700', label: '3x' },
+        { inicioColor: '#FF00FF', finColor: '#BA55D3', label: '2x' },
+        { inicioColor: '#00FFFF', finColor: '#E0FFFF', label: '5x' }
     ];
 
     function dibujarSegmento(segmento, inicioAngulo, finAngulo) {
-        // ... función para dibujar los segmentos con gradiente
+        const gradiente = ctx.createLinearGradient(
+            radio + radio * Math.cos(inicioAngulo), 
+            radio + radio * Math.sin(inicioAngulo),
+            radio + radio * Math.cos(finAngulo), 
+            radio + radio * Math.sin(finAngulo)
+        );
+        gradiente.addColorStop(0, segmento.inicioColor);
+        gradiente.addColorStop(1, segmento.finColor);
+
+        ctx.beginPath();
+        ctx.fillStyle = gradiente;
+        ctx.moveTo(radio, radio);
+        ctx.arc(radio, radio, radio, inicioAngulo, finAngulo);
+        ctx.closePath();
+        ctx.fill();
+
+        // Texto más grande y grueso
+        ctx.save();
+        ctx.translate(radio, radio);
+        ctx.rotate((inicioAngulo + finAngulo) / 2);
+        ctx.textAlign = 'right';
+        ctx.fillStyle = 'black'; // Letras negras
+        ctx.font = 'bold 40px Arial';
+        ctx.fillText(segmento.label, radio - 10, 10);
+        ctx.restore();
     }
 
     function dibujarFlecha() {
-        // ... función para dibujar la flecha indicadora
+        ctx.save();
+        ctx.beginPath();
+        ctx.fillStyle = 'black';
+        ctx.moveTo(radio - 4, 0);
+        ctx.lineTo(radio + 4, 0);
+        ctx.lineTo(radio + 4, -10);
+        ctx.lineTo(radio + 10, -10);
+        ctx.lineTo(radio, -30);
+        ctx.lineTo(radio - 10, -10);
+        ctx.lineTo(radio - 4, -10);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
     }
 
     function girarRuleta() {
-        // ... función para iniciar el giro de la ruleta
-    }
-
-    function dibujarCentroCentelleante() {
-        ctx.font = 'bold 75px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillStyle = centelleo ? 'gold' : 'transparent';
-        ctx.fillText('$', radio, radio + 25);
-        centelleo = !centelleo;
+        if (!velocidad) {
+            velocidad = Math.PI * 2 / (100 + Math.random() * 100);
+            anguloActual = Math.random() * Math.PI * 2;
+        }
+        if (velocidad > 0.002) {
+            velocidad *= 0.99; // Desaceleración
+            anguloActual += velocidad;
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            dibujarRuleta();
+            ctx.translate(radio, radio);
+            ctx.rotate(anguloActual);
+            ctx.translate(-radio, -radio);
+            frameId = requestAnimationFrame(girarRuleta);
+        } else {
+            cancelAnimationFrame(frameId);
+            velocidad = 0;
+            // Determinar el segmento ganador
+            const segmentoGanador = segmentos[Math.floor((anguloActual / (Math.PI * 2)) * segmentos.length) % segmentos.length];
+            console.log('El segmento ganador es:', segmentoGanador.label);
+        }
     }
 
     function dibujarRuleta() {
@@ -41,23 +93,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
             inicioAngulo = finAngulo;
         });
 
+        // Dibujar la flecha
         dibujarFlecha();
-        dibujarCentroCentelleante();
     }
 
     btnGirar.addEventListener('click', () => {
-        if (frameId) {
-            cancelAnimationFrame(frameId);
-            velocidad = 0;
+        if (!velocidad) {
+            girarRuleta();
         }
-        girarRuleta();
     });
 
-    function actualizar() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        dibujarRuleta();
-        frameId = requestAnimationFrame(actualizar);
-    }
-
-    actualizar(); // Inicia la animación de actualización
+    dibujarRuleta();
 });
