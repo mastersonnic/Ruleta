@@ -5,25 +5,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const radio = canvas.width / 2;
     let anguloActual = 0;
     const segmentos = [
-        { color: '#555', label: '0X' },
-        { color: '#666', label: '0.02X' },
-        { color: '#777', label: '0.05X' },
-        { color: '#888', label: '1X' },
-        { color: '#999', label: '2X' },
-        { color: '#aaa', label: '4X' },
-        { color: '#bbb', label: '6X' }
+        { color: '#DAA520', label: '0X' }, // Dorado
+        { color: '#C0C0C0', label: '0.02X' }, // Plateado
+        { color: '#B87333', label: '0.05X' }, // Cobre
+        { color: '#808080', label: '1X' }, // Gris
+        { color: '#FFD700', label: '2X' }, // Oro
+        { color: '#4B0082', label: '4X' }, // Indigo
+        { color: '#8A2BE2', label: '6X' }  // Azul violeta
     ];
-
-    // Función para mezclar los segmentos en orden aleatorio
-    function mezclarSegmentos(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-    }
-
-    // Mezclar los segmentos antes de dibujar
-    mezclarSegmentos(segmentos);
 
     function dibujarSegmento(segmento, inicioAngulo, finAngulo) {
         ctx.beginPath();
@@ -39,8 +28,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         ctx.translate(radio, radio);
         ctx.rotate((inicioAngulo + finAngulo) / 2);
         ctx.textAlign = 'right';
-        ctx.fillStyle = 'white';
-        ctx.font = 'bold 20px Arial';
+        ctx.fillStyle = 'black';
+        ctx.font = 'bold 30px Arial'; // Tamaño de letra aumentado
         ctx.fillText(segmento.label, radio - 10, 10);
         ctx.restore();
     }
@@ -55,11 +44,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             inicioAngulo = finAngulo;
         });
 
-        // Dibujar el círculo del centro
-        ctx.beginPath();
-        ctx.arc(radio, radio, 20, 0, Math.PI * 2);
-        ctx.fillStyle = 'black';
-        ctx.fill();
+        // Omitir el dibujo del círculo central
     }
 
     function girarRuleta() {
