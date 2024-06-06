@@ -5,18 +5,31 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const radio = canvas.width / 2;
     let anguloActual = 0;
     const segmentos = [
-        { color: '#DAA520', label: '0X' }, // Dorado
-        { color: '#C0C0C0', label: '0.02X' }, // Plateado
-        { color: '#B87333', label: '0.05X' }, // Cobre
-        { color: '#808080', label: '1X' }, // Gris
-        { color: '#FFD700', label: '2X' }, // Oro
-        { color: '#4B0082', label: '4X' }, // Indigo
-        { color: '#8A2BE2', label: '6X' }  // Azul violeta
+        { pattern: 'https://www.freepik.com/free-photos-vectors/metal-texture', label: '0X' },
+        { pattern: 'https://www.freepik.com/free-photos-vectors/metal-texture', label: '0.02X' },
+        { pattern: 'https://www.freepik.com/free-photos-vectors/metal-texture', label: '0.05X' },
+        { pattern: 'https://www.freepik.com/free-photos-vectors/metal-texture', label: '1X' },
+        { pattern: 'https://www.freepik.com/free-photos-vectors/metal-texture', label: '2X' },
+        { pattern: 'https://www.freepik.com/free-photos-vectors/metal-texture', label: '4X' },
+        { pattern: 'https://www.freepik.com/free-photos-vectors/metal-texture', label: '6X' }
     ];
 
-    function dibujarSegmento(segmento, inicioAngulo, finAngulo) {
+    // Cargar las imágenes para las texturas
+    const texturas = segmentos.map(seg => {
+        const img = new Image();
+        img.src = seg.pattern;
+        return img;
+    });
+
+    function dibujarSegmento(segmento, inicioAngulo, finAngulo, index) {
         ctx.beginPath();
-        ctx.fillStyle = segmento.color;
+
+        // Esperar a que la imagen de la textura esté cargada
+        texturas[index].onload = () => {
+            const pattern = ctx.createPattern(texturas[index], 'repeat');
+            ctx.fillStyle = pattern;
+        };
+
         ctx.moveTo(radio, radio);
         ctx.arc(radio, radio, radio, inicioAngulo, finAngulo);
         ctx.lineTo(radio, radio);
@@ -38,9 +51,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const anguloPorSegmento = Math.PI * 2 / segmentos.length;
         let inicioAngulo = 0;
 
-        segmentos.forEach(segmento => {
+        segmentos.forEach((segmento, index) => {
             const finAngulo = inicioAngulo + anguloPorSegmento;
-            dibujarSegmento(segmento, inicioAngulo, finAngulo);
+            dibujarSegmento(segmento, inicioAngulo, finAngulo, index);
             inicioAngulo = finAngulo;
         });
 
