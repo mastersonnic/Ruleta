@@ -1,17 +1,21 @@
-document.addEventListener('DOMContentLoaded', function() {
-  var ruleta = document.getElementById('ruleta');
-  var botonGirar = document.getElementById('girar'); // Obtiene el botón que hemos añadido
-  var grados = 0;
+document.addEventListener('DOMContentLoaded', () => {
+    const roulette = document.getElementById('roulette');
+    const spinButton = document.getElementById('spinButton');
+    const confettiCanvas = document.getElementById('confetti-canvas');
+    const confetti = window.confetti.create(confettiCanvas, { resize: true });
 
-  function girarRuleta() {
-    // Calcula un ángulo aleatorio para la rotación
-    var anguloFinal = Math.floor(Math.random() * 360) + 1440; // 1440 es 4 vueltas completas
-    grados = anguloFinal;
-    ruleta.style.transform = 'rotate(' + grados + 'deg)';
-  }
+    spinButton.addEventListener('click', () => {
+        let newAngle = Math.floor(3600 + Math.random() * 360);
+        roulette.style.transition = 'transform 4s ease-out';
+        roulette.style.transform = `translate(-50%, -50%) rotate(${newAngle}deg)`;
 
-  // Evento de clic para el botón
-  botonGirar.addEventListener('click', function() {
-    girarRuleta();
-  });
+        setTimeout(() => {
+            confettiCanvas.style.display = 'block';
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }, 4000); // Se activa el confeti después de que la ruleta termine de girar
+    });
 });
