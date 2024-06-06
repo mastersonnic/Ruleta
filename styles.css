@@ -1,8 +1,38 @@
-#ruleta-container {
-    text-align: center;
-    margin-top: 50px;
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f7f7;
 }
 
-canvas {
-    border: 2px solid #000;
+.ruleta-container {
+  position: relative;
+}
+
+.ruleta {
+  width: 300px; /* Ajusta esto al tamaño de tu imagen */
+  transition: transform 7s ease-out;
+}
+
+.flecha {
+  position: absolute;
+  top: 10%; /* Ajusta esto según el diseño de tu ruleta */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px; /* Ajusta esto al tamaño de tu imagen */
+}
+
+.base {
+  position: absolute;
+  top: 100%; /* Ajusta esto según el diseño de tu ruleta */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px; /* Ajusta esto al tamaño de tu imagen */
+}
+
+.base-img {
+  width: 100%;
+  height: auto;
 }
