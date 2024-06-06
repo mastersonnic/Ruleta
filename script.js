@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
   var ruleta = document.getElementById('ruleta');
+  var botonGirar = document.getElementById('girar'); // Obtiene el botón que hemos añadido
   var grados = 0;
 
   function girarRuleta() {
@@ -9,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
     ruleta.style.transform = 'rotate(' + grados + 'deg)';
   }
 
-  // Espera 5 segundos para iniciar la desaceleración
-  setTimeout(function() {
+  // Evento de clic para el botón
+  botonGirar.addEventListener('click', function() {
     girarRuleta();
-  }, 5000);
+  });
 });
