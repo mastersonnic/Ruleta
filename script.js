@@ -5,18 +5,29 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const radio = canvas.width / 2;
     let anguloActual = 0;
     const segmentos = [
-        { color: '#FFD700', label: 'Premio 1' }, // Dorado
-        { color: '#C0C0C0', label: 'Premio 2' }, // Plateado
-        { color: '#CD7F32', label: 'Premio 3' }, // Bronce
-        { color: '#E5E4E2', label: 'Premio 4' }  // Platino
+        { color: '#555', label: '0X' },
+        { color: '#666', label: '0.02X' },
+        { color: '#777', label: '0.05X' },
+        { color: '#888', label: '1X' },
+        { color: '#999', label: '2X' },
+        { color: '#aaa', label: '4X' },
+        { color: '#bbb', label: '6X' }
     ];
+
+    // Función para mezclar los segmentos en orden aleatorio
+    function mezclarSegmentos(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    // Mezclar los segmentos antes de dibujar
+    mezclarSegmentos(segmentos);
 
     function dibujarSegmento(segmento, inicioAngulo, finAngulo) {
         ctx.beginPath();
-        const gradiente = ctx.createLinearGradient(0, 0, canvas.width, 0);
-        gradiente.addColorStop(0, segmento.color);
-        gradiente.addColorStop(1, '#FFFFFF');
-        ctx.fillStyle = gradiente;
+        ctx.fillStyle = segmento.color;
         ctx.moveTo(radio, radio);
         ctx.arc(radio, radio, radio, inicioAngulo, finAngulo);
         ctx.lineTo(radio, radio);
@@ -28,7 +39,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         ctx.translate(radio, radio);
         ctx.rotate((inicioAngulo + finAngulo) / 2);
         ctx.textAlign = 'right';
-        ctx.fillStyle = 'black';
+        ctx.fillStyle = 'white';
         ctx.font = 'bold 20px Arial';
         ctx.fillText(segmento.label, radio - 10, 10);
         ctx.restore();
@@ -53,7 +64,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     function girarRuleta() {
         let velocidad = 0.2; // Velocidad inicial de giro
-        const desaceleracion = 0.99; // Factor de desaceleración (debe ser menor que 1)
+        const desaceleracion = 0.99; // Factor de desaceleración
 
         function animarGiro() {
             anguloActual += velocidad;
