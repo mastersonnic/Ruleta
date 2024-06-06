@@ -1,92 +1,61 @@
-document.addEventListener('DOMContentLoaded', (event) => {
+// script.js
+document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('ruleta');
     const ctx = canvas.getContext('2d');
     const btnGirar = document.getElementById('girar');
-    const radio = canvas.width / 2;
-    let anguloActual = 0;
-    const segmentos = [
-        { pattern: 'https://www.freepik.com/free-photos-vectors/metal-texture', label: '0X' },
-        { pattern: 'https://www.freepik.com/free-photos-vectors/metal-texture', label: '0.02X' },
-        { pattern: 'https://www.freepik.com/free-photos-vectors/metal-texture', label: '0.05X' },
-        { pattern: 'https://www.freepik.com/free-photos-vectors/metal-texture', label: '1X' },
-        { pattern: 'https://www.freepik.com/free-photos-vectors/metal-texture', label: '2X' },
-        { pattern: 'https://www.freepik.com/free-photos-vectors/metal-texture', label: '4X' },
-        { pattern: 'https://www.freepik.com/free-photos-vectors/metal-texture', label: '6X' }
-    ];
+    let angulo = 0;
+    let raf;
 
-    // Cargar las imágenes para las texturas
-    const texturas = segmentos.map(seg => {
-        const img = new Image();
-        img.src = seg.pattern;
-        return img;
-    });
-
-    function dibujarSegmento(segmento, inicioAngulo, finAngulo, index) {
-        ctx.beginPath();
-
-        // Esperar a que la imagen de la textura esté cargada
-        texturas[index].onload = () => {
-            const pattern = ctx.createPattern(texturas[index], 'repeat');
-            ctx.fillStyle = pattern;
-        };
-
-        ctx.moveTo(radio, radio);
-        ctx.arc(radio, radio, radio, inicioAngulo, finAngulo);
-        ctx.lineTo(radio, radio);
-        ctx.stroke();
-        ctx.fill();
-
-        // Dibujar el texto
-        ctx.save();
-        ctx.translate(radio, radio);
-        ctx.rotate((inicioAngulo + finAngulo) / 2);
-        ctx.textAlign = 'right';
-        ctx.fillStyle = 'black';
-        ctx.font = 'bold 30px Arial'; // Tamaño de letra aumentado
-        ctx.fillText(segmento.label, radio - 10, 10);
-        ctx.restore();
-    }
-
+    // Dibuja la ruleta
     function dibujarRuleta() {
-        const anguloPorSegmento = Math.PI * 2 / segmentos.length;
-        let inicioAngulo = 0;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2;
 
-        segmentos.forEach((segmento, index) => {
-            const finAngulo = inicioAngulo + anguloPorSegmento;
-            dibujarSegmento(segmento, inicioAngulo, finAngulo, index);
-            inicioAngulo = finAngulo;
-        });
-
-        // Omitir el dibujo del círculo central
-    }
-
-    function girarRuleta() {
-        let velocidad = 0.2; // Velocidad inicial de giro
-        const desaceleracion = 0.99; // Factor de desaceleración
-
-        function animarGiro() {
-            anguloActual += velocidad;
-            velocidad *= desaceleracion; // Reducir la velocidad gradualmente
-
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.translate(radio, radio);
-            ctx.rotate(anguloActual);
-            ctx.translate(-radio, -radio);
-            dibujarRuleta();
-
-            // Continuar girando si la velocidad es suficiente
-            if (velocidad > 0.001) {
-                requestAnimationFrame(animarGiro);
-            } else {
-                // La ruleta se ha detenido, determinar el segmento ganador
-                const segmentoGanador = segmentos[Math.floor((anguloActual % (Math.PI * 2)) / (Math.PI * 2 / segmentos.length))];
-                console.log('El segmento ganador es:', segmentoGanador.label);
-            }
+        // Dibuja los segmentos de la ruleta
+        const segmentos = ['Rojo', 'Verde', 'Azul', 'Amarillo', 'Morado', 'Naranja'];
+        const segmentoAngulo = 2 * Math.PI / segmentos.length;
+        for (let i = 0; i < segmentos.length; i++) {
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2, canvas.height / 2);
+            ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 2, segmentoAngulo * i, segmentoAngulo * (i + 1), false);
+            ctx.closePath();
+            ctx.fillStyle = segmentos[i];
+            ctx.fill();
+            ctx.stroke();
         }
 
-        animarGiro();
+        // Dibuja el puntero
+        ctx.fillStyle = 'black';
+        ctx.beginPath();
+        ctx.moveTo(canvas.width / 2, 0);
+        ctx.lineTo(canvas.width / 2 - 10, 30);
+        ctx.lineTo(canvas.width / 2 + 10, 30);
+        ctx.fill();
+
+        // Rota la ruleta
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.rotate(angulo);
+        ctx.translate(-canvas.width / 2, -canvas.height / 2);
     }
 
-    btnGirar.addEventListener('click', girarRuleta);
+    // Anima la ruleta
+    function animarRuleta() {
+        angulo += 0.1; // Velocidad de rotación
+        dibujarRuleta();
+        raf = requestAnimationFrame(animarRuleta);
+    }
+
+    // Evento para el botón Girar
+    btnGirar.addEventListener('click', () => {
+        if (!raf) {
+            animarRuleta();
+        } else {
+            cancelAnimationFrame(raf);
+            raf = null;
+        }
+    });
+
+    // Inicializa la ruleta
     dibujarRuleta();
 });
