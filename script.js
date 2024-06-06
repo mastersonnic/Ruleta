@@ -5,29 +5,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const radio = canvas.width / 2;
     let anguloActual = 0;
     const segmentos = [
-        { color: 'gold', label: 'Premio 1', pattern: 'img/metal1.png' },
-        { color: 'silver', label: 'Premio 2', pattern: 'img/metal2.png' },
-        { color: 'bronze', label: 'Premio 3', pattern: 'img/metal3.png' },
-        { color: 'platinum', label: 'Premio 4', pattern: 'img/metal4.png' }
+        { color: '#FFD700', label: 'Premio 1' }, // Dorado
+        { color: '#C0C0C0', label: 'Premio 2' }, // Plateado
+        { color: '#CD7F32', label: 'Premio 3' }, // Bronce
+        { color: '#E5E4E2', label: 'Premio 4' }  // Platino
     ];
 
-    // Cargar las imágenes para las texturas
-    const texturas = segmentos.map(seg => {
-        const img = new Image();
-        img.src = seg.pattern;
-        return img;
-    });
-
-    function dibujarSegmento(segmento, inicioAngulo, finAngulo, index) {
+    function dibujarSegmento(segmento, inicioAngulo, finAngulo) {
         ctx.beginPath();
-        ctx.fillStyle = segmento.color;
-
-        // Esperar a que la imagen de la textura esté cargada
-        texturas[index].onload = () => {
-            const pattern = ctx.createPattern(texturas[index], 'repeat');
-            ctx.fillStyle = pattern;
-        };
-
+        const gradiente = ctx.createLinearGradient(0, 0, canvas.width, 0);
+        gradiente.addColorStop(0, segmento.color);
+        gradiente.addColorStop(1, '#FFFFFF');
+        ctx.fillStyle = gradiente;
         ctx.moveTo(radio, radio);
         ctx.arc(radio, radio, radio, inicioAngulo, finAngulo);
         ctx.lineTo(radio, radio);
@@ -39,7 +28,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         ctx.translate(radio, radio);
         ctx.rotate((inicioAngulo + finAngulo) / 2);
         ctx.textAlign = 'right';
-        ctx.fillStyle = '#FFFFFF';
+        ctx.fillStyle = 'black';
         ctx.font = 'bold 20px Arial';
         ctx.fillText(segmento.label, radio - 10, 10);
         ctx.restore();
@@ -49,29 +38,45 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const anguloPorSegmento = Math.PI * 2 / segmentos.length;
         let inicioAngulo = 0;
 
-        segmentos.forEach((segmento, index) => {
+        segmentos.forEach(segmento => {
             const finAngulo = inicioAngulo + anguloPorSegmento;
-            dibujarSegmento(segmento, inicioAngulo, finAngulo, index);
+            dibujarSegmento(segmento, inicioAngulo, finAngulo);
             inicioAngulo = finAngulo;
         });
 
-        // Dibujar el círculo del centro con un diseño de palacio real
+        // Dibujar el círculo del centro
         ctx.beginPath();
         ctx.arc(radio, radio, 20, 0, Math.PI * 2);
-        ctx.fillStyle = ctx.createPattern(texturas[0], 'repeat'); // Usar la primera textura como ejemplo
+        ctx.fillStyle = 'black';
         ctx.fill();
-        ctx.strokeStyle = 'gold';
-        ctx.lineWidth = 3;
-        ctx.stroke();
-
-        // Agregar detalles adicionales al diseño central
-        ctx.beginPath();
-        ctx.arc(radio, radio, 15, 0, Math.PI * 2);
-        ctx.strokeStyle = 'silver';
-        ctx.stroke();
     }
 
-    // ... (el resto del código para girarRuleta y animarGiro permanece igual)
+    function girarRuleta() {
+        let velocidad = 0.2; // Velocidad inicial de giro
+        const desaceleracion = 0.99; // Factor de desaceleración (debe ser menor que 1)
+
+        function animarGiro() {
+            anguloActual += velocidad;
+            velocidad *= desaceleracion; // Reducir la velocidad gradualmente
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.translate(radio, radio);
+            ctx.rotate(anguloActual);
+            ctx.translate(-radio, -radio);
+            dibujarRuleta();
+
+            // Continuar girando si la velocidad es suficiente
+            if (velocidad > 0.001) {
+                requestAnimationFrame(animarGiro);
+            } else {
+                // La ruleta se ha detenido, determinar el segmento ganador
+                const segmentoGanador = segmentos[Math.floor((anguloActual % (Math.PI * 2)) / (Math.PI * 2 / segmentos.length))];
+                console.log('El segmento ganador es:', segmentoGanador.label);
+            }
+        }
+
+        animarGiro();
+    }
 
     btnGirar.addEventListener('click', girarRuleta);
     dibujarRuleta();
