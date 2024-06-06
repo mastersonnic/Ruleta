@@ -1,7 +1,21 @@
-<div class="ruleta-container">
-  <img id="ruleta" class="ruleta" src="https://raw.githubusercontent.com/mastersonnic/Ruleta/main/1717696211888.png" alt="Ruleta">
-  <img src="https://raw.githubusercontent.com/mastersonnic/Ruleta/main/1717696320531.png" alt="Flecha" class="flecha">
-</div>
-<div class="base">
-  <img src="https://raw.githubusercontent.com/mastersonnic/Ruleta/main/1717696372276.png" alt="Base" class="base-img">
-</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ruleta de la Fortuna</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+</head>
+<body>
+    <div id="roulette-container">
+        <img id="base" src="https://raw.githubusercontent.com/mastersonnic/Ruleta/main/1717696372276.png" alt="Base">
+        <img id="roulette" src="https://raw.githubusercontent.com/mastersonnic/Ruleta/main/1717696211888.png" alt="Ruleta">
+        <img id="arrow" src="https://raw.githubusercontent.com/mastersonnic/Ruleta/main/1717696320531.png" alt="Flecha">
+        <img id="money" src="https://raw.githubusercontent.com/mastersonnic/Ruleta/main/dinero-05.gif" alt="Dinero">
+    </div>
+    <button id="spinButton">Girar Ruleta</button>
+    <canvas id="confetti-canvas"></canvas>
+    <script src="script.js"></script>
+</body>
+</html>
