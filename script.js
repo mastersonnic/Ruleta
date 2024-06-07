@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     spinButton.addEventListener('click', () => {
         if (!isSpinning) {
             isSpinning = true;
-            let newAngle = Math.floor(3600 + Math.random() * 360);
+            let previousAngle = parseInt(roulette.style.transform.replace(/[^0-9]/g, '')) || 0;
+            let newAngle = previousAngle + Math.floor(360 + Math.random() * 360);
             roulette.style.transition = 'transform 4s ease-out';
             roulette.style.transform = `translate(-50%, -50%) rotate(${newAngle}deg)`;
 
@@ -19,8 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     spread: 120,
                     origin: { y: 0.6 }
                 });
+                setTimeout(() => {
+                    confettiCanvas.style.display = 'none';
+                }, 2000);
                 isSpinning = false;
-            }, 4000); // Se activa el confeti después de que la ruleta termine de girar
+            }, 4000);
         }
     });
 });
