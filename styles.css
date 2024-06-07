@@ -20,7 +20,7 @@ body, html {
     position: absolute;
     width: 590px; /* Ancho de la base */
     height: 373px; /* Alto de la base */
-    bottom: 0; /* Posición inferior dentro del contenedor */
+    bottom: 10; /* Posición inferior dentro del contenedor */
     left: 50%; /* Centrado horizontalmente */
     transform: translateX(-50%); /* Ajuste fino de la posición horizontal */
     z-index: 1; /* Orden de apilamiento */
@@ -40,9 +40,9 @@ body, html {
 /* Estilos para la flecha */
 #arrow {
     position: absolute;
-    width: 70px; /* Ancho de la flecha */
-    height: 100px; /* Alto de la flecha */
-    top: -50px; /* Posición superior fuera de la ruleta */
+    width: 100px; /* Ancho de la flecha */
+    height: 200px; /* Alto de la flecha */
+    top: -90px; /* Posición superior fuera de la ruleta */
     left: 50%; /* Centrado horizontalmente */
     transform: translateX(-50%); /* Ajuste fino de la posición horizontal */
     z-index: 3; /* Orden de apilamiento */
@@ -54,8 +54,8 @@ body, html {
     top: 50%; /* Centrado verticalmente */
     left: 50%; /* Centrado horizontalmente */
     transform: translate(-50%, -50%); /* Ajuste fino de la posición */
-    width: 300px; /* Ancho del círculo */
-    height: 300px; /* Alto del círculo */
+    width: 200px; /* Ancho del círculo */
+    height: 200px; /* Alto del círculo */
     border-radius: 50%; /* Hace el contenedor circular */
     background: white; /* Color de fondo del círculo */
     display: flex;
@@ -66,23 +66,23 @@ body, html {
 
 /* Estilos para el símbolo de dinero */
 #money {
-    width: 250px; /* Ancho del símbolo de dinero */
-    height: 250px; /* Alto del símbolo de dinero */
+    width: 200px; /* Ancho del símbolo de dinero */
+    height: 200px; /* Alto del símbolo de dinero */
 }
 
 /* Estilos para el botón de girar */
 #spinButton {
     position: absolute;
-    bottom: -150px; /* Posición inferior fuera de la ruleta */
+    bottom: -100px; /* Posición inferior fuera de la ruleta */
     left: 50%; /* Centrado horizontalmente */
     transform: translateX(-50%); /* Ajuste fino de la posición horizontal */
     padding: 20px 40px; /* Relleno del botón */
-    font-size: 24px; /* Tamaño de fuente del botón */
+    font-size: 35px; /* Tamaño de fuente del botón */
     color: white; /* Color de texto del botón */
     background-color: #007bff; /* Color de fondo del botón */
     border: none;
-    border-radius: 5px; /* Bordes redondeados del botón */
-    box-shadow: 0px 4px 8px rgba(0, 123, 255, 0.5); /* Sombra del botón */
+    border-radius: 7px; /* Bordes redondeados del botón */
+    box-shadow: 0px 8px 12px rgba(0, 123, 255, 0.5); /* Sombra del botón */
     cursor: pointer;
     z-index: 5; /* Orden de apilamiento */
 }
