@@ -20,7 +20,7 @@ body, html {
     position: absolute;
     width: 590px; /* Ancho de la base */
     height: 373px; /* Alto de la base */
-    bottom: 10; /* Posición inferior dentro del contenedor */
+    bottom: 50; /* Posición inferior dentro del contenedor */
     left: 50%; /* Centrado horizontalmente */
     transform: translateX(-50%); /* Ajuste fino de la posición horizontal */
     z-index: 1; /* Orden de apilamiento */
@@ -40,9 +40,9 @@ body, html {
 /* Estilos para la flecha */
 #arrow {
     position: absolute;
-    width: 100px; /* Ancho de la flecha */
+    width: 150px; /* Ancho de la flecha */
     height: 200px; /* Alto de la flecha */
-    top: -90px; /* Posición superior fuera de la ruleta */
+    top: -130px; /* Posición superior fuera de la ruleta */
     left: 50%; /* Centrado horizontalmente */
     transform: translateX(-50%); /* Ajuste fino de la posición horizontal */
     z-index: 3; /* Orden de apilamiento */
@@ -77,11 +77,11 @@ body, html {
     left: 50%; /* Centrado horizontalmente */
     transform: translateX(-50%); /* Ajuste fino de la posición horizontal */
     padding: 20px 40px; /* Relleno del botón */
-    font-size: 35px; /* Tamaño de fuente del botón */
+    font-size: 45px; /* Tamaño de fuente del botón */
     color: white; /* Color de texto del botón */
     background-color: #007bff; /* Color de fondo del botón */
     border: none;
-    border-radius: 7px; /* Bordes redondeados del botón */
+    border-radius: 10px; /* Bordes redondeados del botón */
     box-shadow: 0px 8px 12px rgba(0, 123, 255, 0.5); /* Sombra del botón */
     cursor: pointer;
     z-index: 5; /* Orden de apilamiento */
