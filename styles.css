@@ -1,56 +1,72 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7f7f7;
+}
+
 #roulette-container {
     position: relative;
-    width: 878px; /* Ancho de la imagen de la ruleta */
-    height: 886px; /* Alto de la imagen de la ruleta */
-    margin: auto; /* Centrar el contenedor en la página */
+    width: 878px;
+    height: 886px;
+}
+
+#base, #roulette, #arrow, #money {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #base {
-    position: absolute;
-    width: 590px; /* Ancho de la imagen de la base */
-    height: 373px; /* Alto de la imagen de la base */
-    bottom: 0; /* Alinear la base en la parte inferior del contenedor */
-    left: 50%; /* Centrar la base horizontalmente */
-    transform: translateX(-50%); /* Ajuste fino de la posición horizontal */
-    z-index: 1; /* Asegurar que la base esté detrás de la ruleta */
+    width: 590px;
+    height: 373px;
+    z-index: 1;
 }
 
 #roulette {
-    position: absolute;
-    width: 878px; /* Ancho de la imagen de la ruleta */
-    height: 886px; /* Alto de la imagen de la ruleta */
-    top: 0; /* Alinear la ruleta en la parte superior del contenedor */
-    left: 50%; /* Centrar la ruleta horizontalmente */
-    transform: translateX(-50%); /* Ajuste fino de la posición horizontal */
-    z-index: 2; /* Asegurar que la ruleta esté encima de la base */
+    width: 878px;
+    height: 886px;
+    z-index: 2;
 }
 
 #arrow {
-    position: absolute;
-    width: 56px; /* Ancho de la imagen de la flecha */
-    height: 79px; /* Alto de la imagen de la flecha */
-    top: -79px; /* Posicionar la flecha encima de la ruleta */
-    left: 50%; /* Centrar la flecha horizontalmente */
-    transform: translateX(-50%); /* Ajuste fino de la posición horizontal */
-    z-index: 3; /* Asegurar que la flecha esté encima de la ruleta */
+    width: 56px;
+    height: 79px;
+    z-index: 3;
+    top: -40px; /* Ajuste para que la flecha sea visible */
 }
 
 #money {
+    width: 250px; /* Tamaño más grande para el símbolo de dinero */
+    height: 250px;
+    z-index: 4;
+}
+
+#spinButton {
     position: absolute;
-    width: 200px; /* Ancho del GIF de dinero */
-    height: 200px; /* Alto del GIF de dinero */
-    top: 50%; /* Centrar el GIF de dinero verticalmente */
-    left: 50%; /* Centrar el GIF de dinero horizontalmente */
-    transform: translate(-50%, -50%); /* Ajuste fino de la posición */
-    z-index: 4; /* Asegurar que el GIF de dinero esté encima de la ruleta */
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 30px;
+    font-size: 20px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 123, 255, 0.5);
+    cursor: pointer;
+    z-index: 5;
 }
 
 #confetti-canvas {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    display: none; /* Ocultar el canvas hasta que se active el confeti */
-    z-index: 5; /* Asegurar que el confeti esté encima de todo */
+    display: none;
+    z-index: 6;
 }
