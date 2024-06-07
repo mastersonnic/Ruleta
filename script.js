@@ -8,9 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
     spinButton.addEventListener('click', () => {
         if (!isSpinning) {
             isSpinning = true;
-            let previousAngle = parseInt(roulette.style.transform.replace(/[^0-9]/g, '')) || 0;
-            let newAngle = previousAngle + Math.floor(360 + Math.random() * 360);
-            roulette.style.transition = 'transform 4s ease-out';
+            // Calcula un ángulo aleatorio entre 360 y 720 grados para la rotación
+            let newAngle = Math.floor(360 + Math.random() * 360);
+            // Establece una duración de transición aleatoria entre 3 y 4 segundos
+            let duration = Math.floor(Math.random() * 1000) + 3000;
+            roulette.style.transition = `transform ${duration}ms ease-out`;
+            // Gira la ruleta al nuevo ángulo
             roulette.style.transform = `translate(-50%, -50%) rotate(${newAngle}deg)`;
 
             setTimeout(() => {
@@ -24,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     confettiCanvas.style.display = 'none';
                 }, 2000);
                 isSpinning = false;
-            }, 4000);
+            }, duration);
         }
     });
 });
