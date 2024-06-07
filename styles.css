@@ -1,99 +1,26 @@
-/* Estilos generales */
-body, html {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f7f7f7;
-}
+document.addEventListener('DOMContentLoaded', () => {
+    const roulette = document.getElementById('roulette');
+    const spinButton = document.getElementById('spinButton');
+    let isSpinning = false;
+    let lastAngle = 0; // Almacena el último ángulo para asegurar que siempre gire hacia la derecha
 
-/* Contenedor principal de la ruleta */
-#roulette-container {
-    position: relative;
-    width: 878px; /* Ancho de la ruleta */
-    height: 886px; /* Alto de la ruleta */
-}
+    spinButton.addEventListener('click', () => {
+        if (!isSpinning) {
+            isSpinning = true;
+            // Calcula un ángulo aleatorio entre 1800 y 2880 grados para la rotación
+            let newAngle = lastAngle + 1800 + Math.floor(Math.random() * 1080);
+            lastAngle = newAngle; // Actualiza el último ángulo
+            // Establece una duración de giro total entre 5 y 8 segundos
+            let spinDuration = Math.floor(Math.random() * 3000) + 5000;
+            // Establece una duración de desaceleración entre 3 y 4 segundos
+            let decelerationDuration = Math.floor(Math.random() * 1000) + 3000;
+            roulette.style.transition = `transform ${spinDuration + decelerationDuration}ms ease-out`;
+            // Gira la ruleta al nuevo ángulo
+            roulette.style.transform = `translate(-50%, -50%) rotate(${newAngle}deg)`;
 
-/* Estilos para la base */
-#base {
-    position: absolute;
-    width: 590px; /* Ancho de la base */
-    height: 373px; /* Alto de la base */
-    bottom: 50; /* Posición inferior dentro del contenedor */
-    left: 50%; /* Centrado horizontalmente */
-    transform: translateX(-50%); /* Ajuste fino de la posición horizontal */
-    z-index: 1; /* Orden de apilamiento */
-}
-
-/* Estilos para la ruleta */
-#roulette {
-    position: absolute;
-    width: 878px; /* Ancho de la ruleta */
-    height: 886px; /* Alto de la ruleta */
-    top: 50%; /* Centrado verticalmente */
-    left: 50%; /* Centrado horizontalmente */
-    transform: translate(-50%, -50%); /* Ajuste fino de la posición */
-    z-index: 2; /* Orden de apilamiento */
-}
-
-/* Estilos para la flecha */
-#arrow {
-    position: absolute;
-    width: 150px; /* Ancho de la flecha */
-    height: 200px; /* Alto de la flecha */
-    top: -130px; /* Posición superior fuera de la ruleta */
-    left: 50%; /* Centrado horizontalmente */
-    transform: translateX(-50%); /* Ajuste fino de la posición horizontal */
-    z-index: 3; /* Orden de apilamiento */
-}
-
-/* Contenedor del símbolo de dinero con forma circular */
-#money-container {
-    position: absolute;
-    top: 50%; /* Centrado verticalmente */
-    left: 50%; /* Centrado horizontalmente */
-    transform: translate(-50%, -50%); /* Ajuste fino de la posición */
-    width: 200px; /* Ancho del círculo */
-    height: 200px; /* Alto del círculo */
-    border-radius: 50%; /* Hace el contenedor circular */
-    background: white; /* Color de fondo del círculo */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 4; /* Orden de apilamiento */
-}
-
-/* Estilos para el símbolo de dinero */
-#money {
-    width: 200px; /* Ancho del símbolo de dinero */
-    height: 200px; /* Alto del símbolo de dinero */
-}
-
-/* Estilos para el botón de girar */
-#spinButton {
-    position: absolute;
-    bottom: -100px; /* Posición inferior fuera de la ruleta */
-    left: 50%; /* Centrado horizontalmente */
-    transform: translateX(-50%); /* Ajuste fino de la posición horizontal */
-    padding: 20px 40px; /* Relleno del botón */
-    font-size: 45px; /* Tamaño de fuente del botón */
-    color: white; /* Color de texto del botón */
-    background-color: #007bff; /* Color de fondo del botón */
-    border: none;
-    border-radius: 10px; /* Bordes redondeados del botón */
-    box-shadow: 0px 8px 12px rgba(0, 123, 255, 0.5); /* Sombra del botón */
-    cursor: pointer;
-    z-index: 5; /* Orden de apilamiento */
-}
-
-/* Canvas para el confeti */
-#confetti-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: none; /* Inicialmente oculto */
-    z-index: 6; /* Orden de apilamiento */
-}
+            setTimeout(() => {
+                isSpinning = false;
+            }, spinDuration + decelerationDuration);
+        }
+    });
+});
