@@ -97,3 +97,30 @@ body, html {
     display: none; /* Inicialmente oculto */
     z-index: 6; /* Orden de apilamiento */
 }
+
+/* Estilos para la corona iluminada */
+#corona {
+    position: absolute;
+    width: 220px; /* Ancho de la corona */
+    height: 220px; /* Alto de la corona */
+    top: 50%; /* Centrado verticalmente */
+    left: 50%; /* Centrado horizontalmente */
+    background: conic-gradient(
+        from 0deg at 50% 50%, 
+        gold 0deg, 
+        gold 90deg, 
+        transparent 90deg, 
+        transparent 360deg
+    ); /* Gradiente cónico para la corona */
+    border-radius: 50%; /* Hace el contenedor circular */
+    clip-path: polygon(50% 50%, 100% 0, 100% 100%); /* Forma de 1/4 de circunferencia */
+    animation: blink 2s infinite; /* Animación de parpadeo */
+    z-index: 7; /* Orden de apilamiento */
+    transform: translate(-50%, -50%) rotate(-45deg); /* Ajuste de la posición y rotación */
+}
+
+/* Animación de parpadeo */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
