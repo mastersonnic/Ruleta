@@ -33,7 +33,7 @@ body, html {
     height: 886px; /* Alto de la ruleta */
     top: 50%; /* Centrado verticalmente */
     left: 50%; /* Centrado horizontalmente */
-    transform: translate(-50%, -50%); /* Ajuste fino de la posición */
+    /* Se elimina el ajuste fino de la posición para evitar el movimiento horizontal y vertical */
     z-index: 2; /* Orden de apilamiento */
 }
 
@@ -53,7 +53,7 @@ body, html {
     position: absolute;
     top: 50%; /* Centrado verticalmente */
     left: 50%; /* Centrado horizontalmente */
-    transform: translate(-50%, -50%); /* Ajuste fino de la posición */
+    /* Se elimina el ajuste fino de la posición para evitar el movimiento horizontal y vertical */
     width: 300px; /* Ancho del círculo */
     height: 300px; /* Alto del círculo */
     border-radius: 50%; /* Hace el contenedor circular */
