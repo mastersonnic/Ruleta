@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 confettiCanvas.style.display = 'block';
                 confetti({
-                    particleCount: 200, // Más confetis
-                    spread: 120, // Mayor dispersión
+                    particleCount: 200,
+                    spread: 120,
                     origin: { y: 0.6 }
                 });
                 isSpinning = false;
