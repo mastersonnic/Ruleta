@@ -33,25 +33,25 @@ body, html {
 }
 
 #arrow {
-    width: 56px;
-    height: 79px;
+    width: 70px; /* Tamaño más grande para la flecha */
+    height: 100px;
     z-index: 3;
-    top: -40px; /* Ajuste para que la flecha sea visible */
+    top: -50px; /* Ajuste para que la flecha sea visible en la parte superior */
 }
 
 #money {
-    width: 250px; /* Tamaño más grande para el símbolo de dinero */
-    height: 250px;
+    width: 300px; /* Tamaño más grande para el símbolo de dinero */
+    height: 300px;
     z-index: 4;
 }
 
 #spinButton {
     position: absolute;
-    bottom: -100px;
+    bottom: -150px;
     left: 50%;
     transform: translateX(-50%);
-    padding: 15px 30px;
-    font-size: 20px;
+    padding: 20px 40px;
+    font-size: 24px;
     color: white;
     background-color: #007bff;
     border: none;
