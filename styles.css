@@ -1,3 +1,4 @@
+/* Estilos generales */
 body, html {
     height: 100%;
     margin: 0;
@@ -7,84 +8,92 @@ body, html {
     background-color: #f7f7f7;
 }
 
+/* Contenedor principal de la ruleta */
 #roulette-container {
     position: relative;
-    width: 878px; /* Puedes cambiar el ancho aquí */
-    height: 886px; /* Puedes cambiar la altura aquí */
+    width: 878px; /* Ancho de la ruleta */
+    height: 886px; /* Alto de la ruleta */
 }
 
+/* Estilos para la base */
 #base {
     position: absolute;
-    width: 590px; /* Puedes cambiar el ancho de la base aquí */
-    height: 373px; /* Puedes cambiar la altura de la base aquí */
-    bottom: 0; /* Ajusta la posición vertical de la base */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
+    width: 590px; /* Ancho de la base */
+    height: 373px; /* Alto de la base */
+    bottom: 0; /* Posición inferior dentro del contenedor */
+    left: 50%; /* Centrado horizontalmente */
+    transform: translateX(-50%); /* Ajuste fino de la posición horizontal */
+    z-index: 1; /* Orden de apilamiento */
 }
 
+/* Estilos para la ruleta */
 #roulette {
     position: absolute;
-    width: 878px; /* Puedes cambiar el ancho de la ruleta aquí */
-    height: 886px; /* Puedes cambiar la altura de la ruleta aquí */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
+    width: 878px; /* Ancho de la ruleta */
+    height: 886px; /* Alto de la ruleta */
+    top: 50%; /* Centrado verticalmente */
+    left: 50%; /* Centrado horizontalmente */
+    transform: translate(-50%, -50%); /* Ajuste fino de la posición */
+    z-index: 2; /* Orden de apilamiento */
 }
 
+/* Estilos para la flecha */
 #arrow {
     position: absolute;
-    width: 70px; /* Puedes cambiar el ancho de la flecha aquí */
-    height: 100px; /* Puedes cambiar la altura de la flecha aquí */
-    top: -50px; /* Ajusta la posición vertical de la flecha */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 3;
+    width: 70px; /* Ancho de la flecha */
+    height: 100px; /* Alto de la flecha */
+    top: -50px; /* Posición superior fuera de la ruleta */
+    left: 50%; /* Centrado horizontalmente */
+    transform: translateX(-50%); /* Ajuste fino de la posición horizontal */
+    z-index: 3; /* Orden de apilamiento */
 }
 
+/* Contenedor del símbolo de dinero con forma circular */
 #money-container {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 300px; /* Puedes cambiar el tamaño del círculo aquí */
-    height: 300px; /* Puedes cambiar el tamaño del círculo aquí */
-    border-radius: 50%; /* Esto crea el círculo alrededor del dinero */
+    top: 50%; /* Centrado verticalmente */
+    left: 50%; /* Centrado horizontalmente */
+    transform: translate(-50%, -50%); /* Ajuste fino de la posición */
+    width: 300px; /* Ancho del círculo */
+    height: 300px; /* Alto del círculo */
+    border-radius: 50%; /* Hace el contenedor circular */
     background: white; /* Color de fondo del círculo */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 4;
+    z-index: 4; /* Orden de apilamiento */
 }
 
+/* Estilos para el símbolo de dinero */
 #money {
-    width: 250px; /* Puedes cambiar el ancho del símbolo de dinero aquí */
-    height: 250px; /* Puedes cambiar la altura del símbolo de dinero aquí */
+    width: 250px; /* Ancho del símbolo de dinero */
+    height: 250px; /* Alto del símbolo de dinero */
 }
 
+/* Estilos para el botón de girar */
 #spinButton {
     position: absolute;
-    bottom: -150px; /* Ajusta la posición vertical del botón */
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 20px 40px; /* Puedes cambiar el relleno del botón aquí */
-    font-size: 24px; /* Puedes cambiar el tamaño de fuente del botón aquí */
-    color: white;
-    background-color: #007bff; /* Puedes cambiar el color del botón aquí */
+    bottom: -150px; /* Posición inferior fuera de la ruleta */
+    left: 50%; /* Centrado horizontalmente */
+    transform: translateX(-50%); /* Ajuste fino de la posición horizontal */
+    padding: 20px 40px; /* Relleno del botón */
+    font-size: 24px; /* Tamaño de fuente del botón */
+    color: white; /* Color de texto del botón */
+    background-color: #007bff; /* Color de fondo del botón */
     border: none;
-    border-radius: 5px;
-    box-shadow: 0px 4px 8px rgba(0, 123, 255, 0.5); /* Puedes cambiar la sombra del botón aquí */
+    border-radius: 5px; /* Bordes redondeados del botón */
+    box-shadow: 0px 4px 8px rgba(0, 123, 255, 0.5); /* Sombra del botón */
     cursor: pointer;
-    z-index: 5;
+    z-index: 5; /* Orden de apilamiento */
 }
 
+/* Canvas para el confeti */
 #confetti-canvas {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    display: none;
-    z-index: 6;
+    display: none; /* Inicialmente oculto */
+    z-index: 6; /* Orden de apilamiento */
 }
