@@ -4,12 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const confettiCanvas = document.getElementById('confetti-canvas');
     const confetti = window.confetti.create(confettiCanvas, { resize: true });
     let isSpinning = false;
+    let lastAngle = 0; // Almacena el último ángulo para asegurar que siempre gire hacia la derecha
 
     spinButton.addEventListener('click', () => {
         if (!isSpinning) {
             isSpinning = true;
-            // Calcula un ángulo aleatorio entre 360 y 2160 grados para la rotación
-            let newAngle = Math.floor(360 + Math.random() * 1800);
+            // Calcula un ángulo aleatorio entre 1980 y 3600 grados para la rotación
+            let newAngle = lastAngle + Math.floor(1980 + Math.random() * 1620);
+            lastAngle = newAngle; // Actualiza el último ángulo
             // Establece una duración de transición total entre 8 y 12 segundos
             let totalDuration = Math.floor(Math.random() * 3000) + 8000;
             // Establece una duración de desaceleración entre 3 y 4 segundos
