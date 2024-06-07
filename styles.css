@@ -9,54 +9,72 @@ body, html {
 
 #roulette-container {
     position: relative;
-    width: 878px;
-    height: 886px;
-}
-
-#base, #roulette, #arrow, #money {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 878px; /* Puedes cambiar el ancho aquí */
+    height: 886px; /* Puedes cambiar la altura aquí */
 }
 
 #base {
-    width: 590px;
-    height: 373px;
+    position: absolute;
+    width: 590px; /* Puedes cambiar el ancho de la base aquí */
+    height: 373px; /* Puedes cambiar la altura de la base aquí */
+    bottom: 0; /* Ajusta la posición vertical de la base */
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1;
 }
 
 #roulette {
-    width: 878px;
-    height: 886px;
+    position: absolute;
+    width: 878px; /* Puedes cambiar el ancho de la ruleta aquí */
+    height: 886px; /* Puedes cambiar la altura de la ruleta aquí */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 2;
 }
 
 #arrow {
-    width: 70px; /* Tamaño más grande para la flecha */
-    height: 100px;
+    position: absolute;
+    width: 70px; /* Puedes cambiar el ancho de la flecha aquí */
+    height: 100px; /* Puedes cambiar la altura de la flecha aquí */
+    top: -50px; /* Ajusta la posición vertical de la flecha */
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 3;
-    top: -50px; /* Ajuste para que la flecha sea visible en la parte superior */
+}
+
+#money-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px; /* Puedes cambiar el tamaño del círculo aquí */
+    height: 300px; /* Puedes cambiar el tamaño del círculo aquí */
+    border-radius: 50%; /* Esto crea el círculo alrededor del dinero */
+    background: white; /* Color de fondo del círculo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 4;
 }
 
 #money {
-    width: 300px; /* Tamaño más grande para el símbolo de dinero */
-    height: 300px;
-    z-index: 4;
+    width: 250px; /* Puedes cambiar el ancho del símbolo de dinero aquí */
+    height: 250px; /* Puedes cambiar la altura del símbolo de dinero aquí */
 }
 
 #spinButton {
     position: absolute;
-    bottom: -150px;
+    bottom: -150px; /* Ajusta la posición vertical del botón */
     left: 50%;
     transform: translateX(-50%);
-    padding: 20px 40px;
-    font-size: 24px;
+    padding: 20px 40px; /* Puedes cambiar el relleno del botón aquí */
+    font-size: 24px; /* Puedes cambiar el tamaño de fuente del botón aquí */
     color: white;
-    background-color: #007bff;
+    background-color: #007bff; /* Puedes cambiar el color del botón aquí */
     border: none;
     border-radius: 5px;
-    box-shadow: 0px 4px 8px rgba(0, 123, 255, 0.5);
+    box-shadow: 0px 4px 8px rgba(0, 123, 255, 0.5); /* Puedes cambiar la sombra del botón aquí */
     cursor: pointer;
     z-index: 5;
 }
