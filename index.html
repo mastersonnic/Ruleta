@@ -1,22 +1,21 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ruleta de la Fortuna</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruleta Interactiva</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
 </head>
 <body>
-    <div id="roulette-container">
-        <img id="base" src="https://raw.githubusercontent.com/mastersonnic/Ruleta/main/1717696372276.png" alt="Base">
-        <img id="roulette" src="https://raw.githubusercontent.com/mastersonnic/Ruleta/main/1717696211888.png" alt="Ruleta">
-        <img id="arrow" src="https://raw.githubusercontent.com/mastersonnic/Ruleta/main/1717696320531.png" alt="Flecha">
-        <div id="money-container">
-            <img id="money" src="https://raw.githubusercontent.com/mastersonnic/Ruleta/main/17-00-52-997_512.webp" alt="Dinero">
-        </div>
+    <div class="ruleta-contenedor">
+        <img src="ruta/a/tu/base.png" alt="Base de la ruleta" class="base-ruleta">
+        <img src="ruta/a/tu/ruleta.png" alt="Ruleta" class="imagen-ruleta">
+        <img src="ruta/a/tu/flecha.png" alt="Flecha indicadora" class="flecha-indicadora">
+        <div class="centro-ruleta"></div>
+        <button id="boton-girar">Girar</button>
+        <div id="contador-giros">5</div>
     </div>
-    <button id="spinButton">Girar Ruleta</button>
-    <canvas id="confetti-canvas"></canvas>
     <script src="script.js"></script>
 </body>
 </html>
