@@ -1,126 +1,63 @@
-/* Estilos generales */
-body, html {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f7f7f7;
-}
-
-/* Contenedor principal de la ruleta */
-#roulette-container {
+/* styles.css */
+.ruleta-contenedor {
     position: relative;
-    width: 878px; /* Ancho de la ruleta */
-    height: 886px; /* Alto de la ruleta */
+    width: 894px; /* Ajusta al tamaño de tu base */
+    height: auto;
 }
 
-/* Estilos para la base */
-#base {
-    position: absolute;
-    width: 590px; /* Ancho de la base */
-    height: 373px; /* Alto de la base */
-    bottom: 0; /* Posición inferior dentro del contenedor */
-    left: 50%; /* Centrado horizontalmente */
-    transform: translateX(-50%); /* Ajuste fino de la posición horizontal */
-    z-index: 1; /* Orden de apilamiento */
-}
-
-/* Estilos para la ruleta */
-#roulette {
-    position: absolute;
-    width: 878px; /* Ancho de la ruleta */
-    height: 886px; /* Alto de la ruleta */
-    top: 50%; /* Centrado verticalmente */
-    left: 50%; /* Centrado horizontalmente */
-    /* Se elimina el ajuste fino de la posición para evitar el movimiento horizontal y vertical */
-    z-index: 2; /* Orden de apilamiento */
-}
-
-/* Estilos para la flecha */
-#arrow {
-    position: absolute;
-    width: 70px; /* Ancho de la flecha */
-    height: 100px; /* Alto de la flecha */
-    top: -50px; /* Posición superior fuera de la ruleta */
-    left: 50%; /* Centrado horizontalmente */
-    transform: translateX(-50%); /* Ajuste fino de la posición horizontal */
-    z-index: 3; /* Orden de apilamiento */
-}
-
-/* Contenedor del símbolo de dinero con forma circular */
-#money-container {
-    position: absolute;
-    top: 50%; /* Centrado verticalmente */
-    left: 50%; /* Centrado horizontalmente */
-    /* Se elimina el ajuste fino de la posición para evitar el movimiento horizontal y vertical */
-    width: 300px; /* Ancho del círculo */
-    height: 300px; /* Alto del círculo */
-    border-radius: 50%; /* Hace el contenedor circular */
-    background: white; /* Color de fondo del círculo */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 4; /* Orden de apilamiento */
-}
-
-/* Estilos para el símbolo de dinero */
-#money {
-    width: 250px; /* Ancho del símbolo de dinero */
-    height: 250px; /* Alto del símbolo de dinero */
-}
-
-/* Estilos para el botón de girar */
-#spinButton {
-    position: absolute;
-    bottom: -150px; /* Posición inferior fuera de la ruleta */
-    left: 50%; /* Centrado horizontalmente */
-    transform: translateX(-50%); /* Ajuste fino de la posición horizontal */
-    padding: 20px 40px; /* Relleno del botón */
-    font-size: 24px; /* Tamaño de fuente del botón */
-    color: white; /* Color de texto del botón */
-    background-color: #007bff; /* Color de fondo del botón */
-    border: none;
-    border-radius: 5px; /* Bordes redondeados del botón */
-    box-shadow: 0px 4px 8px rgba(0, 123, 255, 0.5); /* Sombra del botón */
-    cursor: pointer;
-    z-index: 5; /* Orden de apilamiento */
-}
-
-/* Canvas para el confeti */
-#confetti-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
+.base-ruleta {
     width: 100%;
-    height: 100%;
-    display: none; /* Inicialmente oculto */
-    z-index: 6; /* Orden de apilamiento */
 }
 
-/* Estilos para la corona iluminada */
-#corona {
+.imagen-ruleta {
     position: absolute;
-    width: 220px; /* Ancho de la corona */
-    height: 220px; /* Alto de la corona */
-    top: 50%; /* Centrado verticalmente */
-    left: 50%; /* Centrado horizontalmente */
-    background: conic-gradient(
-        from 0deg at 50% 50%, 
-        gold 0deg, 
-        gold 90deg, 
-        transparent 90deg, 
-        transparent 360deg
-    ); /* Gradiente cónico para la corona */
-    border-radius: 50%; /* Hace el contenedor circular */
-    clip-path: polygon(50% 50%, 100% 0, 100% 100%); /* Forma de 1/4 de circunferencia */
-    animation: blink 2s infinite; /* Animación de parpadeo */
-    z-index: 7; /* Orden de apilamiento */
-    transform: translate(-50%, -50%) rotate(-45deg); /* Ajuste de la posición y rotación */
+    top: 50%; /* Ajusta según sea necesario */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 878px; /* Ajusta al tamaño de tu ruleta */
 }
 
-/* Animación de parpadeo */
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+.flecha-indicadora {
+    position: absolute;
+    top: 10px; /* Ajusta según sea necesario */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 187px; /* Ajusta al tamaño de tu flecha */
 }
+
+.centro-ruleta {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px; /* Ajusta al tamaño de tu símbolo de dinero */
+    height: 100px; /* Ajusta al tamaño de tu símbolo de dinero */
+    background: url('ruta/a/tu/simbolo-dinero.gif') no-repeat center;
+    background-size: contain;
+    border-radius: 50%;
+    /* Gradiente de amarillo a blanco */
+    background-image: radial-gradient(circle, yellow, white);
+}
+
+#boton-girar {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: blue;
+    color: white;
+    /* Gradiente de amarillo a blanco en las letras */
+    background-image: linear-gradient(to right, yellow, white);
+    font-size: 20px; /* Ajusta al tamaño deseado */
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+#contador-giros {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 20px; /* Ajusta al tamaño deseado */
+}
+g
