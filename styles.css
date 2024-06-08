@@ -1,25 +1,22 @@
-/* styles.css */
-.ruleta-container {
+#ruleta {
   position: relative;
-  width: 878px;
-  height: 886px;
+  width: 720px;
+  height: 695px;
 }
 
-#ruleta, #lienzo {
-  position: absolute;
-  top: 0;
-  left: 0;
+#imgRuleta {
   width: 100%;
 }
 
-#flecha {
+#imgFlecha {
   position: absolute;
-  top: 0;
+  top: -20px; /* Ajustar según sea necesario */
   left: 50%;
   transform: translateX(-50%);
-  width: 187px;
 }
 
-#girar {
+#resultado {
   margin-top: 20px;
+  text-align: center;
+  font-size: 24px;
 }
