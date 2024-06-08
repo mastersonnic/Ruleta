@@ -5,13 +5,16 @@
   height: 886px;
 }
 
-#ruleta {
+#ruleta, #lienzo {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
 }
 
 #flecha {
   position: absolute;
-  top: -93.5px; /* La mitad de la altura de la flecha para centrarla */
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
   width: 187px;
