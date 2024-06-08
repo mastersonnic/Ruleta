@@ -1,63 +1,22 @@
 /* styles.css */
-.ruleta-contenedor {
-    position: relative;
-    width: 894px; /* Ajusta al tamaño de tu base */
-    height: auto;
+.ruleta-container {
+  position: relative;
+  width: 878px;
+  height: 886px;
 }
 
-.base-ruleta {
-    width: 100%;
+#ruleta {
+  width: 100%;
 }
 
-.imagen-ruleta {
-    position: absolute;
-    top: 50%; /* Ajusta según sea necesario */
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 878px; /* Ajusta al tamaño de tu ruleta */
+#flecha {
+  position: absolute;
+  top: -93.5px; /* La mitad de la altura de la flecha para centrarla */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 187px;
 }
 
-.flecha-indicadora {
-    position: absolute;
-    top: 10px; /* Ajusta según sea necesario */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 187px; /* Ajusta al tamaño de tu flecha */
+#girar {
+  margin-top: 20px;
 }
-
-.centro-ruleta {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100px; /* Ajusta al tamaño de tu símbolo de dinero */
-    height: 100px; /* Ajusta al tamaño de tu símbolo de dinero */
-    background: url('ruta/a/tu/simbolo-dinero.gif') no-repeat center;
-    background-size: contain;
-    border-radius: 50%;
-    /* Gradiente de amarillo a blanco */
-    background-image: radial-gradient(circle, yellow, white);
-}
-
-#boton-girar {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: blue;
-    color: white;
-    /* Gradiente de amarillo a blanco en las letras */
-    background-image: linear-gradient(to right, yellow, white);
-    font-size: 20px; /* Ajusta al tamaño deseado */
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-}
-
-#contador-giros {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    font-size: 20px; /* Ajusta al tamaño deseado */
-}
-g
