@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var gradosPorVuelta = 360;
     var anguloFinal = vueltasPorClick * gradosPorVuelta * duracionGiro;
 
+    // Asegurarse de que la ruleta gire siempre hacia la derecha
+    anguloFinal = Math.abs(anguloFinal);
+
     imgRuleta.style.transition = 'transform ' + duracionGiro + 's ease-out';
     imgRuleta.style.transform = 'rotate(' + anguloFinal + 'deg)';
 
