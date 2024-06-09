@@ -2,12 +2,12 @@
   /* Variables para personalizar la ruleta y sus elementos */
   --ruleta-width: 720px; /* Aumenta o disminuye para cambiar el ancho de la ruleta */
   --ruleta-height: 695px; /* Aumenta o disminuye para cambiar la altura de la ruleta */
-  --flecha-top: -20px; /* Aumenta o disminuye para mover la flecha verticalmente */
-  --flecha-left: 50%; /* Aumenta o disminuye para mover la flecha horizontalmente */
-  --flecha-width: 100px; /* Aumenta o disminuye para cambiar el ancho de la flecha */
+  --flecha-top: -50px; /* Aumenta o disminuye para mover la flecha verticalmente */
+  --flecha-left: 70%; /* Aumenta o disminuye para mover la flecha horizontalmente */
+  --flecha-width: 130px; /* Aumenta o disminuye para cambiar el ancho de la flecha */
   --resultado-top: 50%; /* Aumenta o disminuye para mover el resultado verticalmente */
-  --resultado-font-size: 48px; /* Aumenta o disminuye para cambiar el tamaño del texto del resultado */
-  --boton-width: 80%; /* Aumenta o disminuye para cambiar el ancho del botón */
+  --resultado-font-size: 55px; /* Aumenta o disminuye para cambiar el tamaño del texto del resultado */
+  --boton-width: 40%; /* Aumenta o disminuye para cambiar el ancho del botón */
   --boton-left: 50%; /* Aumenta o disminuye para mover el botón horizontalmente */
 }
 
