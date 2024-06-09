@@ -1,7 +1,17 @@
+:root {
+  /* Variables para personalizar la ruleta y sus elementos */
+  --ruleta-width: 720px;
+  --ruleta-height: 695px;
+  --flecha-top: -20px;
+  --resultado-top: 50%;
+  --resultado-font-size: 48px;
+  --boton-width: 80%;
+}
+
 #ruleta {
   position: relative;
-  width: var(--ruleta-width, 720px); /* Variable para el ancho */
-  height: var(--ruleta-height, 695px); /* Variable para la altura */
+  width: var(--ruleta-width); /* Ancho de la ruleta */
+  height: var(--ruleta-height); /* Altura de la ruleta */
 }
 
 #imgRuleta {
@@ -10,27 +20,34 @@
 
 #imgFlecha {
   position: absolute;
-  top: var(--flecha-top, -20px); /* Variable para ajustar la posición superior */
+  top: var(--flecha-top); /* Posición superior de la flecha */
   left: 50%;
   transform: translateX(-50%);
 }
 
 #resultado {
   position: absolute;
-  top: var(--resultado-top, 50%); /* Variable para ajustar la posición superior */
+  top: var(--resultado-top); /* Posición superior del resultado */
   left: 50%;
   transform: translate(-50%, -50%);
   display: none;
-  font-size: var(--resultado-font-size, 48px); /* Variable para el tamaño de fuente */
-  color: red; /* Color de las letras del mensaje ganador */
+  font-size: var(--resultado-font-size); /* Tamaño de fuente del resultado */
+  color: red; /* Color del texto del resultado */
+  font-weight: bold; /* Texto en negrita */
+  text-shadow: 2px 2px 2px white; /* Sombra blanca alrededor del texto */
   z-index: 1000;
-  font-family: 'Alfa Slab One', cursive; /* Fuente para el mensaje ganador */
+  font-family: 'Alfa Slab One', cursive; /* Fuente del resultado */
   animation: aparecer 1s ease-in-out forwards;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
 
 #girar {
   display: block;
-  width: var(--boton-width, 80%); /* Variable para el ancho del botón */
+  width: var(--boton-width); /* Ancho del botón */
   margin: 20px auto;
   padding: 10px;
   font-size: 24px;
