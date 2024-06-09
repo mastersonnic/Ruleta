@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var duracionGiro = Math.random() * 0.5 + 1.5; // Duración del giro entre 1.5 y 2 segundos
     var vueltasPorClick = 20; // Vueltas por segundo
     var gradosPorVuelta = 360 / segmentos.length;
-    var anguloDesfase = 22.5; // Desfase para alinear con la flecha
     var anguloFinal = vueltasPorClick * gradosPorVuelta * duracionGiro * segmentos.length;
 
     // Asegurarse de que la ruleta gire siempre hacia la derecha
@@ -22,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     setTimeout(function () {
       // Ajustar el cálculo del segmento ganador con el desfase
-      var anguloDesplazado = (anguloFinal + anguloDesfase) % 360;
+      var anguloDesplazado = (anguloFinal % 360) + gradosPorVuelta / 2; // Añadir medio segmento para el desfase
       var segmentoGanadorIndex = Math.floor((360 - anguloDesplazado) / gradosPorVuelta) % segmentos.length;
       var segmentoGanador = segmentos[segmentoGanadorIndex];
       resultado.textContent = '¡Haz ganado ' + segmentoGanador + '!';
