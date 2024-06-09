@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
     girando = true;
     var duracionGiro = Math.random() * 0.5 + 1.5; // Duración del giro entre 1.5 y 2 segundos
     var vueltasPorClick = 20; // Vueltas por segundo
-    var gradosPorVuelta = 360;
-    var anguloFinal = vueltasPorClick * gradosPorVuelta * duracionGiro;
+    var gradosPorVuelta = 360 / segmentos.length;
+    var anguloFinal = vueltasPorClick * gradosPorVuelta * duracionGiro * segmentos.length;
 
     // Asegurarse de que la ruleta gire siempre hacia la derecha
     anguloFinal = Math.abs(anguloFinal);
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
     setTimeout(function () {
       // Ajustar el cálculo del segmento ganador
       var anguloDesplazado = anguloFinal % 360;
-      var segmentoGanadorIndex = Math.floor((360 - anguloDesplazado) / gradosPorVuelta * segmentos.length) % segmentos.length;
+      var segmentoGanadorIndex = Math.floor((360 - anguloDesplazado) / gradosPorVuelta);
       var segmentoGanador = segmentos[segmentoGanadorIndex];
       resultado.textContent = '¡Haz ganado ' + segmentoGanador + '!';
       resultado.style.display = 'block';
