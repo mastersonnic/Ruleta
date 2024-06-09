@@ -1,7 +1,7 @@
 #ruleta {
   position: relative;
-  width: 720px;
-  height: 695px;
+  width: var(--ruleta-width, 720px); /* Variable para el ancho */
+  height: var(--ruleta-height, 695px); /* Variable para la altura */
 }
 
 #imgRuleta {
@@ -10,31 +10,27 @@
 
 #imgFlecha {
   position: absolute;
-  top: -20px; /* Ajustar según sea necesario */
+  top: var(--flecha-top, -20px); /* Variable para ajustar la posición superior */
   left: 50%;
   transform: translateX(-50%);
 }
 
 #resultado {
   position: absolute;
-  top: 50%;
+  top: var(--resultado-top, 50%); /* Variable para ajustar la posición superior */
   left: 50%;
   transform: translate(-50%, -50%);
   display: none;
-  font-size: 48px;
-  color: white;
+  font-size: var(--resultado-font-size, 48px); /* Variable para el tamaño de fuente */
+  color: red; /* Color de las letras del mensaje ganador */
   z-index: 1000;
+  font-family: 'Alfa Slab One', cursive; /* Fuente para el mensaje ganador */
   animation: aparecer 1s ease-in-out forwards;
-}
-
-@keyframes aparecer {
-  from { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
 
 #girar {
   display: block;
-  width: 80%;
+  width: var(--boton-width, 80%); /* Variable para el ancho del botón */
   margin: 20px auto;
   padding: 10px;
   font-size: 24px;
