@@ -20,7 +20,9 @@ document.addEventListener('DOMContentLoaded', function () {
     imgRuleta.style.transform = 'rotate(' + anguloFinal + 'deg)';
 
     setTimeout(function () {
-      var segmentoGanadorIndex = Math.floor((anguloFinal / gradosPorVuelta) % segmentos.length);
+      // Ajustar el cálculo del segmento ganador
+      var anguloDesplazado = anguloFinal % 360;
+      var segmentoGanadorIndex = Math.floor((360 - anguloDesplazado) / gradosPorVuelta * segmentos.length) % segmentos.length;
       var segmentoGanador = segmentos[segmentoGanadorIndex];
       resultado.textContent = '¡Haz ganado ' + segmentoGanador + '!';
       resultado.style.display = 'block';
