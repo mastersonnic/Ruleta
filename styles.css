@@ -1,47 +1,42 @@
-/* Contenedor de la ruleta */
 #ruleta {
   position: relative;
-  width: 720px; /* Ancho de la ruleta - editable */
-  height: 695px; /* Alto de la ruleta - editable */
+  width: 720px; /* Ancho de la ruleta */
+  height: 695px; /* Alto de la ruleta */
 }
 
-/* Imagen de la ruleta */
 #imgRuleta {
   width: 100%;
 }
 
-/* Imagen de la flecha */
 #imgFlecha {
   position: absolute;
-  top: -20px; /* Posición vertical de la flecha - editable */
-  left: 50%; /* Posición horizontal de la flecha - editable */
+  top: -20px; /* Posición vertical de la flecha */
+  left: 50%; /* Posición horizontal de la flecha */
   transform: translateX(-50%);
 }
 
-/* Botón para girar la ruleta */
 #girar {
   background-color: blue;
   color: white;
-  font-size: 20px; /* Tamaño del texto del botón - editable */
-  padding: 10px 20px; /* Relleno del botón - editable */
+  font-size: 20px; /* Tamaño del texto del botón */
+  padding: 10px 20px; /* Relleno del botón */
   border: none;
   cursor: pointer;
   display: block;
-  margin: 20px auto; /* Margen alrededor del botón - editable */
-  background-image: linear-gradient(to right, #0000ff, #800080); /* Gradiente del botón - editable */
+  margin: 20px auto; /* Margen alrededor del botón */
+  background-image: linear-gradient(to right, #0000ff, #800080); /* Gradiente del botón */
 }
 
-/* Mensaje del segmento ganador */
 #mensajeGanador {
   position: absolute;
-  top: 50%; /* Posición vertical del mensaje - editable */
-  left: 50%; /* Posición horizontal del mensaje - editable */
+  top: 50%; /* Posición vertical del mensaje */
+  left: 50%; /* Posición horizontal del mensaje */
   transform: translate(-50%, -50%);
-  font-size: 40px; /* Tamaño del texto del mensaje - editable */
+  font-size: 40px; /* Tamaño del texto del mensaje */
   color: white;
   text-align: center;
   display: none;
-  z-index: 1000; /* Asegura que el mensaje esté sobre todo - editable */
+  z-index: 1000; /* Asegura que el mensaje esté sobre todo */
 }
 
 /* Animación para el mensaje del ganador */
