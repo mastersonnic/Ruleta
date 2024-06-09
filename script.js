@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
       // Ajustar el cálculo del segmento ganador
       var anguloDesplazado = anguloFinal % 360;
       var segmentoGanadorIndex = Math.floor((360 - anguloDesplazado) / gradosPorVuelta);
-      var segmentoGanador = segmentos[segmentoGanadorIndex];
+      var segmentoGanador = segmentos[(segmentos.length - segmentoGanadorIndex) % segmentos.length];
       resultado.textContent = '¡Haz ganado ' + segmentoGanador + '!';
       resultado.style.display = 'block';
       girando = false;
