@@ -2,14 +2,14 @@
   /* Variables para personalizar la ruleta y sus elementos */
   --ruleta-width: 720px; /* Yendo a los positivos haces más ancho */
   --ruleta-height: 695px; /* Yendo a los positivos haces más alto */
-  --ruleta-left: 50%; /* Yendo a los positivos puedes ir a la derecha */
-  --flecha-top: -20px; /* Yendo a los positivos subes */
-  --flecha-left: 50%; /* Yendo a los positivos vas a la derecha */
+  --ruleta-left: 80%; /* Yendo a los positivos puedes ir a la derecha */
+  --flecha-top: -30px; /* Yendo a los positivos subes */
+  --flecha-left: 80%; /* Yendo a los positivos vas a la derecha */
   --flecha-width: 100px; /* Yendo a los positivos haces más ancho */
   --resultado-top: 50%; /* Yendo a los positivos subes */
   --resultado-font-size: 48px; /* Yendo a los positivos haces más grande el texto */
   --boton-width: 80%; /* Yendo a los positivos haces más ancho */
-  --boton-left: 50%; /* Yendo a los positivos vas a la derecha */
+  --boton-left: 20%; /* Yendo a los positivos vas a la derecha */
 }
 
 #ruleta {
