@@ -1,7 +1,7 @@
 #ruleta {
   position: relative;
-  width: 720px;
-  height: 695px;
+  width: 720px; /* Ancho de la ruleta */
+  height: 695px; /* Alto de la ruleta */
 }
 
 #imgRuleta {
@@ -10,33 +10,37 @@
 
 #imgFlecha {
   position: absolute;
-  top: -20px; /* Ajustar según sea necesario */
-  left: 50%;
+  top: -20px; /* Posición vertical de la flecha */
+  left: 50%; /* Posición horizontal de la flecha */
   transform: translateX(-50%);
 }
 
 #girar {
-  background-image: linear-gradient(to right, blue, purple);
-  color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
-  font-size: 20px;
-  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+  font-size: 20px; /* Tamaño del texto del botón */
+  padding: 10px 20px; /* Relleno del botón */
   border: none;
-  border-radius: 5px;
   cursor: pointer;
   display: block;
-  margin: 20px auto 0;
+  margin: 20px auto; /* Margen alrededor del botón */
+  background-image: linear-gradient(to right, #0000ff, #800080); /* Gradiente del botón */
 }
 
-#resultado {
+#mensajeGanador {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50%; /* Posición vertical del mensaje */
+  left: 50%; /* Posición horizontal del mensaje */
   transform: translate(-50%, -50%);
-  display: none;
-  font-size: 48px;
+  font-size: 40px; /* Tamaño del texto del mensaje */
   color: white;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-  z-index: 1000;
+  text-align: center;
+  display: none;
+  z-index: 1000; /* Asegura que el mensaje esté sobre todo */
+}
+
+/* Animación para el mensaje del ganador */
+@keyframes aparecer {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
