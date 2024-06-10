@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
   ];
   var imgRuleta = document.getElementById('imgRuleta');
   var resultado = document.getElementById('resultado');
+  var confeti = document.getElementById('confeti');
   var botonGirar = document.getElementById('girar');
   var girando = false;
 
@@ -33,6 +34,9 @@ document.addEventListener('DOMContentLoaded', function () {
       var segmentoGanador = segmentos[segmentoGanadorIndex].nombre;
       resultado.textContent = '¡Haz ganado ' + segmentoGanador + '!';
       resultado.style.display = 'block';
+      if (!segmentoGanador.includes('0.')) {
+        confeti.className = 'confeti';
+      }
       girando = false;
     }, duracionGiro * 1000);
   });
