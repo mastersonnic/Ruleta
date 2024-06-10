@@ -1,20 +1,23 @@
 :root {
   /* Variables para personalizar la ruleta y sus elementos */
-  --ruleta-width: 720px;
-  --ruleta-height: 695px;
-  --ruleta-left: 15%;
-  --flecha-top: -1px;
-  --flecha-left: 47%;
-  --flecha-width: 100px;
-  --resultado-top: 50%;
-  --resultado-font-size: 48px;
-  --boton-width: 30%;
-  --boton-left: 2%;
-  --boton-font-size: 28px; /* Aumenta el tamaño de la fuente del botón */
+  --ruleta-width: 720px; /* Yendo a los positivos haces más ancho */
+  --ruleta-height: 695px; /* Yendo a los positivos haces más alto */
+  --ruleta-top: 10px; /* Baja la ruleta 10px */
+  --ruleta-left: 15%; /* Yendo a los positivos puedes ir a la derecha */
+  --flecha-top: -40px; /* Yendo a los positivos subes */
+  --flecha-left: 47%; /* Yendo a los positivos vas a la derecha */
+  --flecha-width: 100px; /* Yendo a los positivos haces más ancho */
+  --flecha-height: var(--flecha-height, 100px); /* Yendo a los positivos haces más alto */
+  --resultado-top: 50%; /* Yendo a los positivos subes */
+  --resultado-font-size: 48px; /* Yendo a los positivos haces más grande el texto */
+  --boton-width: 30%; /* Yendo a los positivos haces más ancho */
+  --boton-left: 2%; /* Yendo a los positivos vas a la derecha */
+  --boton-font-size: 28px; /* Aumenta el tamaño de la fuente del botón sin cambiar el tamaño del botón */
 }
 
 #ruleta {
   position: relative;
+  top: var(--ruleta-top);
   width: var(--ruleta-width);
   height: var(--ruleta-height);
   left: var(--ruleta-left);
@@ -30,6 +33,7 @@
   left: var(--flecha-left);
   transform: translateX(-50%);
   width: var(--flecha-width);
+  height: var(--flecha-height); /* Aplica la variable para ajustar la altura de la flecha */
 }
 
 #resultado {
@@ -57,7 +61,7 @@
   width: var(--boton-width);
   margin: 20px auto;
   padding: 10px;
-  font-size: var(--boton-font-size); /* Aplica el tamaño de la fuente del botón */
+  font-size: var(--boton-font-size);
   color: white;
   background-image: linear-gradient(to right, blue, purple);
   border: none;
