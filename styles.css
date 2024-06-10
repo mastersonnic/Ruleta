@@ -1,18 +1,19 @@
 :root {
-  --ruleta-width: 720px;
-  --ruleta-height: 695px;
-  --ruleta-top: 10px;
-  --ruleta-left: 15%;
-  --flecha-top: -60px;
-  --flecha-left: 47%;
-  --flecha-width: 100px;
-  --flecha-height: 90px;
-  --resultado-top: 180%;
-  --resultado-font-size: 65px;
-  --boton-width: 30%;
-  --boton-left: 1%;
-  --boton-font-size: 75px;
-  --boton-border-radius: 5px;
+  /* Variables para personalizar la ruleta y sus elementos */
+  --ruleta-width: 720px; /* Yendo a los positivos haces más ancho */
+  --ruleta-height: 695px; /* Yendo a los positivos haces más alto */
+  --ruleta-top: 10px; /* Baja la ruleta 10px */
+  --ruleta-left: 15%; /* Yendo a los positivos puedes ir a la derecha */
+  --flecha-top: -48px; /* Yendo a los positivos subes */
+  --flecha-left: 47%; /* Yendo a los positivos vas a la derecha */
+  --flecha-width: 100px; /* Yendo a los positivos haces más ancho */
+  --flecha-height: var(--flecha-height, 90px); /* Yendo a los positivos haces más alto */
+  --resultado-top: 180%; /* Yendo a los positivos subes */
+  --resultado-font-size: 65px; /* Yendo a los positivos haces más grande el texto */
+  --boton-width: 30%; /* Yendo a los positivos haces más ancho */
+  --boton-left: 1%; /* Yendo a los positivos vas a la derecha */
+  --boton-font-size: 75px; /* Aumenta el tamaño de la fuente del botón sin cambiar el tamaño del botón */
+  --boton-border-radius: 5px; /* Variable para redondear las esquinas del botón */
 }
 
 #ruleta {
@@ -33,7 +34,18 @@
   left: var(--flecha-left);
   transform: translateX(-50%);
   width: var(--flecha-width);
-  height: var(--flecha-height);
+  height: var(--flecha-height); /* Aplica la variable para ajustar la altura de la flecha */
+}
+
+#confeti {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none; /* Inicialmente oculto */
+  background-size: cover;
+  z-index: 999; /* Asegura que el confeti esté detrás de la ruleta */
 }
 
 #resultado {
@@ -75,21 +87,4 @@
 
 #girar:hover {
   background-image: linear-gradient(to left, blue, purple);
-}
-
-/* Estilos para la animación de confeti */
-.confeti {
-  position: absolute;
-  top: var(--ruleta-top);
-  left: var(--ruleta-left);
-  width: var(--ruleta-width);
-  height: var(--ruleta-height);
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" fill="%23FFD700"/></svg>');
-  background-repeat: repeat;
-  animation: confetiAnimacion 5s forwards;
-}
-
-@keyframes confetiAnimacion {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(300%); }
 }
