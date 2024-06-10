@@ -4,7 +4,7 @@
   --ruleta-height: 695px; /* Yendo a los positivos haces más alto */
   --ruleta-top: 10px; /* Baja la ruleta 10px */
   --ruleta-left: 15%; /* Yendo a los positivos puedes ir a la derecha */
-  --flecha-top: -48px; /* Yendo a los positivos subes */
+  --flecha-top: -30px; /* Yendo a los positivos subes */
   --flecha-left: 47%; /* Yendo a los positivos vas a la derecha */
   --flecha-width: 100px; /* Yendo a los positivos haces más ancho */
   --flecha-height: var(--flecha-height, 90px); /* Yendo a los positivos haces más alto */
