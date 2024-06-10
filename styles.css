@@ -9,7 +9,7 @@
   --resultado-top: 50%; /* Yendo a los positivos subes */
   --resultado-font-size: 48px; /* Yendo a los positivos haces más grande el texto */
   --boton-width: 80%; /* Yendo a los positivos haces más ancho */
-  --boton-left: 25%; /* Yendo a los positivos vas a la derecha */
+  --boton-left: 15%; /* Yendo a los positivos vas a la derecha */
 }
 
 #ruleta {
