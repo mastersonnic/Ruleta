@@ -17,10 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
   botonGirar.addEventListener('click', function () {
     if (girando) return;
     girando = true;
-    var duracionGiro = Math.random() * 0.5 + 1.5; // Duración del giro entre 1.5 y 2 segundos
-    var gradosPorVuelta = 360 / segmentos.length;
-    var anguloAleatorio = Math.random() * gradosPorVuelta; // Variación aleatoria dentro del segmento
-    var anguloFinal = (360 * 5) + anguloAleatorio; // Asegura que la ruleta gire varias veces
+    var vueltasPorSegundo = 20;
+    var duracionGiro = 3; // Duración del giro en segundos
+    var anguloFinal = vueltasPorSegundo * 360 * duracionGiro;
 
     imgRuleta.style.transition = 'transform ' + duracionGiro + 's ease-out';
     imgRuleta.style.transform = 'rotate(' + anguloFinal + 'deg)';
