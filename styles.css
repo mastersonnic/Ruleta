@@ -13,7 +13,7 @@
   --boton-width: 30%; /* Yendo a los positivos haces más ancho */
   --boton-left: 1%; /* Yendo a los positivos vas a la derecha */
   --boton-font-size: 75px; /* Aumenta el tamaño de la fuente del botón sin cambiar el tamaño del botón */
-  --boton-border-radius: 5px; /* Variable para redondear las esquinas del botón */
+  --boton-border-radius: 15px; /* Variable para redondear las esquinas del botón */
 }
 
 #ruleta {
