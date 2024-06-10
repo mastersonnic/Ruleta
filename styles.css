@@ -12,7 +12,7 @@
   --resultado-font-size: 48px; /* Yendo a los positivos haces más grande el texto */
   --boton-width: 30%; /* Yendo a los positivos haces más ancho */
   --boton-left: 1%; /* Yendo a los positivos vas a la derecha */
-  --boton-font-size: 28px; /* Aumenta el tamaño de la fuente del botón sin cambiar el tamaño del botón */
+  --boton-font-size: 35px; /* Aumenta el tamaño de la fuente del botón sin cambiar el tamaño del botón */
 }
 
 #ruleta {
