@@ -35,7 +35,11 @@ document.addEventListener('DOMContentLoaded', function () {
       resultado.textContent = '¡Haz ganado ' + segmentoGanador + '!';
       resultado.style.display = 'block';
       if (!segmentoGanador.includes('0.')) {
-        confeti.className = 'confeti';
+        confeti.style.backgroundImage = 'url(https://raw.githubusercontent.com/mastersonnic/Ruleta/main/raining-money-38.gif.webp)';
+        confeti.style.display = 'block';
+        setTimeout(function () {
+          confeti.style.display = 'none';
+        }, 7000); // Confeti visible durante 7 segundos
       }
       girando = false;
     }, duracionGiro * 1000);
