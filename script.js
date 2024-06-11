@@ -16,11 +16,22 @@ document.addEventListener('DOMContentLoaded', function () {
   var girando = false;
   var anguloActual = 0;
 
+  // Función para iniciar el confeti
+  function iniciarConfeti() {
+    // Aquí se agregaría la llamada a la biblioteca de confeti
+  }
+
+  // Función para detener el confeti
+  function detenerConfeti() {
+    // Aquí se detendría la animación de confeti
+  }
+
   botonGirar.addEventListener('click', function () {
     if (girando) return;
     girando = true;
     resultado.style.display = 'none';
     dinero.style.display = 'none';
+    detenerConfeti(); // Detiene el confeti si está activo
     var duracionGiro = 5; // Duración del giro en segundos
     var vueltasPorSegundo = 20;
     var anguloFinal = 360 * vueltasPorSegundo * duracionGiro; // Gira la ruleta 20 veces por segundo durante 5 segundos
@@ -42,10 +53,10 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!segmentoGanador.includes('0.')) {
         dinero.style.display = 'block';
         dinero.style.zIndex = '1000'; // Asegura que el gif de dinero esté al frente
-        // Aquí se mostraría el confeti
+        iniciarConfeti(); // Inicia el confeti
         setTimeout(function () {
           dinero.style.display = 'none';
-          // Aquí se detendría el confeti
+          detenerConfeti(); // Detiene el confeti
         }, 7000); // Gif de dinero visible durante 7 segundos
       }
       girando = false;
