@@ -27,8 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
     imgRuleta.style.transform = 'rotate(' + anguloFinal + 'deg)';
 
     setTimeout(function () {
-      imgRuleta.style.transition = '';
-      imgRuleta.style.transform = 'rotate(' + (anguloFinal % 360) + 'deg)';
+      imgRuleta.style.transition = 'none';
       var anguloDesplazado = anguloFinal % 360;
       var segmentoGanadorIndex = segmentos.findIndex(function(segmento) {
         return anguloDesplazado >= segmento.inicio && anguloDesplazado < segmento.fin;
