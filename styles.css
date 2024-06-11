@@ -4,7 +4,7 @@
   --ruleta-height: 695px;
   --ruleta-top: 10px;
   --ruleta-left: 15%;
-  --flecha-top: 20px;
+  --flecha-top: 30px;
   --flecha-left: 47%;
   --flecha-width: 100px;
   --flecha-height: 90px;
@@ -13,7 +13,7 @@
   --boton-width: 30%;
   --boton-left: 1%;
   --boton-font-size: 75px;
-  --boton-border-radius: 30px;
+  --boton-border-radius: 20px;
 }
 
 #ruleta {
@@ -35,6 +35,7 @@
   transform: translateX(-50%);
   width: var(--flecha-width);
   height: var(--flecha-height);
+  box-shadow: 0 0 10px white; /* Sombra blanca alrededor de la flecha */
 }
 
 #dinero {
@@ -47,7 +48,7 @@
   background-image: url('https://raw.githubusercontent.com/mastersonnic/Ruleta/main/raining-money-38.gif.webp');
   background-size: cover;
   display: none;
-  z-index: 1000;
+  z-index: 1000; /* Asegura que el gif de dinero esté al frente */
 }
 
 #resultado {
@@ -57,20 +58,13 @@
   transform: translate(-50%, -50%);
   display: none;
   font-size: var(--resultado-font-size);
-  color: red;
+  color: red; /* Texto en rojo */
   font-weight: bold;
   text-shadow: 2px 2px 2px white;
-  z-index: 1000;
-  font-family: 'Alfa Slab One', cursive;
-  animation: aparecer 1s ease-in-out forwards;
+  z-index: 1001; /* Asegura que el mensaje del segmento ganador esté al frente del dinero */
 }
 
-@keyframes aparecer {
-  from { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-}
-
-#girar {
+@girar {
   display: block;
   width: var(--boton-width);
   margin: 20px auto;
