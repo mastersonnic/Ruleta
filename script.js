@@ -1,12 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
   var segmentos = [
     { nombre: '0X', inicio: 337.5, fin: 22.5 },
+    { nombre: '0X', inicio: 337.5, fin: 22.5 },
     { nombre: '1X', inicio: 22.5, fin: 67.5 },
     { nombre: '6X', inicio: 67.5, fin: 112.5 },
     { nombre: '0.02X', inicio: 112.5, fin: 157.5 },
     { nombre: '0.1X', inicio: 157.5, fin: 202.5 },
     { nombre: '4X', inicio: 202.5, fin: 247.5 },
     { nombre: '0.5X', inicio: 247.5, fin: 292.5 },
+    { nombre: '2X', inicio: 292.5, fin: 337.5 }
     { nombre: '2X', inicio: 292.5, fin: 337.5 }
   ];
   var imgRuleta = document.getElementById('imgRuleta');
@@ -21,8 +23,9 @@ document.addEventListener('DOMContentLoaded', function () {
     girando = true;
     resultado.style.display = 'none';
     dinero.style.display = 'none';
-    var duracionGiro = 3; // Duración del giro en segundos
-    var anguloFinal = Math.floor(Math.random() * 360) + 360 * 5; // Gira la ruleta al menos 5 veces
+    var duracionGiro = 5; // Duración del giro en segundos
+    var vueltasPorSegundo = 20;
+    var anguloFinal = 360 * vueltasPorSegundo * duracionGiro; // Gira la ruleta 20 veces por segundo durante 5 segundos
 
     anguloActual += anguloFinal;
     imgRuleta.style.transition = 'transform ' + duracionGiro + 's ease-out';
@@ -37,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var segmentoGanador = segmentos[segmentoGanadorIndex].nombre;
       resultado.textContent = '¡Haz ganado ' + segmentoGanador + '!';
       resultado.style.display = 'block';
+      dinero.style.zIndex = '1000'; // Asegura que el gif de dinero esté al frente
       if (!segmentoGanador.includes('0.')) {
         dinero.style.display = 'block';
         setTimeout(function () {
