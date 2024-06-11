@@ -5,7 +5,7 @@
   --ruleta-height: 695px; /* Alto de la ruleta */
   --ruleta-top: 10px; /* Posición superior de la ruleta */
   --ruleta-left: 15%; /* Posición izquierda de la ruleta */
-  --flecha-top: -48px; /* Posición superior de la flecha */
+  --flecha-top: -30px; /* Posición superior de la flecha */
   --flecha-left: 47%; /* Posición izquierda de la flecha */
   --flecha-width: 100px; /* Ancho de la flecha */
   --flecha-height: 90px; /* Alto de la flecha */
@@ -14,7 +14,7 @@
   --boton-width: 30%; /* Ancho del botón */
   --boton-left: 1%; /* Posición izquierda del botón */
   --boton-font-size: 75px; /* Tamaño de fuente del botón */
-  --boton-border-radius: 15px; /* Redondeo de las esquinas del botón */
+  --boton-border-radius: 20px; /* Redondeo de las esquinas del botón */
 }
 
 #ruleta {
