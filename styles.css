@@ -1,20 +1,19 @@
 :root {
-  /* Variables para personalizar la ruleta y sus elementos */
   --dinero-width: 50%; /* Ajusta el ancho del gif de dinero */
-  --ruleta-width: 720px; /* Ancho de la ruleta */
-  --ruleta-height: 695px; /* Alto de la ruleta */
-  --ruleta-top: 10px; /* Posición superior de la ruleta */
-  --ruleta-left: 15%; /* Posición izquierda de la ruleta */
-  --flecha-top: -30px; /* Posición superior de la flecha */
-  --flecha-left: 47%; /* Posición izquierda de la flecha */
-  --flecha-width: 100px; /* Ancho de la flecha */
-  --flecha-height: 90px; /* Alto de la flecha */
-  --resultado-top: 180%; /* Posición superior del resultado */
-  --resultado-font-size: 65px; /* Tamaño de fuente del resultado */
-  --boton-width: 30%; /* Ancho del botón */
-  --boton-left: 1%; /* Posición izquierda del botón */
-  --boton-font-size: 75px; /* Tamaño de fuente del botón */
-  --boton-border-radius: 20px; /* Redondeo de las esquinas del botón */
+  --ruleta-width: 720px;
+  --ruleta-height: 695px;
+  --ruleta-top: 10px;
+  --ruleta-left: 15%;
+  --flecha-top: -48px;
+  --flecha-left: 47%;
+  --flecha-width: 100px;
+  --flecha-height: 90px;
+  --resultado-top: 180%;
+  --resultado-font-size: 65px;
+  --boton-width: 30%;
+  --boton-left: 1%;
+  --boton-font-size: 75px;
+  --boton-border-radius: 5px;
 }
 
 #ruleta {
@@ -47,8 +46,8 @@
   height: 100%;
   background-image: url('https://raw.githubusercontent.com/mastersonnic/Ruleta/main/raining-money-38.gif.webp');
   background-size: cover;
-  display: none; /* Inicialmente oculto */
-  z-index: -1; /* Detrás de la ruleta */
+  display: none;
+  z-index: -1;
 }
 
 #resultado {
