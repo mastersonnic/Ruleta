@@ -4,14 +4,14 @@
   --ruleta-height: 695px;
   --ruleta-top: 10px;
   --ruleta-left: 15%;
-  --flecha-top: 30px;
+  --flecha-top: 20px;
   --flecha-left: 47%;
   --flecha-width: 100px;
   --flecha-height: 90px;
   --resultado-top: 180%;
   --resultado-font-size: 65px;
   --boton-width: 30%;
-  --boton-left: 1%;
+  --boton-left: 3%;
   --boton-font-size: 75px;
   --boton-border-radius: 20px;
 }
