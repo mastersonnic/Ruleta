@@ -39,11 +39,13 @@ document.addEventListener('DOMContentLoaded', function () {
       var segmentoGanador = segmentos[segmentoGanadorIndex].nombre;
       resultado.textContent = '¡Haz ganado ' + segmentoGanador + '!';
       resultado.style.display = 'block';
-      dinero.style.zIndex = '1000'; // Asegura que el gif de dinero esté al frente
       if (!segmentoGanador.includes('0.')) {
         dinero.style.display = 'block';
+        dinero.style.zIndex = '1000'; // Asegura que el gif de dinero esté al frente
+        // Aquí se mostraría el confeti
         setTimeout(function () {
           dinero.style.display = 'none';
+          // Aquí se detendría el confeti
         }, 7000); // Gif de dinero visible durante 7 segundos
       }
       girando = false;
