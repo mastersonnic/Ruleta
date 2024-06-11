@@ -18,12 +18,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Función para iniciar el confeti
   function iniciarConfeti() {
-    confetti.start(); // Inicia la animación de confeti
+    // Aquí se agregaría la llamada a la biblioteca de confeti
   }
 
   // Función para detener el confeti
   function detenerConfeti() {
-    confetti.stop(); // Detiene la animación de confeti
+    // Aquí se detendría la animación de confeti
   }
 
   botonGirar.addEventListener('click', function () {
