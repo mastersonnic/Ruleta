@@ -1,27 +1,22 @@
 :root {
-  --dinero-width: 50%; /* Ajusta el ancho del gif de dinero */
-  --ruleta-width: 720px;
-  --ruleta-height: 695px;
-  --ruleta-top: 10px;
-  --ruleta-left: 15%;
-  --flecha-top: 30px;
-  --flecha-left: 47%;
-  --flecha-width: 100px;
-  --flecha-height: 90px;
-  --resultado-top: 180%;
-  --resultado-font-size: 65px;
-  --boton-width: 30%;
-  --boton-left: 1%;
-  --boton-font-size: 75px;
-  --boton-border-radius: 20px;
+  /* Variables para personalizar la ruleta y sus elementos */
+  --ruleta-width: 720px; /* Yendo a los positivos haces más ancho */
+  --ruleta-height: 695px; /* Yendo a los positivos haces más alto */
+  --ruleta-left: 15%; /* Yendo a los positivos puedes ir a la derecha */
+  --flecha-top: 30px; /* Yendo a los positivos subes */
+  --flecha-left: 47%; /* Yendo a los positivos vas a la derecha */
+  --flecha-width: 100px; /* Yendo a los positivos haces más ancho */
+  --resultado-top: 50%; /* Yendo a los positivos subes */
+  --resultado-font-size: 48px; /* Yendo a los positivos haces más grande el texto */
+  --boton-width: 30%; /* Yendo a los positivos haces más ancho */
+  --boton-left: 2%; /* Yendo a los positivos vas a la derecha */
 }
 
 #ruleta {
   position: relative;
-  top: var(--ruleta-top);
   width: var(--ruleta-width);
   height: var(--ruleta-height);
-  left: var(--ruleta-left);
+  left: var(--ruleta-left); /* Aplica la variable para mover la ruleta hacia la derecha */
 }
 
 #imgRuleta {
@@ -34,21 +29,6 @@
   left: var(--flecha-left);
   transform: translateX(-50%);
   width: var(--flecha-width);
-  height: var(--flecha-height);
-  box-shadow: 0 0 10px white; /* Sombra blanca alrededor de la flecha */
-}
-
-#dinero {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: var(--dinero-width);
-  height: 100%;
-  background-image: url('https://raw.githubusercontent.com/mastersonnic/Ruleta/main/raining-money-38.gif.webp');
-  background-size: cover;
-  display: none;
-  z-index: 1000; /* Asegura que el gif de dinero esté al frente */
 }
 
 #resultado {
@@ -58,22 +38,29 @@
   transform: translate(-50%, -50%);
   display: none;
   font-size: var(--resultado-font-size);
-  color: red; /* Texto en rojo */
+  color: red;
   font-weight: bold;
   text-shadow: 2px 2px 2px white;
-  z-index: 1001; /* Asegura que el mensaje del segmento ganador esté al frente del dinero */
+  z-index: 1000;
+  font-family: 'Alfa Slab One', cursive;
+  animation: aparecer 1s ease-in-out forwards;
 }
 
-@girar {
+@keyframes aparecer {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+#girar {
   display: block;
   width: var(--boton-width);
   margin: 20px auto;
   padding: 10px;
-  font-size: var(--boton-font-size);
+  font-size: 24px;
   color: white;
   background-image: linear-gradient(to right, blue, purple);
   border: none;
-  border-radius: var(--boton-border-radius);
+  border-radius: 5px;
   cursor: pointer;
   box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
   transition: background-color 0.3s;
