@@ -4,7 +4,7 @@
   --ruleta-height: 695px;
   --ruleta-top: 10px;
   --ruleta-left: 15%;
-  --flecha-top: -30px;
+  --flecha-top: -10px;
   --flecha-left: 47%;
   --flecha-width: 100px;
   --flecha-height: 90px;
@@ -13,7 +13,7 @@
   --boton-width: 30%;
   --boton-left: 1%;
   --boton-font-size: 75px;
-  --boton-border-radius: 5px;
+  --boton-border-radius: 30px;
 }
 
 #ruleta {
