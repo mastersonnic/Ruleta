@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var dinero = document.getElementById('dinero');
   var botonGirar = document.getElementById('girar');
   var girando = false;
+  var anguloActual = 0;
 
   botonGirar.addEventListener('click', function () {
     if (girando) return;
@@ -21,16 +22,17 @@ document.addEventListener('DOMContentLoaded', function () {
     resultado.style.display = 'none';
     dinero.style.display = 'none';
     var duracionGiro = 3; // Duración del giro en segundos
-    var anguloFinal = Math.floor(Math.random() * 360) + 360 * 10; // Gira la ruleta al menos 10 veces
+    var anguloFinal = Math.floor(Math.random() * 360) + 360 * 5; // Gira la ruleta al menos 5 veces
 
+    anguloActual += anguloFinal;
     imgRuleta.style.transition = 'transform ' + duracionGiro + 's ease-out';
-    imgRuleta.style.transform = 'rotate(' + anguloFinal + 'deg)';
+    imgRuleta.style.transform = 'rotate(' + anguloActual + 'deg)';
 
     setTimeout(function () {
-      imgRuleta.style.transition = 'none';
-      var anguloDesplazado = anguloFinal % 360;
+      var anguloDesplazado = anguloActual % 360;
       var segmentoGanadorIndex = segmentos.findIndex(function(segmento) {
-        return anguloDesplazado >= segmento.inicio && anguloDesplazado < segmento.fin;
+        var inicio = segmento.inicio < segmento.fin ? segmento.inicio : segmento.inicio - 360;
+        return inicio <= anguloDesplazado && anguloDesplazado < segmento.fin;
       });
       var segmentoGanador = segmentos[segmentoGanadorIndex].nombre;
       resultado.textContent = '¡Haz ganado ' + segmentoGanador + '!';
