@@ -1,19 +1,20 @@
 :root {
   /* Variables para personalizar la ruleta y sus elementos */
-  --ruleta-width: 720px; /* Yendo a los positivos haces más ancho */
-  --ruleta-height: 695px; /* Yendo a los positivos haces más alto */
-  --ruleta-top: 10px; /* Baja la ruleta 10px */
-  --ruleta-left: 15%; /* Yendo a los positivos puedes ir a la derecha */
-  --flecha-top: -48px; /* Yendo a los positivos subes */
-  --flecha-left: 47%; /* Yendo a los positivos vas a la derecha */
-  --flecha-width: 100px; /* Yendo a los positivos haces más ancho */
-  --flecha-height: var(--flecha-height, 90px); /* Yendo a los positivos haces más alto */
-  --resultado-top: 180%; /* Yendo a los positivos subes */
-  --resultado-font-size: 65px; /* Yendo a los positivos haces más grande el texto */
-  --boton-width: 30%; /* Yendo a los positivos haces más ancho */
-  --boton-left: 1%; /* Yendo a los positivos vas a la derecha */
-  --boton-font-size: 75px; /* Aumenta el tamaño de la fuente del botón sin cambiar el tamaño del botón */
-  --boton-border-radius: 15px; /* Variable para redondear las esquinas del botón */
+  --dinero-width: 50%; /* Ajusta el ancho del gif de dinero */
+  --ruleta-width: 720px; /* Ancho de la ruleta */
+  --ruleta-height: 695px; /* Alto de la ruleta */
+  --ruleta-top: 10px; /* Posición superior de la ruleta */
+  --ruleta-left: 15%; /* Posición izquierda de la ruleta */
+  --flecha-top: -48px; /* Posición superior de la flecha */
+  --flecha-left: 47%; /* Posición izquierda de la flecha */
+  --flecha-width: 100px; /* Ancho de la flecha */
+  --flecha-height: 90px; /* Alto de la flecha */
+  --resultado-top: 180%; /* Posición superior del resultado */
+  --resultado-font-size: 65px; /* Tamaño de fuente del resultado */
+  --boton-width: 30%; /* Ancho del botón */
+  --boton-left: 1%; /* Posición izquierda del botón */
+  --boton-font-size: 75px; /* Tamaño de fuente del botón */
+  --boton-border-radius: 15px; /* Redondeo de las esquinas del botón */
 }
 
 #ruleta {
@@ -34,18 +35,20 @@
   left: var(--flecha-left);
   transform: translateX(-50%);
   width: var(--flecha-width);
-  height: var(--flecha-height); /* Aplica la variable para ajustar la altura de la flecha */
+  height: var(--flecha-height);
 }
 
-#confeti {
+#dinero {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--dinero-width);
   height: 100%;
-  display: none; /* Inicialmente oculto */
+  background-image: url('https://raw.githubusercontent.com/mastersonnic/Ruleta/main/raining-money-38.gif.webp');
   background-size: cover;
-  z-index: 999; /* Asegura que el confeti esté detrás de la ruleta */
+  display: none; /* Inicialmente oculto */
+  z-index: -1; /* Detrás de la ruleta */
 }
 
 #resultado {
