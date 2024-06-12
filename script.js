@@ -1,3 +1,5 @@
+let ultimoAngulo = 0; // Variable para guardar el último ángulo
+
 const segmentos = [
   { nombre: '0X', inicio: 337.5, fin: 22.5 },
   { nombre: '1X', inicio: 22.5, fin: 67.5 },
@@ -11,24 +13,25 @@ const segmentos = [
 
 function girarRuleta() {
   const duracion = Math.floor(Math.random() * 2) + 5; // Duración aleatoria entre 5 y 7 segundos
+  const anguloAlAzar = Math.floor(Math.random() * 360); // Ángulo al azar para el segmento ganador
   const vueltasPorSegundo = 20;
   const gradosPorVuelta = 360;
-  const gradosTotales = vueltasPorSegundo * gradosPorVuelta * duracion;
+  const gradosTotales = vueltasPorSegundo * gradosPorVuelta * duracion + anguloAlAzar - ultimoAngulo;
+  ultimoAngulo = anguloAlAzar; // Actualizar el último ángulo
+
   const ruleta = document.getElementById('imgRuleta');
   ruleta.style.transition = `transform ${duracion}s cubic-bezier(0.33, 1, 0.68, 1)`;
   ruleta.style.transform = `rotate(${gradosTotales}deg)`;
 
   setTimeout(() => {
-    const gradosReales = gradosTotales % 360;
-    let gradosAjustados = gradosReales > 180 ? gradosReales - 360 : gradosReales;
-    const segmentoGanador = segmentos.reduce((prev, curr) => {
-      let inicio = curr.inicio > 180 ? curr.inicio - 360 : curr.inicio;
-      let fin = curr.fin > 180 ? curr.fin - 360 : curr.fin;
-      if (gradosAjustados >= inicio && gradosAjustados < fin) {
-        return curr;
+    const segmentoGanador = segmentos.find(segmento => {
+      let inicio = segmento.inicio;
+      let fin = segmento.fin;
+      if (fin < inicio) {
+        fin += 360; // Ajuste para los segmentos que cruzan el ángulo 0/360
       }
-      return prev;
-    }, segmentos[0]);
+      return anguloAlAzar >= inicio && anguloAlAzar < fin;
+    }) || segmentos[0]; // Fallback al primer segmento por si acaso
 
     const resultado = document.getElementById('resultado');
     resultado.textContent = `¡Haz ganado ${segmentoGanador.nombre}!`;
