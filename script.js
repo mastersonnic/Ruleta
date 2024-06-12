@@ -1,49 +1,35 @@
-let ultimoAngulo = 0; // Variable para guardar el último ángulo
-
+// Definición de los segmentos de la ruleta
 const segmentos = [
   { nombre: '0X', inicio: 337.5, fin: 22.5 },
   { nombre: '1X', inicio: 22.5, fin: 67.5 },
-  { nombre: '6X', inicio: 67.5, fin: 112.5 },
-  { nombre: '0.02X', inicio: 112.5, fin: 157.5 },
-  { nombre: '0.1X', inicio: 157.5, fin: 202.5 },
-  { nombre: '4X', inicio: 202.5, fin: 247.5 },
-  { nombre: '0.5X', inicio: 247.5, fin: 292.5 },
-  { nombre: '2X', inicio: 292.5, fin: 337.5 }
+  { nombre: '6X', inicio: 67.5, fin: 135 },
+  { nombre: '0.02X', inicio: 135, fin: 145 },
+  { nombre: '0.1X', inicio: 145, fin: 190 },
+  { nombre: '4X', inicio: 190, fin: 270 },
+  { nombre: '0.5X', inicio: 270, fin: 315 },
+  { nombre: '2X', inicio: 315, fin: 337.5 }
 ];
 
-// Función para obtener el nombre del segmento basado en el ángulo
-function obtenerSegmentoPorAngulo(angulo) {
+// Función para calcular el segmento ganador basado en el ángulo
+function calcularSegmentoGanador(angulo) {
+  const anguloNormalizado = angulo % 360;
   return segmentos.find(segmento => {
-    let inicio = segmento.inicio;
-    let fin = segmento.fin;
-    if (inicio > fin) {
-      fin += 360; // Ajuste para los segmentos que cruzan el ángulo 0/360
-    }
-    if (angulo >= inicio && angulo < fin) {
-      return true;
-    } else if (angulo + 360 >= inicio && angulo + 360 < fin) {
-      return true; // Ajuste para cuando el ángulo es negativo
-    }
-    return false;
-  }) || segmentos[0]; // Fallback al primer segmento por si acaso
+    const inicio = segmento.inicio < segmento.fin ? segmento.inicio : segmento.inicio - 360;
+    const fin = segmento.fin;
+    return anguloNormalizado >= inicio && anguloNormalizado < fin;
+  }) || segmentos[0]; // Fallback al primer segmento
 }
 
+// Función para girar la ruleta
 function girarRuleta() {
-  const duracion = Math.floor(Math.random() * 2) + 5; // Duración aleatoria entre 5 y 7 segundos
   const anguloAlAzar = Math.floor(Math.random() * 360); // Ángulo al azar para el segmento ganador
-  const vueltasPorSegundo = 20;
-  const gradosPorVuelta = 360;
-  const gradosTotales = vueltasPorSegundo * gradosPorVuelta * duracion;
-  const anguloFinal = (ultimoAngulo + gradosTotales + anguloAlAzar) % 360;
-  ultimoAngulo = anguloFinal; // Actualizar el último ángulo
-
   const ruleta = document.getElementById('imgRuleta');
-  ruleta.style.transition = `transform ${duracion}s cubic-bezier(0.33, 1, 0.68, 1)`;
-  ruleta.style.transform = `rotate(${gradosTotales}deg)`;
+  ruleta.style.transition = 'transform 4s ease-out';
+  ruleta.style.transform = `rotate(${anguloAlAzar}deg)`;
 
-  // Asegurarse de que la ruleta haya terminado de girar antes de calcular el segmento ganador
+  // Mostrar el resultado después de que la ruleta se detenga
   setTimeout(() => {
-    const segmentoGanador = obtenerSegmentoPorAngulo(anguloFinal);
+    const segmentoGanador = calcularSegmentoGanador(anguloAlAzar);
     const resultado = document.getElementById('resultado');
     resultado.textContent = `¡Haz ganado ${segmentoGanador.nombre}!`;
     resultado.style.display = 'block';
@@ -52,7 +38,9 @@ function girarRuleta() {
       lanzarConfeti();
       mostrarDineroCayendo();
     }
-  }, duracion * 1000); // Esperar a que la animación haya terminado
+  }, 4000); // Esperar 4 segundos para que la animación termine
 }
 
 document.getElementById('girar').addEventListener('click', girarRuleta);
+
+// Las funciones lanzarConfeti y mostrarDineroCayendo se mantienen igual
