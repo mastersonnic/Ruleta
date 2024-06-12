@@ -10,7 +10,7 @@
   --resultado-font-size: 48px;
   --boton-width: 30%;
   --boton-left: 2%;
-  --boton-position-left: 35%; /* Nueva variable para la posición lateral del botón */
+  --boton-position-left: 15%; /* Nueva variable para la posición lateral del botón */
   --boton-border-radius: 20px; /* Nueva variable para las esquinas del botón */
 }
 
