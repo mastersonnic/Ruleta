@@ -24,14 +24,16 @@ function girarRuleta() {
   ruleta.style.transform = `rotate(${gradosTotales}deg)`;
 
   setTimeout(() => {
+    const anguloFinal = (ultimoAngulo + 360) % 360;
     const segmentoGanador = segmentos.find(segmento => {
       let inicio = segmento.inicio;
       let fin = segmento.fin;
-      if (fin < inicio) {
-        fin += 360; // Ajuste para los segmentos que cruzan el ángulo 0/360
+      if (inicio > fin) { // Ajuste para los segmentos que cruzan el ángulo 0/360
+        if (anguloFinal >= inicio || anguloFinal < fin) return true;
+      } else {
+        if (anguloFinal >= inicio && anguloFinal < fin) return true;
       }
-      let anguloFinal = (anguloAlAzar + 360 - ultimoAngulo) % 360;
-      return anguloFinal >= inicio && anguloFinal < fin;
+      return false;
     }) || segmentos[0]; // Fallback al primer segmento por si acaso
 
     const resultado = document.getElementById('resultado');
