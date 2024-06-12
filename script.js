@@ -19,15 +19,16 @@ function girarRuleta() {
   ruleta.style.transform = `rotate(${gradosTotales}deg)`;
 
   setTimeout(() => {
-    const gradosReales = (gradosTotales % 360) + 360; // Ajuste para asegurar que siempre termina en un ángulo positivo
-    const segmentoGanador = segmentos.find(segmento => {
-      let inicio = segmento.inicio;
-      let fin = segmento.fin;
-      if (fin < inicio) {
-        fin += 360; // Ajuste para los segmentos que cruzan el ángulo 0/360
+    const gradosReales = gradosTotales % 360;
+    let gradosAjustados = gradosReales > 180 ? gradosReales - 360 : gradosReales;
+    const segmentoGanador = segmentos.reduce((prev, curr) => {
+      let inicio = curr.inicio > 180 ? curr.inicio - 360 : curr.inicio;
+      let fin = curr.fin > 180 ? curr.fin - 360 : curr.fin;
+      if (gradosAjustados >= inicio && gradosAjustados < fin) {
+        return curr;
       }
-      return gradosReales >= inicio && gradosReales < fin;
-    }) || segmentos[0]; // Fallback al primer segmento por si acaso
+      return prev;
+    }, segmentos[0]);
 
     const resultado = document.getElementById('resultado');
     resultado.textContent = `¡Haz ganado ${segmentoGanador.nombre}!`;
