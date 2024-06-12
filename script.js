@@ -25,7 +25,7 @@ function girarRuleta() {
 
   // Asegurarse de que la ruleta haya terminado de girar antes de calcular el segmento ganador
   setTimeout(() => {
-    const anguloFinal = (360 - (anguloAlAzar % 360)) % 360; // Corrección del ángulo final
+    const anguloFinal = (ultimoAngulo + 360 - anguloAlAzar) % 360;
     const segmentoGanador = segmentos.find(segmento => {
       let inicio = segmento.inicio;
       let fin = segmento.fin;
