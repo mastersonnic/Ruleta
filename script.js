@@ -1,65 +1,66 @@
-document.addEventListener('DOMContentLoaded', function () {
-  var segmentos = [
-    { nombre: '0X', inicio: 337.5, fin: 22.5, centro: 0 },
-    { nombre: '1X', inicio: 22.5, fin: 67.5, centro: 45 },
-    { nombre: '6X', inicio: 67.5, fin: 135, centro: 101.25 },
-    { nombre: '0.02X', inicio: 135, fin: 145, centro: 140 },
-    { nombre: '0.1X', inicio: 145, fin: 190, centro: 167.5 },
-    { nombre: '4X', inicio: 190, fin: 270, centro: 230 },
-    { nombre: '0.5X', inicio: 270, fin: 315, centro: 292.5 },
-    { nombre: '2X', inicio: 315, fin: 337.5, centro: 326.25 }
-  ];
-  var imgRuleta = document.getElementById('imgRuleta');
-  var resultado = document.getElementById('resultado');
-  var dinero = document.getElementById('dinero');
-  var botonGirar = document.getElementById('girar');
-  var girando = false;
-  var anguloActual = 0;
+const segmentos = [
+  { nombre: '0X', inicio: 337.5, fin: 22.5 },
+  { nombre: '1X', inicio: 22.5, fin: 67.5 },
+  { nombre: '6X', inicio: 67.5, fin: 135 },
+  { nombre: '0.02X', inicio: 135, fin: 145 },
+  { nombre: '0.1X', inicio: 145, fin: 190 },
+  { nombre: '4X', inicio: 190, fin: 270 },
+  { nombre: '0.5X', inicio: 270, fin: 315 },
+  { nombre: '2X', inicio: 315, fin: 337.5 }
+];
 
-  // Función para iniciar el confeti
-  function iniciarConfeti() {
-    // Aquí se agregaría la llamada a la biblioteca de confeti
-  }
+function girarRuleta() {
+  const grados = 360 * 3 + Math.floor(Math.random() * 360);
+  const duracion = 5;
+  const ruleta = document.getElementById('imgRuleta');
+  ruleta.style.transition = `transform ${duracion}s ease-out`;
+  ruleta.style.transform = `rotate(${grados}deg)`;
 
-  // Función para detener el confeti
-  function detenerConfeti() {
-    // Aquí se detendría la animación de confeti
-  }
+  setTimeout(() => {
+    const gradosReales = grados % 360;
+    const segmentoGanador = segmentos.find(segmento => {
+      const inicio = segmento.inicio > segmento.fin ? segmento.inicio - 360 : segmento.inicio;
+      return gradosReales >= inicio && gradosReales < segmento.fin;
+    });
 
-  botonGirar.addEventListener('click', function () {
-    if (girando) return;
-    girando = true;
-    resultado.style.display = 'none';
-    dinero.style.display = 'none';
-    detenerConfeti(); // Detiene el confeti si está activo
-    var duracionGiro = 5; // Duración del giro en segundos
-    var vueltasPorSegundo = 20;
-    var anguloFinal = 360 * vueltasPorSegundo * duracionGiro; // Gira la ruleta 20 veces por segundo durante 5 segundos
+    const resultado = document.getElementById('resultado');
+    resultado.textContent = `¡Haz ganado ${segmentoGanador.nombre}!`;
+    resultado.style.display = 'block';
+    if (segmentoGanador.nombre !== '0X') {
+      document.body.classList.add('ganador');
+      lanzarConfeti();
+      mostrarDineroCayendo();
+    }
+  }, duracion * 1000);
+}
 
-    anguloActual += anguloFinal;
-    imgRuleta.style.transition = 'transform ' + duracionGiro + 's ease-out';
-    imgRuleta.style.transform = 'rotate(' + anguloActual + 'deg)';
+document.getElementById('girar').addEventListener('click', girarRuleta);
 
-    setTimeout(function () {
-      var anguloDesplazado = anguloActual % 360;
-      var segmentoGanadorIndex = segmentos.findIndex(function(segmento) {
-        var inicio = segmento.inicio < segmento.fin ? segmento.inicio : segmento.inicio - 360;
-        var fin = segmento.fin;
-        return (inicio <= anguloDesplazado && anguloDesplazado < fin) || (inicio <= anguloDesplazado + 360 && anguloDesplazado + 360 < fin);
-      });
-      var segmentoGanador = segmentos[segmentoGanadorIndex].nombre;
-      resultado.textContent = '¡Haz ganado ' + segmentoGanador + '!';
-      resultado.style.display = 'block';
-      if (!segmentoGanador.includes('0.')) {
-        dinero.style.display = 'block';
-        dinero.style.zIndex = '1000'; // Asegura que el gif de dinero esté al frente
-        iniciarConfeti(); // Inicia el confeti
-        setTimeout(function () {
-          dinero.style.display = 'none';
-          detenerConfeti(); // Detiene el confeti
-        }, 7000); // Gif de dinero visible durante 7 segundos
-      }
-      girando = false;
-    }, duracionGiro * 1000 + 100); // Pequeño retraso para asegurar que la transición haya terminado
+function lanzarConfeti() {
+  confetti({
+    particleCount: 100,
+    spread: 70,
+    origin: { y: 0.6 }
   });
-});
+}
+
+function mostrarDineroCayendo() {
+  const imgDineroCayendo = document.createElement('img');
+  imgDineroCayendo.src = 'https://github.com/mastersonnic/Ruleta/blob/main/raining-money-38.gif.webp';
+  imgDineroCayendo.style.position = 'absolute';
+  imgDineroCayendo.style.top = '50%';
+  imgDineroCayendo.style.left = '50%';
+  imgDineroCayendo.style.transform = 'translate(-50%, -50%)';
+  imgDineroCayendo.style.zIndex = '1000';
+  document.body.appendChild(imgDineroCayendo);
+
+  setTimeout(() => {
+    document.body.removeChild(imgDineroCayendo);
+  }, 5000); // El GIF de dinero cayendo se mostrará por 5 segundos
+}
+
+document.body.onanimationend = function(e) {
+  if (e.animationName === 'aparecer') {
+    document.body.classList.remove('ganador');
+  }
+};
