@@ -10,7 +10,7 @@ document.getElementById('girar').addEventListener('click', () => {
   document.getElementById('imgRuleta').style.transform = `rotate(${anguloActual}deg)`;
 
   // Ajuste para alinear el segmento ganador con la flecha
-  const ajuste = gradosPorSegmento / 2;
+  const ajuste = gradosPorSegmento / 3;
   const indiceGanador = Math.floor(((anguloActual + ajuste) % 360) / gradosPorSegmento);
   const segmentoGanador = segmentos[indiceGanador];
   
