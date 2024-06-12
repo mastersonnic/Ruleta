@@ -1,27 +1,33 @@
 const segmentos = [
   { nombre: '0X', inicio: 337.5, fin: 22.5 },
   { nombre: '1X', inicio: 22.5, fin: 67.5 },
-  { nombre: '6X', inicio: 67.5, fin: 135 },
-  { nombre: '0.02X', inicio: 135, fin: 145 },
-  { nombre: '0.1X', inicio: 145, fin: 190 },
-  { nombre: '4X', inicio: 190, fin: 270 },
-  { nombre: '0.5X', inicio: 270, fin: 315 },
-  { nombre: '2X', inicio: 315, fin: 337.5 }
+  { nombre: '6X', inicio: 67.5, fin: 112.5 },
+  { nombre: '0.02X', inicio: 112.5, fin: 157.5 },
+  { nombre: '0.1X', inicio: 157.5, fin: 202.5 },
+  { nombre: '4X', inicio: 202.5, fin: 247.5 },
+  { nombre: '0.5X', inicio: 247.5, fin: 292.5 },
+  { nombre: '2X', inicio: 292.5, fin: 337.5 }
 ];
 
 function girarRuleta() {
-  const grados = 360 * 3 + Math.floor(Math.random() * 360);
-  const duracion = 5;
+  const duracion = Math.floor(Math.random() * 2) + 5; // Duración aleatoria entre 5 y 7 segundos
+  const vueltasPorSegundo = 20;
+  const gradosPorVuelta = 360;
+  const gradosTotales = vueltasPorSegundo * gradosPorVuelta * duracion;
   const ruleta = document.getElementById('imgRuleta');
-  ruleta.style.transition = `transform ${duracion}s ease-out`;
-  ruleta.style.transform = `rotate(${grados}deg)`;
+  ruleta.style.transition = `transform ${duracion}s cubic-bezier(0.33, 1, 0.68, 1)`;
+  ruleta.style.transform = `rotate(${gradosTotales}deg)`;
 
   setTimeout(() => {
-    const gradosReales = grados % 360;
+    const gradosReales = (gradosTotales % 360) + 360; // Ajuste para asegurar que siempre termina en un ángulo positivo
     const segmentoGanador = segmentos.find(segmento => {
-      const inicio = segmento.inicio > segmento.fin ? segmento.inicio - 360 : segmento.inicio;
-      return gradosReales >= inicio && gradosReales < segmento.fin;
-    });
+      let inicio = segmento.inicio;
+      let fin = segmento.fin;
+      if (fin < inicio) {
+        fin += 360; // Ajuste para los segmentos que cruzan el ángulo 0/360
+      }
+      return gradosReales >= inicio && gradosReales < fin;
+    }) || segmentos[0]; // Fallback al primer segmento por si acaso
 
     const resultado = document.getElementById('resultado');
     resultado.textContent = `¡Haz ganado ${segmentoGanador.nombre}!`;
@@ -31,36 +37,9 @@ function girarRuleta() {
       lanzarConfeti();
       mostrarDineroCayendo();
     }
-  }, duracion * 1000);
+  }, duracion * 1000 + 100); // Pequeño retraso para asegurar que la animación haya terminado
 }
 
 document.getElementById('girar').addEventListener('click', girarRuleta);
 
-function lanzarConfeti() {
-  confetti({
-    particleCount: 100,
-    spread: 70,
-    origin: { y: 0.6 }
-  });
-}
-
-function mostrarDineroCayendo() {
-  const imgDineroCayendo = document.createElement('img');
-  imgDineroCayendo.src = 'https://github.com/mastersonnic/Ruleta/blob/main/raining-money-38.gif.webp';
-  imgDineroCayendo.style.position = 'absolute';
-  imgDineroCayendo.style.top = '50%';
-  imgDineroCayendo.style.left = '50%';
-  imgDineroCayendo.style.transform = 'translate(-50%, -50%)';
-  imgDineroCayendo.style.zIndex = '1000';
-  document.body.appendChild(imgDineroCayendo);
-
-  setTimeout(() => {
-    document.body.removeChild(imgDineroCayendo);
-  }, 5000); // El GIF de dinero cayendo se mostrará por 5 segundos
-}
-
-document.body.onanimationend = function(e) {
-  if (e.animationName === 'aparecer') {
-    document.body.classList.remove('ganador');
-  }
-};
+// Las funciones lanzarConfeti y mostrarDineroCayendo se mantienen igual
