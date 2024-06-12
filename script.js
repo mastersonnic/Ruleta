@@ -17,7 +17,7 @@ function girarRuleta() {
   const vueltasPorSegundo = 20;
   const gradosPorVuelta = 360;
   const gradosTotales = vueltasPorSegundo * gradosPorVuelta * duracion + anguloAlAzar - ultimoAngulo;
-  ultimoAngulo = anguloAlAzar; // Actualizar el último ángulo
+  ultimoAngulo = (ultimoAngulo + gradosTotales) % 360; // Actualizar el último ángulo
 
   const ruleta = document.getElementById('imgRuleta');
   ruleta.style.transition = `transform ${duracion}s cubic-bezier(0.33, 1, 0.68, 1)`;
@@ -30,7 +30,8 @@ function girarRuleta() {
       if (fin < inicio) {
         fin += 360; // Ajuste para los segmentos que cruzan el ángulo 0/360
       }
-      return anguloAlAzar >= inicio && anguloAlAzar < fin;
+      let anguloFinal = (anguloAlAzar + 360 - ultimoAngulo) % 360;
+      return anguloFinal >= inicio && anguloFinal < fin;
     }) || segmentos[0]; // Fallback al primer segmento por si acaso
 
     const resultado = document.getElementById('resultado');
