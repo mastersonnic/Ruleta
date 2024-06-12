@@ -3,15 +3,15 @@
   --ruleta-width: 720px;
   --ruleta-height: 695px;
   --ruleta-left: 15%;
-  --flecha-top: 20px;
-  --flecha-left: 50%;
+  --flecha-top: 30px;
+  --flecha-left: 47%;
   --flecha-width: 100px;
-  --flecha-height: 100px; /* Variable para editar el alto de la flecha */
+  --flecha-height: 100px; /* Variable para la altura de la flecha */
   --resultado-top: 50%;
   --resultado-font-size: 48px;
   --boton-width: 30%;
-  --boton-left: 5%; /* Ajustado para la posición lateral del botón */
-  --boton-border-radius: 5px; /* Ajustado para las esquinas del botón */
+  --boton-left: 2%;
+  --boton-border-radius: 10px; /* Variable para las esquinas redondeadas del botón */
 }
 
 #ruleta {
@@ -23,6 +23,7 @@
 
 #imgRuleta {
   width: 100%;
+  transition: transform 4s ease-out;
 }
 
 #imgFlecha {
@@ -31,7 +32,7 @@
   left: var(--flecha-left);
   transform: translateX(-50%);
   width: var(--flecha-width);
-  height: var(--flecha-height); /* Aplicando la variable para el alto de la flecha */
+  height: var(--flecha-height); /* Aplica la altura de la flecha */
 }
 
 #resultado {
@@ -46,7 +47,6 @@
   text-shadow: 2px 2px 2px white;
   z-index: 1000;
   font-family: 'Alfa Slab One', cursive;
-  animation: aparecer 1s ease-in-out forwards;
 }
 
 @keyframes aparecer {
@@ -63,7 +63,7 @@
   color: white;
   background-image: linear-gradient(to right, blue, purple);
   border: none;
-  border-radius: var(--boton-border-radius);
+  border-radius: var(--boton-border-radius); /* Aplica las esquinas redondeadas */
   cursor: pointer;
   box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
   transition: background-color 0.3s;
