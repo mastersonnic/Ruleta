@@ -44,11 +44,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Encontrar el segmento correspondiente al ángulo final
     for (let i = 0; i < segmentos.length; i++) {
       let seg = segmentos[i];
-      if (angulo >= seg.min && angulo < seg.max) {
-        return seg.nombre;
-      }
-      if (seg.min > seg.max && (angulo >= seg.min || angulo < seg.max)) {
-        return seg.nombre;
+      if (seg.min > seg.max) { // Para segmentos que cruzan el ángulo 0/360
+        if (angulo >= seg.min || angulo < seg.max) {
+          return seg.nombre;
+        }
+      } else { // Para segmentos que no cruzan el ángulo 0/360
+        if (angulo >= seg.min && angulo < seg.max) {
+          return seg.nombre;
+        }
       }
     }
     return '0'; // Por defecto, si no se encuentra en ningún rango
