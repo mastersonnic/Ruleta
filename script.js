@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       // Determinar el segmento ganador basado en el ángulo final
       let segmentoGanador = calcularSegmentoGanador(anguloFinal);
       resultado.textContent = `El segmento ganador es: ${segmentoGanador}X`;
-    }, velocidad.slice(0, -1) * 1000); // Convertir la velocidad a milisegundos
+    }, parseFloat(velocidad) * 1000); // Convertir la velocidad a milisegundos
   });
 
   function calcularSegmentoGanador(angulo) {
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     for (let i = 0; i < segmentos.length; i++) {
       let seg = segmentos[i];
       if (seg.min > seg.max) { // Para segmentos que cruzan el ángulo 0/360
-        if (angulo >= seg.min || angulo < seg.max) {
+        if ((angulo >= seg.min && angulo <= 360) || (angulo >= 0 && angulo < seg.max)) {
           return seg.nombre;
         }
       } else { // Para segmentos que no cruzan el ángulo 0/360
