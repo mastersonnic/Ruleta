@@ -15,7 +15,7 @@
   /* Nuevas variables para la lógica de la ruleta */
   --vueltas: 5; /* Variable 1: Número de vueltas hasta detenerse */
   --velocidad: 3s; /* Variable 2: Velocidad de la ruleta hasta detenerse */
-  --ajuste-angulo: 0deg; /* Variable 3: Ajuste de ángulo para sincronizar mensaje */
+  --ajuste-angulo: 22.5deg; /* Variable 3: Ajuste de ángulo para sincronizar mensaje */
 }
 
 #ruleta {
