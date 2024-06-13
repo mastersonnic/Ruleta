@@ -1,21 +1,21 @@
 :root {
-  /* Variables para personalizar la ruleta y sus elementos */
+  /* Variables existentes para personalizar la ruleta y sus elementos */
   --ruleta-width: 720px;
   --ruleta-height: 695px;
   --ruleta-left: 15%;
   --flecha-top: 15px;
   --flecha-left: 50%;
   --flecha-width: 100px;
-  --flecha-height: 20; /* Variable para la altura de la flecha */
+  --flecha-height: 20px; /* Corregido para incluir 'px' */
   --resultado-top: 50%;
   --resultado-font-size: 48px;
   --boton-width: 30%;
   --boton-left: 70%;
-  --boton-border-radius: 5px; /* Variable para las esquinas redondeadas del botón */
-  /* Nuevas variables para la lógica de la ruleta */
-  --vueltas: 5; /* Variable 1: Número de vueltas hasta detenerse */
-  --velocidad: 3s; /* Variable 2: Velocidad de la ruleta hasta detenerse */
-  --ajuste-angulo: 22.5deg; /* Variable 3: Ajuste de ángulo para sincronizar mensaje */
+  --boton-border-radius: 5px;
+  --vueltas: 5;
+  --velocidad: 3s;
+  --ajuste-angulo: 22.5deg;
+  --flecha-opacity: 0.7; /* Variable nueva para la opacidad de la flecha */
 }
 
 #ruleta {
@@ -36,6 +36,7 @@
   transform: translateX(-50%);
   width: var(--flecha-width);
   height: var(--flecha-height);
+  opacity: var(--flecha-opacity); /* Aplicando la opacidad a la flecha */
 }
 
 #resultado {
