@@ -5,13 +5,13 @@
   --ruleta-left: 15%;
   --flecha-top: 15px;
   --flecha-left: 50%;
-  --flecha-width: 100px;
-  --flecha-height: 20px; /* Corregido para incluir 'px' */
+  --flecha-width: 80px;
+  --flecha-height: 10px; /* Corregido para incluir 'px' */
   --resultado-top: 50%;
   --resultado-font-size: 48px;
-  --boton-width: 30%;
+  --boton-width: 50%;
   --boton-left: 70%;
-  --boton-border-radius: 5px;
+  --boton-border-radius: 20px;
   --vueltas: 5;
   --velocidad: 3s;
   --ajuste-angulo: 22.5deg;
