@@ -9,11 +9,9 @@ function girarRuleta() {
   let ajusteAngulo = parseInt(getComputedStyle(document.documentElement)
                   .getPropertyValue('--ajuste-angulo'));
 
-  let anguloPorSegmento = 360 / segmentos.length;
-  let anguloInicial = Math.floor(Math.random() * 360);
-  let anguloTotal = vueltas * 360 + anguloInicial;
-  let anguloFinal = anguloTotal % 360;
-  let indiceSegmentoGanador = Math.floor((anguloFinal + ajusteAngulo) / anguloPorSegmento) % segmentos.length;
+  let anguloTotal = vueltas * 360;
+  let anguloFinal = (anguloTotal + ajusteAngulo) % 360;
+  let indiceSegmentoGanador = Math.floor(anguloFinal / 45) % segmentos.length;
 
   document.getElementById('imgRuleta').style.transition = `transform ${velocidad} ease-out`;
   document.getElementById('imgRuleta').style.transform = `rotate(${anguloTotal}deg)`;
