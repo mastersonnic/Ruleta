@@ -2,21 +2,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
   const girar = document.getElementById('girar');
   const imgRuleta = document.getElementById('imgRuleta');
   const resultado = document.getElementById('resultado');
-  let anguloActual = 0;
+  let anguloInicial = Math.random() * 360; // Variable 1: Ángulo inicial al azar
 
   girar.addEventListener('click', () => {
-    // Número de vueltas completas más un cuarto de vuelta
-    let vueltas = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--vueltas'), 10);
-    let ajusteAngulo = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--ajuste-angulo'));
+    let vueltas = Math.floor(Math.random() * (40 - 20 + 1)) + 20; // Variable 2: Vueltas al azar entre 20 y 40
+    let numerador = Math.floor(Math.random() * 9) + 1;
+    let denominador = Math.floor(Math.random() * 9) + 1;
+    let fraccionGiro = (numerador / denominador) * 360; // Variable 1/2: Fracción de giro al azar
     let velocidad = getComputedStyle(document.documentElement).getPropertyValue('--velocidad');
 
     // Calcular el ángulo total de rotación
-    anguloActual += (vueltas * 360) + ajusteAngulo;
-    let anguloFinal = anguloActual % 360;
+    anguloInicial += (vueltas * 360) + fraccionGiro;
+    let anguloFinal = anguloInicial % 360;
 
     // Rotar la imagen de la ruleta
     imgRuleta.style.transition = `transform ${velocidad} ease-out`;
-    imgRuleta.style.transform = `rotate(${anguloActual}deg)`;
+    imgRuleta.style.transform = `rotate(${anguloInicial}deg)`;
 
     // Mostrar el resultado después de que la ruleta se detenga
     setTimeout(() => {
