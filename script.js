@@ -1,3 +1,4 @@
+// script.js
 document.getElementById('girar').addEventListener('click', girarRuleta);
 
 function girarRuleta() {
@@ -14,11 +15,15 @@ function girarRuleta() {
   let indiceSegmentoGanador = Math.floor((anguloGanador + ajusteAngulo) / anguloPorSegmento) % segmentos.length;
   let anguloTotal = vueltas * 360 + anguloGanador;
 
-  document.getElementById('ruleta').style.transition = `transform ${velocidad} ease-out`;
-  document.getElementById('ruleta').style.transform = `rotate(${anguloTotal}deg)`;
+  // Aplicar animación de giro solo a la imagen de la ruleta
+  let ruleta = document.getElementById('imgRuleta');
+  ruleta.style.transition = `transform ${velocidad} ease-out`;
+  ruleta.style.transform = `rotate(${anguloTotal}deg)`;
 
+  // Mostrar mensaje ganador después de la animación
   setTimeout(() => {
-    document.getElementById('resultado').style.display = 'block';
-    document.getElementById('resultado').textContent = `¡Haz ganado ${segmentos[indiceSegmentoGanador]}!`;
+    let resultado = document.getElementById('resultado');
+    resultado.style.display = 'block';
+    resultado.textContent = `¡Haz ganado ${segmentos[indiceSegmentoGanador]}!`;
   }, parseFloat(velocidad) * 1000);
 }
