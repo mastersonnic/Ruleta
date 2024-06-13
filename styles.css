@@ -10,7 +10,7 @@
   --resultado-top: 50%;
   --resultado-font-size: 48px;
   --boton-width: 30%;
-  --boton-left: 60%;
+  --boton-left: 70%;
   --boton-border-radius: 5px; /* Variable para las esquinas redondeadas del botón */
   /* Nuevas variables para la lógica de la ruleta */
   --vueltas: 5; /* Variable 1: Número de vueltas hasta detenerse */
