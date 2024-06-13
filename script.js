@@ -29,31 +29,25 @@ document.addEventListener('DOMContentLoaded', (event) => {
   });
 
   function calcularSegmentoGanador(angulo) {
-    // Definir los rangos de ángulos para cada segmento
-    const segmentos = [
-      { nombre: '0', min: 337.5, max: 22.5 },
-      { nombre: '1', min: 22.5, max: 67.5 },
-      { nombre: '6', min: 67.5, max: 135 },
-      { nombre: '0.02', min: 135, max: 145 },
-      { nombre: '0.1', min: 145, max: 190 },
-      { nombre: '4', min: 190, max: 270 },
-      { nombre: '0.5', min: 270, max: 315 },
-      { nombre: '2', min: 315, max: 337.5 }
-    ];
-
-    // Encontrar el segmento correspondiente al ángulo final
-    for (let i = 0; i < segmentos.length; i++) {
-      let seg = segmentos[i];
-      if (seg.min > seg.max) { // Para segmentos que cruzan el ángulo 0/360
-        if ((angulo >= seg.min && angulo <= 360) || (angulo >= 0 && angulo < seg.max)) {
-          return seg.nombre;
-        }
-      } else { // Para segmentos que no cruzan el ángulo 0/360
-        if (angulo >= seg.min && angulo < seg.max) {
-          return seg.nombre;
-        }
-      }
+    // Asumiendo que 'angulo' es el ángulo final después de todos los giros
+    if (angulo >= 337.5 || angulo < 22.5) {
+      return '0';
+    } else if (angulo >= 22.5 && angulo < 67.5) {
+      return '1';
+    } else if (angulo >= 67.5 && angulo < 135) {
+      return '6';
+    } else if (angulo >= 135 && angulo < 145) {
+      return '0.02';
+    } else if (angulo >= 145 && angulo < 190) {
+      return '0.1';
+    } else if (angulo >= 190 && angulo < 270) {
+      return '4';
+    } else if (angulo >= 270 && angulo < 315) {
+      return '0.5';
+    } else if (angulo >= 315 && angulo < 337.5) {
+      return '2';
+    } else {
+      return 'Error en el cálculo del segmento ganador';
     }
-    return '0'; // Por defecto, si no se encuentra en ningún rango
   }
 });
