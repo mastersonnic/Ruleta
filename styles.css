@@ -6,7 +6,7 @@
   --flecha-top: 15px;
   --flecha-left: 50%;
   --flecha-width: 80px;
-  --flecha-height: 20px; /* Corregido para incluir 'px' */
+  --flecha-height: 10px; /* Corregido para incluir 'px' */
   --resultado-top: 50%;
   --resultado-font-size: 48px;
   --boton-width: 50%;
