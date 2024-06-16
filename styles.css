@@ -14,6 +14,10 @@
   --velocidad: 3s;
   --ajuste-angulo: 22.5deg;
   --flecha-opacity: 0.7; /* Variable nueva para la opacidad de la flecha */
+  --dinero-width: 100px
+  --dinero-top: 100px
+  --dinero-left: 100px
+  --dinero-height: 100px
 }
 
 #ruleta {
