@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   let anguloInicial = Math.random() * 360; // Variable 1: Ángulo inicial al azar
 
   girar.addEventListener('click', () => {
-    let vueltas = Math.floor(Math.random() * (40 - 20 + 1)) + 20; // Variable 2: Vueltas al azar entre 20 y 40
+    let vueltas = Math.floor(Math.random() * (30 - 20 + 1)) + 20; // Variable 2: Vueltas al azar entre 20 y 40
     let numerador = Math.floor(Math.random() * 9) + 1;
     let denominador = Math.floor(Math.random() * 9) + 1;
     let fraccionGiro = (numerador / denominador) * 360; // Variable 1/2: Fracción de giro al azar
