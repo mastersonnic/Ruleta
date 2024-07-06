@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ruleta de Premios</title>
-<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Ruleta</title>
 </head>
 <body>
-<div id="ruleta">
-<img id="imgRuleta" src="https://raw.githubusercontent.com/mastersonnic/Ruleta/main/1717884942604.png" alt="Ruleta">
-<img id="imgFlecha" src="https://raw.githubusercontent.com/mastersonnic/Ruleta/main/1718131463969.png" alt="Flecha">
-</div>
-<button id="girar">Girar Ruleta</button>
+    <div class="ruleta">
+        <video id="ruletaVideo" controls autoplay>
+            <source src="https://raw.githubusercontent.com/mastersonnic/Ruleta/main/Solo%20giros.mp4" type="video/mp4">
+        </video>
+    </div>
+    <button id="girarBtn">Girar</button>
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
