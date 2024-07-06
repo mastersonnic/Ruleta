@@ -1,53 +1,70 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-  const girar = document.getElementById('girar');
-  const imgRuleta = document.getElementById('imgRuleta');
-  const resultado = document.getElementById('resultado');
-  let anguloInicial = Math.random() * 360; // Variable 1: Ángulo inicial al azar
+document.addEventListener('DOMContentLoaded', () => {
+    const girarBtn = document.getElementById('girarBtn');
+    const ruletaVideo = document.getElementById('ruletaVideo');
 
-  girar.addEventListener('click', () => {
-    let vueltas = Math.floor(Math.random() * (25 - 20 + 1)) + 20; // Variable 2: Vueltas al azar entre 20 y 40
-    let numerador = Math.floor(Math.random() * 9) + 1;
-    let denominador = Math.floor(Math.random() * 9) + 1;
-    let fraccionGiro = (numerador / denominador) * 360; // Variable 1/2: Fracción de giro al azar
-    let velocidad = getComputedStyle(document.documentElement).getPropertyValue('--velocidad');
+    // Definir las probabilidades de cada segmento (en números enteros)
+    const probabilidades = {
+        "0X": 15,
+        "1X": 20,
+        "6X": 5,
+        "0.02X": 10,
+        "0.1X": 12,
+        "4X": 8,
+        "0.5X": 18,
+        "2X": 12,
+        // Agrega las demás probabilidades aquí
+    };
 
-    // Calcular el ángulo total de rotación
-    anguloInicial += (vueltas * 360) + fraccionGiro;
-    let anguloFinal = anguloInicial % 360;
+    // Definir las rutas de los videos en GitHub
+    const rutasVideos = {
+        "0X": "https://raw.githubusercontent.com/mastersonnic/Ruleta/main/0X%20derecha%20m%C3%A1s%20len.mp4",
+         "0X": "https://raw.githubusercontent.com/mastersonnic/Ruleta/main/0X%20derecha%20m%C3%A1s%20len.mp4",
+        "1X": "https://raw.githubusercontent.com/mastersonnic/Ruleta/main/1X%20centro%20lento.mp4",
+        "6X": "https://raw.githubusercontent.com/mastersonnic/Ruleta/main/6X%20izq%20lento.mp4",
+        "0.02X": "https://raw.githubusercontent.com/mastersonnic/Ruleta/main/0.02%20X%20derecha%20mejorado.mp4",
+        "0.02X": https://github.com/mastersonnic/Ruleta/raw/main/0.02X%20centro%20lento.mp4
+        "0.02X": "https://raw.githubusercontent.com/mastersonnic/Ruleta/main/0.02X%20izqu%20m%C3%A1s%20le.mp4",
+        "0.1X": "https://raw.githubusercontent.com/mastersonnic/Ruleta/main/0.1%20izq%20mejorado.mp4",
+        "0.1X": "https://raw.githubusercontent.com/mastersonnic/Ruleta/main/0.1X%20derec%20m%C3%A1s%20lent.mp4",
+        "0.1X": "https://raw.githubusercontent.com/mastersonnic/Ruleta/main/0.1x%20centro%20mejorad.mp4",
+        "0.5X": "https://raw.githubusercontent.com/mastersonnic/Ruleta/main/0.5X%20izq.%20m%C3%A1s%20lento.mp4",
+        "0.5X": "https://raw.githubusercontent.com/mastersonnic/Ruleta/main/0.5x%20derecha%20mejorad.mp4",
+        "https://raw.githubusercontent.com/mastersonnic/Ruleta/main/0x%20izq%20lento.mp4",
+          "1X":
+        "https://raw.githubusercontent.com/mastersonnic/Ruleta/main/1X%20derec%20m%C3%A1s%20lent.mp4",
+          "1X":
+"https://raw.githubusercontent.com/mastersonnic/Ruleta/main/1x%20izquierda%20mejor.mp4",
+          "2X":
+"https://raw.githubusercontent.com/mastersonnic/Ruleta/main/2X%20centr%20m%C3%A1s%20lento.mp4"'
+          "2X":
+"https://raw.githubusercontent.com/mastersonnic/Ruleta/main/2X%20der%20lento.mp4",
+          "2X":
+"https://raw.githubusercontent.com/mastersonnic/Ruleta/main/2x%20izquierda%20mejorado.mp4",
+          "4X":
+"https://raw.githubusercontent.com/mastersonnic/Ruleta/main/4x%20derecha%20mejo.mp4",
+          "4X":
+"https://raw.githubusercontent.com/mastersonnic/Ruleta/main/4x%20izq%20mejprado.mp4",
+          "6X":
+"https://raw.githubusercontent.com/mastersonnic/Ruleta/main/6X%20centr%20lento.mp4",
+          "6X":
+"https://raw.githubusercontent.com/mastersonnic/Ruleta/main/1X%20derec%20m%C3%A1s%20lent.mp4",
+ "Solo giros":
+"https://raw.githubusercontent.com/mastersonnic/Ruleta/main/Solo%20giros.mp4",
+    };
 
-    // Rotar la imagen de la ruleta
-    imgRuleta.style.transition = `transform ${velocidad} ease-out`;
-    imgRuleta.style.transform = `rotate(${anguloInicial}deg)`;
+    girarBtn.addEventListener('click', () => {
+        // Detener el video actual
+        ruletaVideo.pause();
 
-    // Mostrar el resultado después de que la ruleta se detenga
-    setTimeout(() => {
-      resultado.style.display = 'block';
-      // Determinar el segmento ganador basado en el ángulo final
-      let segmentoGanador = calcularSegmentoGanador(anguloFinal);
-      resultado.textContent = `El segmento ganador es: ${segmentoGanador}X`;
-    }, parseFloat(velocidad) * 1000); // Convertir la velocidad a milisegundos
-  });
+        // Seleccionar un resultado basado en las probabilidades
+        const resultados = Object.keys(probabilidades);
+        const resultadoSeleccionado = resultados[Math.floor(Math.random() * resultados.length)];
 
-  function calcularSegmentoGanador(angulo) {
-    // Asumiendo que 'angulo' es el ángulo final después de todos los giros
-    if (angulo >= 337.5 || angulo < 22.5) {
-      return '0';
-    } else if (angulo >= 22.5 && angulo < 67.5) {
-      return '1';
-    } else if (angulo >= 67.5 && angulo < 135) {
-      return '6';
-    } else if (angulo >= 135 && angulo < 145) {
-      return '0.02';
-    } else if (angulo >= 145 && angulo < 190) {
-      return '0.1';
-    } else if (angulo >= 190 && angulo < 270) {
-      return '4';
-    } else if (angulo >= 270 && angulo < 315) {
-      return '0.5';
-    } else if (angulo >= 315 && angulo < 337.5) {
-      return '2';
-    } else {
-      return 'Error en el cálculo del segmento ganador';
-    }
-  }
+        // Obtener la ruta del video correspondiente al resultado
+        const rutaVideo = rutasVideos[resultadoSeleccionado];
+
+        // Cargar el nuevo video
+        ruletaVideo.src = rutaVideo;
+        ruletaVideo.play();
+    });
 });
