@@ -1,18 +1,34 @@
-/* Estilos personalizables */
-.ruleta {
-    width: 300px; /* Ancho de la ruleta */
-    height: 300px; /* Alto de la ruleta */
-    background-color: blue; /* Color de fondo */
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); /* Sombra */
+/* styles.css */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
 }
 
-/* Estilos para el botón */
-#girarBtn {
-    font-size: 25px;
-    background-color: #0074D9;
+.ruleta-container {
+    position: relative;
+}
+
+#ruleta-video {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#girar-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: blue;
     color: white;
-    border: none;
-    border-radius: 15px;
+    font-size: 24px;
     padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
 }
