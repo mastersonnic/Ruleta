@@ -8,11 +8,11 @@
 
 /* Estilos para el botón */
 #girarBtn {
-    font-size: 18px;
+    font-size: 25px;
     background-color: #0074D9;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 15px;
     padding: 10px 20px;
     cursor: pointer;
 }
