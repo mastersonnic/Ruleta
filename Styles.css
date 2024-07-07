@@ -11,6 +11,7 @@ body {
 
 .ruleta-container {
     position: relative;
+    text-align: center; /* Centrar el botón */
 }
 
 #ruleta-video {
