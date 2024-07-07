@@ -1,83 +1,35 @@
-:root {
-  /* Variables existentes para personalizar la ruleta y sus elementos */
-  --ruleta-width: 720px;
-  --ruleta-height: 695px;
-  --ruleta-left: 15%;
-  --flecha-top: 15px;
-  --flecha-left: 50%;
-  --flecha-width: 80px;
-  --flecha-height: 90px; /* Corregido para incluir 'px' */
-  --boton-width: 50%;
-  --boton-left: 63%;
-  --boton-border-radius: 20px;
-  --vueltas: 5;
-  --velocidad: 3s;
-  --ajuste-angulo: 22.5deg;
-  --flecha-opacity: 0.7; /* Variable nueva para la opacidad de la flecha */
-  --dinero-width: 50px
-  --dinero-top: 50px
-  --dinero-left: 50px
-  --dinero-height: 50px
+/* styles.css */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
 }
 
-#ruleta {
-  position: relative;
-  width: var(--ruleta-width);
-  height: var(--ruleta-height);
-  left: var(--ruleta-left);
+.ruleta-container {
+    position: relative;
+    text-align: center; /* Centrar el botón */
 }
 
-#imgRuleta {
-  width: 100%;
+#ruleta-video {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-#imgFlecha {
-  position: absolute;
-  top: var(--flecha-top);
-  left: var(--flecha-left);
-  transform: translateX(-50%);
-  width: var(--flecha-width);
-  height: var(--flecha-height);
-  opacity: var(--flecha-opacity); /* Aplicando la opacidad a la flecha */
-}
-
-#resultado {
-  position: absolute;
-  top: var(--resultado-top);
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: none;
-  font-size: var(--resultado-font-size);
-  color: red;
-  font-weight: bold;
-  text-shadow: 2px 2px 2px white;
-  z-index: 1000;
-  font-family: 'Alfa Slab One', cursive;
-  animation: aparecer 1s ease-in-out forwards;
-}
-
-@keyframes aparecer {
-  from { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-}
-
-#girar {
-  display: block;
-  width: var(--boton-width);
-  margin: 20px auto;
-  padding: 10px;
-  font-size: 24px;
-  color: white;
-  background-image: linear-gradient(to right, blue, purple);
-  border: none;
-  border-radius: var(--boton-border-radius);
-  cursor: pointer;
-  box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
-  transition: background-color 0.3s;
-  left: var(--boton-left);
-  position: relative;
-}
-
-#girar:hover {
-  background-image: linear-gradient(to left, blue, purple);
+#girar-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: blue;
+    color: white;
+    font-size: 24px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
