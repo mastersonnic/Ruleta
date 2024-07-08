@@ -6,38 +6,30 @@ document.addEventListener("DOMContentLoaded", () => {
     const valoresMinas = [0, 0.02, 0.1, 0.5, 1, 2, 4, 6];
     const probabilidades = [10, 15, 20, 10, 20, 10, 10, 5]; // Porcentajes
 
-    // Genera el tablero con celdas
+    // Genera el tablero con celdas y asigna valores
     for (let i = 0; i < 100; i++) {
         const cell = document.createElement("div");
         cell.classList.add("cell");
+        const randomIndex = obtenerIndiceSegunProbabilidad(probabilidades);
+        const valorMina = valoresMinas[randomIndex];
+        cell.dataset.valor = valorMina;
         board.appendChild(cell);
     }
 
-    // Función para iniciar el juego
-    function iniciarJuego() {
-        const apuesta = parseFloat(apuestaInput.value);
-        if (isNaN(apuesta) || apuesta <= 0) {
-            alert("Ingresa una apuesta válida.");
-            return;
-        }
-
-        // Lógica para asignar valores y probabilidades a las celdas
-        const cells = document.querySelectorAll(".cell");
-        cells.forEach((cell, index) => {
-            const randomIndex = obtenerIndiceSegunProbabilidad(probabilidades);
-            const valorMina = valoresMinas[randomIndex];
-            cell.dataset.valor = valorMina;
-        });
-
-        // Escucha el clic en las celdas
-        cells.forEach((cell) => {
-            cell.addEventListener("click", () => {
-                const valor = parseFloat(cell.dataset.valor);
+    // Escucha el clic en las celdas
+    board.addEventListener("click", (event) => {
+        const cell = event.target;
+        if (cell.classList.contains("cell")) {
+            const valor = parseFloat(cell.dataset.valor);
+            const apuesta = parseFloat(apuestaInput.value);
+            if (!isNaN(apuesta) && apuesta > 0) {
                 const ganancia = apuesta * valor;
                 alert(`Ganancia: ${ganancia}`);
-            });
-        });
-    }
+            } else {
+                alert("Ingresa una apuesta válida.");
+            }
+        }
+    });
 
     // Función para obtener índice según probabilidad
     function obtenerIndiceSegunProbabilidad(probabilidades) {
