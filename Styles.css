@@ -1,17 +1,28 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Buscaminas</title>
-</head>
-<body>
-    <div class="board">
-        <!-- Aquí se generará el tablero -->
-    </div>
-    <input type="number" id="apuesta" placeholder="Apuesta inicial">
-    <button onclick="iniciarJuego()">Iniciar juego</button>
-    <script src="script.js"></script>
-</body>
-</html>
+/* Estilos para el tablero y las celdas */
+.board {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr); /* Ajusta según el tamaño deseado */
+    gap: 5px;
+}
+
+.cell {
+    width: 30px;
+    height: 30px;
+    background-color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Estilos para las celdas encendidas */
+.cell.active {
+    background-color: #f9c74f;
+}
+
+/* Estilos para las celdas con minas */
+.cell.mine {
+    background-color: #e63946;
+}
