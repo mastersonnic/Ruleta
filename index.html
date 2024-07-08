@@ -10,9 +10,12 @@
     <div class="board">
         <!-- Aquí se generará el tablero -->
     </div>
-    <input type="number" id="apuesta" placeholder="Apuesta inicial">
-    <button onclick="iniciarJuego()">Iniciar juego</button>
-    <p id="saldo"></p>
+    <div class="info">
+        <p>Saldo total: <span id="saldo">0.00</span></p>
+        <input type="number" id="apuesta" placeholder="Apuesta inicial">
+        <button onclick="iniciarJuego()">Iniciar juego</button>
+        <p>Cantidad de 0x: <input type="number" id="cantidadCeros" value="10"></p>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
