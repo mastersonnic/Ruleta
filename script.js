@@ -15,4 +15,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const randomIndex = Math.floor(Math.random() * valoresMinas.length);
         const valorMina = valoresMinas[randomIndex];
         cell.dataset.valor = valorMina;
-        board.appendChild
+        board.appendChild(cell);
+    }
+
+    // Escucha el clic en las celdas
+    board.addEventListener("click", (event) => {
+        const cell = event.target;
+        if (cell.classList.contains("cell")) {
+            const valor = parseFloat(cell.dataset.valor);
+            const apuesta = parseFloat(apuestaInput.value);
+            const cantidadCeros = parseInt(cantidadCerosSelect.value);
+            if (!isNaN(apuesta) && apuesta > 0) {
+                const ganancia = apuesta * valor;
+                if (valor === 0) {
