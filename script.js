@@ -1,19 +1,55 @@
-// script.js
-document.addEventListener('DOMContentLoaded', function () {
-    const ruletaVideo = document.getElementById('ruleta-video');
-    const girarBtn = document.getElementById('girar-btn');
+document.addEventListener("DOMContentLoaded", () => {
+    const board = document.querySelector(".board");
+    const apuestaInput = document.getElementById("apuesta");
 
-    // Cambiar al nuevo video después de 1.5 segundos al hacer clic en el botón
-    girarBtn.addEventListener('click', function () {
-        // Detener el video actual
-        ruletaVideo.pause();
-        ruletaVideo.currentTime = 0;
+    // Valores ocultos en las minas
+    const valoresMinas = [0, 0.02, 0.1, 0.5, 1, 2, 4, 6];
+    const probabilidades = [10, 15, 20, 10, 20, 10, 10, 5]; // Porcentajes
 
-        // Cambiar al segundo video después de 1.5 segundos
-        setTimeout(() => {
-            ruletaVideo.src = 'https://raw.githubusercontent.com/mastersonnic/Ruleta/main/6X%20izq%20lento.mp4';
-            ruletaVideo.play();
-        }, 1500);
-    });
+    // Genera el tablero con celdas
+    for (let i = 0; i < 100; i++) {
+        const cell = document.createElement("div");
+        cell.classList.add("cell");
+        board.appendChild(cell);
+    }
+
+    // Función para iniciar el juego
+    function iniciarJuego() {
+        const apuesta = parseFloat(apuestaInput.value);
+        if (isNaN(apuesta) || apuesta <= 0) {
+            alert("Ingresa una apuesta válida.");
+            return;
+        }
+
+        // Lógica para asignar valores y probabilidades a las celdas
+        const cells = document.querySelectorAll(".cell");
+        cells.forEach((cell, index) => {
+            const randomIndex = obtenerIndiceSegunProbabilidad(probabilidades);
+            const valorMina = valoresMinas[randomIndex];
+            cell.dataset.valor = valorMina;
+        });
+
+        // Escucha el clic en las celdas
+        cells.forEach((cell) => {
+            cell.addEventListener("click", () => {
+                const valor = parseFloat(cell.dataset.valor);
+                const ganancia = apuesta * valor;
+                alert(`Ganancia: ${ganancia}`);
+            });
+        });
+    }
+
+    // Función para obtener índice según probabilidad
+    function obtenerIndiceSegunProbabilidad(probabilidades) {
+        const totalProbabilidad = probabilidades.reduce((acc, val) => acc + val, 0);
+        const random = Math.random() * totalProbabilidad;
+        let acumulado = 0;
+        for (let i = 0; i < probabilidades.length; i++) {
+            acumulado += probabilidades[i];
+            if (random < acumulado) {
+                return i;
+            }
+        }
+        return probabilidades.length - 1;
+    }
 });
-k
