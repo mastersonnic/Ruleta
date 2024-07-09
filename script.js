@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const apuestaInput = document.getElementById("apuesta");
     const saldoElement = document.getElementById("saldo");
     const cantidadCerosSelect = document.getElementById("cantidadCeros");
+    const resultsTable = document.querySelector(".results table tbody");
     let saldoTotal = 0;
 
     // Valores ocultos en las minas
@@ -28,3 +29,18 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!isNaN(apuesta) && apuesta > 0) {
                 const ganancia = apuesta * valor;
                 if (valor === 0) {
+                    saldoTotal = 0;
+                } else {
+                    saldoTotal += ganancia;
+                }
+                saldoElement.textContent = saldoTotal.toFixed(2);
+                cell.textContent = (valor * apuesta).toFixed(2);
+                setTimeout(() => {
+                    cell.textContent = "";
+                }, 2000);
+            } else {
+                alert("Ingresa una apuesta válida.");
+            }
+        }
+    });
+});
