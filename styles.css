@@ -47,11 +47,26 @@
     animation: pulse 2s infinite alternate;
 }
 
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    100% {
-        transform: scale(1.05);
-    }
+/* Estilos para los resultados */
+.results {
+    margin-top: 20px;
+    background: linear-gradient(to bottom, #bdd7ff, #a5c9ff);
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #e6f0ff;
 }
