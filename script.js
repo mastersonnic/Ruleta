@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const apuestaInput = document.getElementById("apuesta");
     const saldoElement = document.getElementById("saldo");
     const cantidadCerosSelect = document.getElementById("cantidadCeros");
-    const resultsTable = document.querySelector(".results table tbody");
     let saldoTotal = 0;
 
     // Valores ocultos en las minas
@@ -37,10 +36,46 @@ document.addEventListener("DOMContentLoaded", () => {
                 cell.textContent = (valor * apuesta).toFixed(2);
                 setTimeout(() => {
                     cell.textContent = "";
+                    cell.classList.add("flipped"); // Ilusión de volteo
+                    setTimeout(() => {
+                        cell.classList.remove("flipped");
+                        if (valor === 0) {
+                            // Agrega aquí la lógica para la explosión
+                            // Puedes aplicar animaciones o cambios de color según lo solicitado
+                            cell.classList.add("mine");
+                            // Utiliza la librería boomjs para la explosión
+                            boom(cell);
+                        }
+                    }, 1000);
                 }, 2000);
+                if (ganancia > 1) {
+                    // Agrega aquí la lógica para el confetti
+                    // Utiliza la biblioteca canvas-confetti
+                    celebratoryConfetti();
+                }
             } else {
                 alert("Ingresa una apuesta válida.");
             }
         }
     });
+
+    // Función para iniciar el juego
+function iniciarJuego() {
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach((cell) => {
+        cell.style.border = "2px solid #1a237e";
+        cell.style.borderImage = "linear-gradient(to right, #1a237e, #3949ab)";
+        cell.style.borderImageSlice = "1";
+    });
+}
+
+        // Puedes aplicar animaciones o cambios de color según lo solicitado
+        // Por ejemplo, resaltar todas las celdas con un marco en degradado
+        const cells = document.querySelectorAll(".cell");
+        cells.forEach((cell) => {
+            cell.style.border = "2px solid #1a237e";
+            cell.style.borderImage = "linear-gradient(to right, #1a237e, #3949ab)";
+            cell.style.borderImageSlice = "1";
+        });
+    }
 });
