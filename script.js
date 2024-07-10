@@ -42,4 +42,17 @@ document.addEventListener("DOMContentLoaded", () => {
                             boom(cell);
                         }
                     }, 1000);
-                }, 2000
+                }, 2000);
+            }
+        }
+    });
+
+    // Función para manejar la explosión de la mina
+    function boom(cell) {
+        // Implementa aquí la lógica de la explosión
+        // Por ejemplo, puedes cambiar el color de fondo o mostrar un mensaje
+        // cuando se hace clic en una mina.
+    }
+
+    // Resto de tu lógica del juego aquí...
+});
