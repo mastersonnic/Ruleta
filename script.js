@@ -59,12 +59,9 @@ document.addEventListener("DOMContentLoaded", () => {
     cells.forEach((cell) => {
         cell.style.backgroundColor = "#f0f8ff"; // Azul casi blanco
         cell.style.transition = "transform 0.5s ease"; // Pequeño movimiento
-        cell.style.transform = "translateY(5px)"; // Movimiento inicial hacia abajo
-        cell.addEventListener("mouseover", () => {
-            cell.style.transform = "scale(1.05) translateY(0)"; // Efecto de aumento al pasar el mouse
-        });
-        cell.addEventListener("mouseout", () => {
-            cell.style.transform = "scale(1) translateY(5px)"; // Volver al tamaño original al salir del mouse
+        cell.style.transform = "scale(1.05)"; // Efecto de aumento inicial
+        cell.addEventListener("click", () => {
+            cell.style.transform = "scale(1)"; // Volver al tamaño original al hacer clic
         });
     });
 
