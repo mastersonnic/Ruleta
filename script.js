@@ -54,5 +54,12 @@ document.addEventListener("DOMContentLoaded", () => {
         // cuando se hace clic en una mina.
     }
 
+    // Estilos adicionales para las celdas
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach((cell) => {
+        cell.style.backgroundColor = "#f0f8ff"; // Azul casi blanco
+        cell.style.transition = "transform 0.5s ease"; // Pequeño movimiento
+    });
+
     // Resto de tu lógica del juego aquí...
 });
