@@ -59,6 +59,12 @@ document.addEventListener("DOMContentLoaded", () => {
     cells.forEach((cell) => {
         cell.style.backgroundColor = "#f0f8ff"; // Azul casi blanco
         cell.style.transition = "transform 0.5s ease"; // Pequeño movimiento
+        cell.addEventListener("mouseover", () => {
+            cell.style.transform = "scale(1.05)"; // Efecto de aumento al pasar el mouse
+        });
+        cell.addEventListener("mouseout", () => {
+            cell.style.transform = "scale(1)"; // Volver al tamaño original al salir del mouse
+        });
     });
 
     // Resto de tu lógica del juego aquí...
