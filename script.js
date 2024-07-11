@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cells.forEach((cell) => {
         cell.style.backgroundColor = "#f0f8ff"; // Azul casi blanco
         cell.style.transition = "transform 0.5s"; // Pequeño movimiento
-        cell.style.animation = "zoom 2s infinite alternate"; // Animación de zoom
+        cell.style.animation = "none"; // Detener la animación al hacer clic
         cell.addEventListener("click", () => {
             cell.style.animation = "none"; // Detener la animación al hacer clic
         });
