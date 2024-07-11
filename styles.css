@@ -7,6 +7,7 @@
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: cellMovement 2s infinite alternate; /* Aumento de tamaño */
 }
 
 .cell {
@@ -24,7 +25,6 @@
     transform-style: preserve-3d;
     transform: rotateY(0deg);
     perspective: 1000px;
-    animation: cellMovement 2s infinite alternate;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -80,4 +80,14 @@ th {
 
 .start-button:hover {
     background-color: #1a237e;
+}
+
+/* Animación para el aumento de tamaño */
+@keyframes cellMovement {
+    0% {
+        transform: scale(1); /* Tamaño original */
+    }
+    100% {
+        transform: scale(1.02); /* Aumento de tamaño */
+    }
 }
