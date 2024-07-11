@@ -1,9 +1,9 @@
-/* Estilos para el tablero y las celdas */
+
 .board {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 5px;
-    background-color: #1a237e;
+    background: linear-gradient(to bottom, #1a237e, #3949ab); /* Degradado */
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -24,7 +24,7 @@
     border-radius: 10px;
     transition: background-color 0.3s ease, transform 0.3s ease;
     transform-style: preserve-3d;
-    transform: rotateY(0deg);
+    transform: rotateY(0deg) scale(1); /* Añadimos escala original */
     perspective: 1000px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
