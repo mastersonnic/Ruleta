@@ -58,10 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const cells = document.querySelectorAll(".cell");
     cells.forEach((cell) => {
         cell.style.backgroundColor = "#f0f8ff"; // Azul casi blanco
-        cell.style.transition = "transform 0.5s ease"; // Pequeño movimiento
-        cell.style.transform = "scale(1.05)"; // Efecto de aumento inicial
+        cell.style.transition = "transform 0.5s"; // Pequeño movimiento
+        cell.style.animation = "zoom 2s infinite alternate"; // Animación de zoom
         cell.addEventListener("click", () => {
-            cell.style.transform = "scale(1)"; // Volver al tamaño original al hacer clic
+            cell.style.animation = "none"; // Detener la animación al hacer clic
         });
     });
 
