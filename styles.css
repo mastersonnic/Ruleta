@@ -3,11 +3,12 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 5px;
-    background-color: #1a237e;
+    background: linear-gradient(270deg, #1a237e, #ff8a65, #ff5722, #1a237e);
+    background-size: 600% 600%;
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation: cellMovement 2s infinite alternate;
+    animation: gradientAnimation 10s ease infinite, cellMovement 2s infinite alternate;
     transform-origin: center;
 }
 
@@ -90,5 +91,18 @@ th {
     }
     100% {
         transform: scale(1.02); /* Aumento de tamaño */
+    }
+}
+
+/* Animación del degradado */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
     }
 }
