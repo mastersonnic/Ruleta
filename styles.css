@@ -89,6 +89,6 @@ th {
         transform: scale(1); /* Tamaño original */
     }
     100% {
-        transform: scale(1.3); /* Aumento de tamaño */
+        transform: scale(1.05); /* Aumento de tamaño */
     }
 }
