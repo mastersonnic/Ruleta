@@ -7,7 +7,7 @@
     border-radius: 10px;
     padding: 10px;
     box-shadow: 10 4px 8px rgba(0, 0, 0, 0.1);
-    animation: cellMovement 20s infinite alternate;
+    animation: cellMovement 2s infinite alternate;
     transform-origin: center;
 }
 
