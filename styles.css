@@ -52,6 +52,7 @@
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: gradientAnimation 10s ease infinite; /* Aplicamos la animación del degradado */
 }
 
 table {
@@ -89,6 +90,7 @@ th {
     color: #ff8a65; /* Color naranja */
     font-weight: bold; /* Negrita */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra */
+    font-size: 18px; /* Aumentamos el tamaño del texto */
 }
 
 /* Estilo para "cantidad de 0x" y la lista desplegable */
@@ -97,10 +99,19 @@ th {
     align-items: center;
     gap: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Aumentamos la sombra */
+    font-size: 18px; /* Aumentamos el tamaño del texto */
 }
 
 .zero-count select {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Aumentamos la sombra */
+}
+
+/* Estilo para el campo de "apuesta inicial" */
+#apuesta {
+    border: none; /* Eliminamos las líneas del borde */
+    background: linear-gradient(to right, #e0f7fa, #ffffff); /* Fondo en degradado azul casi blanco */
+    padding: 5px;
+    border-radius: 5px;
 }
 
 /* Animación para el aumento de tamaño */
