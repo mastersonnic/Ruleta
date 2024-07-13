@@ -1,78 +1,52 @@
-/* Estilos para el tablero y las celdas */
-.board {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 5px;
-    background: linear-gradient(270deg, #1a237e, #6a1b9a, #ff8a65, #1a237e);
-    background-size: 600% 600%;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation: gradientAnimation 10s ease infinite, cellMovement 2s infinite alternate;
-    transform-origin: center;
-}
-
-.cell {
-    width: 50px;
-    height: 50px;
-    background-color: #3949ab;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 10px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    transform-style: preserve-3d;
-    transform: rotateY(0deg);
-    perspective: 1000px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Aumentamos la sombra */
-}
-
-.cell.mine {
-    background-color: #e63946;
-}
-
-.info {
+body {
+    font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    animation: pulse 2s infinite alternate;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f8ff;
 }
 
-.results {
-    margin-top: 20px;
-    background: linear-gradient(270deg, #1a237e, #6a1b9a, #ff8a65, #1a237e); /* Aplicamos la animación del degradado */
-    background-size: 600% 600%;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation: gradientAnimation 10s ease infinite; /* Aplicamos la animación del degradado */
+.board {
+    display: grid;
+    grid-template-columns: repeat(5, 60px);
+    grid-gap: 10px;
+    margin-bottom: 20px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+.cell {
+    width: 60px;
+    height: 60px;
+    background-color: #add8e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
-th, td {
-    padding: 8px;
+.cell.flipped {
+    background-color: #87cefa;
+    transform: scale(1.1);
+}
+
+.cell.mine {
+    background-color: #ff6347;
+    color: white;
+}
+
+.info {
     text-align: center;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #e6f0ff;
+    margin-bottom: 20px;
 }
 
 .start-button {
-    font-size: 16px;
+    font-size: 20px; /* Aumentar el tamaño de las letras */
+    font-weight: bold; /* Formato bold */
     background: linear-gradient(to right, #1a237e, #3949ab);
     color: white;
     border: none;
@@ -86,54 +60,25 @@ th {
     background-color: #1a237e;
 }
 
-/* Estilo para el texto "Saldo total: 100.00 USD" */
-.info p {
-    color: #ff8a65; /* Color naranja */
-    font-weight: bold; /* Negrita */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra */
-    font-size: 18px; /* Aumentamos el tamaño del texto */
+.results {
+    margin-top: 20px;
 }
 
-/* Estilo para "cantidad de 0x" y la lista desplegable */
-.zero-count {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Aumentamos la sombra */
-    font-size: 18px; /* Aumentamos el tamaño del texto */
+table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.zero-count select {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Aumentamos la sombra */
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
 }
 
-/* Estilo para el campo de "apuesta inicial" */
-#apuesta {
-    border: none; /* Eliminamos las líneas del borde */
-    background: linear-gradient(to right, #e0f7fa, #ffffff); /* Fondo en degradado azul casi blanco */
-    padding: 5px;
-    border-radius: 5px;
+th {
+    background-color: #f2f2f2;
 }
 
-/* Animación para el aumento de tamaño */
-@keyframes cellMovement {
-    0% {
-        transform: scale(1); /* Tamaño original */
-    }
-    100% {
-        transform: scale(1.02); /* Aumento de tamaño */
-    }
-}
-
-/* Animación del degradado */
-@keyframes gradientAnimation {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+td {
+    background-color: #fafafa;
 }
