@@ -7,13 +7,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const valoresMinas = [0, 0.02, 0.1, 0.5, 1, 2, 4, 6];
 
-    for (let i = 0; i < 20; i++) {
-        const cell = document.createElement("div");
-        cell.classList.add("cell");
-        const randomIndex = Math.floor(Math.random() * valoresMinas.length);
-        const valorMina = valoresMinas[randomIndex];
-        cell.dataset.valor = valorMina;
-        board.appendChild(cell);
+    function generarDistribucion(cantidadCeros) {
+        const distribucion = [];
+        const distribuciones = {
+            2: [2, 6, 5, 4, 3, 2, 0, 0],
+            3: [3, 5, 4, 3, 2, 2, 1, 0],
+            4: [4, 4, 3, 3, 2, 2, 1, 1],
+            5: [5, 3, 3, 2, 2, 2, 2, 1],
+            6: [6, 2, 2, 2, 2, 2, 2, 2],
+            7: [7, 1, 1, 2, 2, 2, 2, 3],
+            8: [8, 1, 1, 1, 2, 2, 2, 3],
+            9: [9, 1, 1, 1, 1, 2, 2, 3],
+            10: [10, 1, 1, 1, 1, 2, 2, 2]
+        };
+        return distribuciones[cantidadCeros];
+    }
+
+    function iniciarJuego() {
+        board.innerHTML = "";
+        const cantidadCeros = parseInt(cantidadCerosSelect.value);
+        const distribucion = generarDistribucion(cantidadCeros);
+
+        for (let i = 0; i < 20; i++) {
+            const cell = document.createElement("div");
+            cell.classList.add("cell");
+            let valorMina;
+            do {
+                const randomIndex = Math.floor(Math.random() * valoresMinas.length);
+                valorMina = valoresMinas[randomIndex];
+            } while (distribucion[valoresMinas.indexOf(valorMina)] <= 0);
+
+            distribucion[valoresMinas.indexOf(valorMina)]--;
+            cell.dataset.valor = valorMina;
+            board.appendChild(cell);
+        }
+
+        actualizarTabla(distribucion);
+    }
+
+    function actualizarTabla(distribucion) {
+        const tbody = document.querySelector(".results tbody");
+        tbody.innerHTML = "";
+        const row = document.createElement("tr");
+        distribucion.forEach((cantidad, index) => {
+            const cell = document.createElement("td");
+            cell.textContent = `${valoresMinas[index]}X (${cantidad})`;
+            row.appendChild(cell);
+        });
+        tbody.appendChild(row);
     }
 
     board.addEventListener("click", (event) => {
@@ -52,18 +93,9 @@ document.addEventListener("DOMContentLoaded", () => {
         // Implementa aquí la lógica de la explosión
         // Por ejemplo, puedes cambiar el color de fondo o mostrar un mensaje
         // cuando se hace clic en una mina.
+        cell.style.backgroundColor = "#ff0000";
+        cell.textContent = "💥";
     }
 
-    // Estilos adicionales para las celdas
-    const cells = document.querySelectorAll(".cell");
-    cells.forEach((cell) => {
-        cell.style.backgroundColor = "#f0f8ff"; // Azul casi blanco
-        cell.style.transition = "transform 0.5s"; // Pequeño movimiento
-        cell.style.animation = "none"; // Detener la animación al hacer clic
-        cell.addEventListener("click", () => {
-            cell.style.animation = "none"; // Detener la animación al hacer clic
-        });
-    });
-
-    // Resto de tu lógica del juego aquí...
+    document.querySelector(".start-button").addEventListener("click", iniciarJuego);
 });
