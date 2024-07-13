@@ -85,20 +85,21 @@ th {
 }
 
 /* Estilo para el texto "Saldo total: 100.00 USD" */
-.total-balance {
+.info p {
     color: #ff8a65; /* Color naranja */
     font-weight: bold; /* Negrita */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra */
 }
 
 /* Estilo para "cantidad de 0x" y la lista desplegable */
-.quantity {
+.zero-count {
     display: flex;
     align-items: center;
     gap: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Aumentamos la sombra */
 }
 
-.quantity select {
+.zero-count select {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Aumentamos la sombra */
 }
 
