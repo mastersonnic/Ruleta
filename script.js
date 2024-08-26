@@ -1,24 +1,17 @@
 window.onload = function() {
-    fetch('https://crypto-store.cc/?locale=en&cur_from=LTC&cur_to=BCH')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Network response was not ok. Status: ${response.status}`);
-            }
-            return response.text();
-        })
-        .then(html => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const exchangeRateElement = doc.querySelector('.ng-tns-c3154908617-11.ng-star-inserted');
-            if (exchangeRateElement) {
-                const exchangeRate = exchangeRateElement.textContent.trim();
-                document.getElementById('exchange-rate').textContent = `Exchange rate: ${exchangeRate}`;
-            } else {
-                document.getElementById('exchange-rate').textContent = 'Exchange rate element not found.';
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching the page:', error);
-            document.getElementById('exchange-rate').textContent = 'Error fetching the exchange rate.';
-        });
+    // Aquí deberías tener el HTML necesario en tu archivo index.html
+    // Este ejemplo asume que el HTML está cargado localmente en el archivo index.html
+
+    // Usamos querySelector para encontrar el elemento que contiene la tasa de intercambio
+    const exchangeRateElement = document.querySelector('.ng-tns-c3154908617-11.ng-star-inserted');
+
+    if (exchangeRateElement) {
+        // Extraemos el texto del elemento
+        const exchangeRate = exchangeRateElement.textContent.trim();
+        // Mostramos la tasa de intercambio en el elemento #exchange-rate
+        document.getElementById('exchange-rate').textContent = `Exchange rate: ${exchangeRate}`;
+    } else {
+        // Si no se encuentra el elemento, mostramos un mensaje de error
+        document.getElementById('exchange-rate').textContent = 'Exchange rate element not found.';
+    }
 };
