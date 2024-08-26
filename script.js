@@ -1,23 +1,24 @@
 window.onload = function() {
     var xhr = new XMLHttpRequest();
-    
-    // Aquí se debería poner la URL real si estuvieras haciendo una solicitud a un servidor
     xhr.open('GET', 'https://crypto-store.cc/?locale=en&cur_from=LTC&cur_to=BCH', true);
 
     xhr.onload = function() {
         if (xhr.status >= 200 && xhr.status < 300) {
-            // Procesar la respuesta del servidor
             var parser = new DOMParser();
             var doc = parser.parseFromString(xhr.responseText, 'text/html');
             
-            // Buscar el elemento que contiene la tasa de intercambio
             var exchangeRateElement = doc.querySelector('.ng-tns-c3154908617-11.ng-star-inserted');
             
             if (exchangeRateElement) {
-                // Extraer el texto de la tasa de intercambio
-                var exchangeRate = exchangeRateElement.textContent.trim();
-                // Mostrar la tasa de intercambio en el elemento #exchange-rate
-                document.getElementById('exchange-rate').textContent = exchangeRate;
+                var exchangeRateText = exchangeRateElement.textContent.trim();
+                var exchangeRateMatch = exchangeRateText.match(/1 BCH = ([\d.]+) LTC/);
+                if (exchangeRateMatch) {
+                    window.exchangeRateBCHtoLTC = parseFloat(exchangeRateMatch[1]);
+                    window.exchangeRateLTCtoBCH = 1 / window.exchangeRateBCHtoLTC;
+                    document.getElementById('exchange-rate').textContent = exchangeRateText;
+                } else {
+                    document.getElementById('exchange-rate').textContent = 'Error parsing the exchange rate.';
+                }
             } else {
                 document.getElementById('exchange-rate').textContent = 'Exchange rate element not found.';
             }
@@ -32,3 +33,23 @@ window.onload = function() {
 
     xhr.send();
 };
+
+function convertBCHtoLTC() {
+    var amount = parseFloat(document.getElementById('amount').value);
+    if (isNaN(amount) || amount <= 0) {
+        alert('Please enter a valid amount.');
+        return;
+    }
+    var result = amount * (window.exchangeRateBCHtoLTC || 0);
+    document.getElementById('result').value = result.toFixed(8) + ' LTC';
+}
+
+function convertLTCtoBCH() {
+    var amount = parseFloat(document.getElementById('amount').value);
+    if (isNaN(amount) || amount <= 0) {
+        alert('Please enter a valid amount.');
+        return;
+    }
+    var result = amount * (window.exchangeRateLTCtoBCH || 0);
+    document.getElementById('result').value = result.toFixed(8) + ' BCH';
+}
