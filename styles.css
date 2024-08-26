@@ -1,6 +1,5 @@
 /* styles.css */
 
-/* General styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -15,7 +14,6 @@ h1 {
     margin-top: 20px;
 }
 
-/* Container for the exchange rate */
 #exchange-rate {
     text-align: center;
     font-size: 1.5em;
@@ -25,13 +23,4 @@ h1 {
     border: 1px solid #ddd;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Responsive design */
-@media (max-width: 600px) {
-    #exchange-rate {
-        font-size: 1.2em;
-        margin: 10px;
-        padding: 8px;
-    }
 }
