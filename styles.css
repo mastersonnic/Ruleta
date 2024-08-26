@@ -1,11 +1,29 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 20px;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
-#exchange-rate {
-    margin-top: 20px;
-    font-size: 1.2em;
+#exchangeRateDiv {
+    font-size: 20px;
+    margin-bottom: 20px;
     color: #333;
+}
+
+#exchangeRateLink {
+    font-size: 18px;
+    color: #007bff;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+}
+
+#exchangeRateLink:hover {
+    background-color: #d0d9e0;
+    color: #0056b3;
 }
