@@ -14,28 +14,6 @@ h1 {
     margin-top: 20px;
 }
 
-.container {
-    text-align: center;
-    margin: 20px;
-}
-
-label {
-    display: block;
-    margin: 10px 0 5px;
-}
-
-input, select {
-    font-size: 1em;
-    padding: 5px;
-    margin-bottom: 10px;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-}
-
 #exchange-rate {
     text-align: center;
     font-size: 1.5em;
@@ -45,4 +23,4 @@ button {
     border: 1px solid #ddd;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+}   
