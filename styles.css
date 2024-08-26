@@ -24,3 +24,26 @@ h1 {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+#calculator {
+    text-align: center;
+    margin: 20px;
+}
+
+#calculator div {
+    margin-bottom: 10px;
+}
+
+input[type="number"],
+input[type="text"] {
+    width: 200px;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 5px;
+    cursor: pointer;
+}
