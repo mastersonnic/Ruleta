@@ -1,18 +1,42 @@
-function simulateExchange() {
-    var amount = document.getElementById('exchangeAmount').value;
-    var iframe = document.getElementById('webView');
+document.addEventListener('DOMContentLoaded', function() {
+    // URL del proxy de CORS Anywhere
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    
+    // URL del sitio que deseas cargar
+    const targetUrl = 'https://exchanging.app/pro/en/?cur_from=LTC&cur_to=BCH';
 
-    iframe.onload = function() {
-        // Inyectar valor en el campo 'exValueFrom' y simular un cambio
-        iframe.contentWindow.document.getElementById('exValueFrom').value = amount;
-        
-        // Ejecutar la simulación (se supone que hay un evento que hace el cálculo automáticamente)
-        iframe.contentWindow.document.getElementById('exValueFrom').dispatchEvent(new Event('input'));
+    // Función para realizar la solicitud y obtener la página
+    function fetchExchangePage() {
+        fetch(proxyUrl + targetUrl)
+            .then(response => response.text())
+            .then(contents => {
+                // Crear un nuevo iframe para mostrar el contenido
+                const iframe = document.createElement('iframe');
+                iframe.style.width = '100%';
+                iframe.style.height = '600px';
+                iframe.srcdoc = contents;
+                document.body.appendChild(iframe);
 
-        // Opcional: Puedes intentar capturar el valor de salida (aunque esto puede no funcionar debido a restricciones de CORS)
-        setTimeout(function() {
-            var outputValue = iframe.contentWindow.document.getElementById('exValueTo').value;
-            alert("Calculated Value: " + outputValue);
-        }, 2000); // Esperar 2 segundos para que la simulación se ejecute
-    };
-}
+                // Simular la entrada de datos en el input
+                iframe.onload = function() {
+                    const inputScript = `
+                        document.getElementById('exValueFrom').value = '1.0';
+                        document.getElementById('exValueFrom').dispatchEvent(new Event('input'));
+                    `;
+                    iframe.contentWindow.eval(inputScript);
+
+                    // Capturar el valor de salida y mostrarlo en otro lugar
+                    setTimeout(function() {
+                        const outputValue = iframe.contentWindow.document.getElementById('exValueTo').value;
+                        const resultDisplay = document.createElement('p');
+                        resultDisplay.textContent = 'Resultado: ' + outputValue;
+                        document.body.appendChild(resultDisplay);
+                    }, 2000);  // Espera 2 segundos para asegurar que la página cargue
+                };
+            })
+            .catch(err => console.error("Error al cargar la página:", err));
+    }
+
+    // Llamar a la función para cargar y manipular la página
+    fetchExchangePage();
+});
