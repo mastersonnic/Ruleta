@@ -1,37 +1,18 @@
 function simulateExchange() {
-    var exchangeAmount = document.getElementById('exchangeAmount').value;
+    var amount = document.getElementById('exchangeAmount').value;
     var iframe = document.getElementById('webView');
-    
+
     iframe.onload = function() {
-        var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+        // Inyectar valor en el campo 'exValueFrom' y simular un cambio
+        iframe.contentWindow.document.getElementById('exValueFrom').value = amount;
         
-        var jsCode = `
-            // Inyectar valor en el campo de entrada y disparar eventos
-            var inputField = document.getElementById('exValueFrom');
-            var outputField = document.getElementById('exValueTo');
-            
-            if (inputField && outputField) {
-                inputField.value = '${exchangeAmount}'; // Inyectar el valor desde el campo de entrada
-                inputField.dispatchEvent(new Event('input')); // Disparar el evento de entrada
+        // Ejecutar la simulación (se supone que hay un evento que hace el cálculo automáticamente)
+        iframe.contentWindow.document.getElementById('exValueFrom').dispatchEvent(new Event('input'));
 
-                // Esperar para capturar el resultado
-                setTimeout(function() {
-                    var resultValue = outputField.value;
-                    // Enviar el resultado de vuelta a la página principal
-                    window.parent.postMessage({ type: 'result', value: resultValue }, '*');
-                }, 2000);
-            }
-        `;
-        
-        var script = iframeDocument.createElement('script');
-        script.type = 'text/javascript';
-        script.text = jsCode;
-        iframeDocument.head.appendChild(script);
+        // Opcional: Puedes intentar capturar el valor de salida (aunque esto puede no funcionar debido a restricciones de CORS)
+        setTimeout(function() {
+            var outputValue = iframe.contentWindow.document.getElementById('exValueTo').value;
+            alert("Calculated Value: " + outputValue);
+        }, 2000); // Esperar 2 segundos para que la simulación se ejecute
     };
-
-    window.addEventListener('message', function(event) {
-        if (event.data.type === 'result') {
-            document.getElementById('resultViewer').value = event.data.value;
-        }
-    });
 }
