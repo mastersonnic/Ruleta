@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exchange Rate Link</title>
-    <link rel="stylesheet" href="style.css"> <!-- Enlace a CSS -->
+    <title>Simulación de Entrada WebView</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="exchangeRateDiv">Exchange rate: 1 BCH = 6.25604727 LTC</div>
-    <a id="exchangeRateLink" href="https://crypto-store.cc/?locale=en&cur_from=LTC&cur_to=BCH"></a>
-
-    <script src="script.js"></script> <!-- Enlace a JS -->
+    <h1>Simulación de Entrada en WebView</h1>
+    <label for="inputValue">Valor para el primer input:</label>
+    <input type="text" id="inputValue" placeholder="Introduce el valor">
+    <button onclick="simulateInput()">Simular Entrada</button>
+    <iframe id="webView" src="https://exchanging.app/pro/en/?cur_from=LTC&cur_to=BCH" width="100%" height="600px"></iframe>
+    <h2>Resultado</h2>
+    <input type="text" id="outputValue" placeholder="Resultado aparecerá aquí" readonly>
+    <script src="script.js"></script>
 </body>
 </html>
